@@ -142,7 +142,7 @@ const GTXLanding = () => {
       icon: <DollarSign className="w-8 h-8" />
     },
     { 
-      number: "350%", 
+      number: "4x%", 
       label: "ROI Médio",
       icon: <TrendingUp className="w-8 h-8" />
     },
