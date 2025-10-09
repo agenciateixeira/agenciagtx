@@ -806,8 +806,8 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
                 <li><a href="#inicio" className="text-gray-400 hover:text-green-500 transition-colors">Início</a></li>
                 <li><a href="#sobre" className="text-gray-400 hover:text-green-500 transition-colors">Quem Somos</a></li>
                 <li><a href="#servicos" className="text-gray-400 hover:text-green-500 transition-colors">Serviços</a></li>
-                <li><a href="#clientes" className="text-gray-400 hover:text-green-500 transition-colors">Clientes</a></li>
-                <li><a href="#depoimentos" className="text-gray-400 hover:text-green-500 transition-colors">Casos de Sucesso</a></li>
+                <li><a href="/carreiras" className="text-gray-400 hover:text-green-500 transition-colors">Trabalhe Conosco</a></li>
+                <li><a href="/exclusive" className="text-gray-400 hover:text-green-500 transition-colors">GTX Exclusive</a></li>
               </ul>
             </div>
             
