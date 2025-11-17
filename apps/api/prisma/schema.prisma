@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String?
+  phone     String?
+  region    String?
+  source    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  utms     LeadUTM[]
+  events   LeadEvent[]
+  stage    LeadStage?
+  whatsapp WhatsAppMessage[]
+
+  @@index([createdAt], map: "lead_created_at_idx")
+  @@index([email], map: "lead_email_idx")
+  @@index([phone], map: "lead_phone_idx")
+}
+
+model LeadUTM {
+  id        String   @id @default(cuid())
+  leadId    String
+  key       String
+  value     String
+  timestamp DateTime @default(now())
+
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId], map: "utm_lead_idx")
+}
+
+model LeadEvent {
+  id        String   @id @default(cuid())
+  leadId    String
+  eventType String
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId], map: "events_lead_idx")
+  @@index([eventType], map: "events_type_idx")
+}
+
+model PipelineStage {
+  id    String @id @default(cuid())
+  name  String
+  order Int
+
+  leads LeadStage[]
+
+  @@unique([order])
+}
+
+model LeadStage {
+  id        String   @id @default(cuid())
+  leadId    String
+  stageId   String
+  updatedAt DateTime @default(now())
+
+  lead  Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  stage PipelineStage @relation(fields: [stageId], references: [id], onDelete: Cascade)
+
+  @@unique([leadId], map: "lead_stage_unique_lead")
+}
+
+model WhatsAppMessage {
+  id        String   @id @default(cuid())
+  leadId    String?
+  direction String
+  content   String
+  timestamp DateTime @default(now())
+
+  lead Lead? @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  @@index([leadId], map: "messages_lead_idx")
+  @@index([timestamp], map: "messages_timestamp_idx")
+}
