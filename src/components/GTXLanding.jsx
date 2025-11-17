@@ -809,6 +809,15 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
                 <li><a href="/carreiras" className="text-gray-400 hover:text-green-500 transition-colors">Trabalhe Conosco</a></li>
                 <li><a href="/exclusive" className="text-gray-400 hover:text-green-500 transition-colors">GTX Exclusive</a></li>
               </ul>
+              <div className="mt-6">
+                <a
+                  href="/login"
+                  className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-400 text-gray-900 font-semibold px-6 py-3 rounded-full transition-all"
+                >
+                  Acessar área de login
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
             
             <div>
