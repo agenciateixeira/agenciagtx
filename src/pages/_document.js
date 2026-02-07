@@ -6,7 +6,12 @@ export default function Document() {
       <Head>
         {/* Favicon */}
         <link rel="icon" href="/images/favicon.png" />
-        
+
+        {/* Google Fonts - Lexend */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
         {/* Meta Tags SEO */}
         <meta name="description" content="GTX Marketing e Vendas - Especialistas em tráfego pago e transformação digital para seu negócio. Consultoria gratuita disponível." />
         <meta name="keywords" content="tráfego pago, marketing digital, e-commerce, restaurantes, meta ads, google ads, consultoria digital" />
