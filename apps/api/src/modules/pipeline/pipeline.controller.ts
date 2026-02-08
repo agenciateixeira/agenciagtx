@@ -1,7 +1,9 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { PipelineService } from './pipeline.service';
 import { MovePipelineDto } from './dto/move-pipeline.dto';
 
+@ApiTags('pipeline')
 @Controller('pipeline')
 export class PipelineController {
   constructor(private readonly pipelineService: PipelineService) {}

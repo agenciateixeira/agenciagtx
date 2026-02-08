@@ -16,6 +16,25 @@ import { WhatsappModule } from './modules/whatsapp/whatsapp.module';
 import { AutomationsModule } from './modules/automations/automations.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 
+const automationsDisabled = process.env.AUTOMATIONS_DISABLED === 'true';
+const bullImports = automationsDisabled
+  ? []
+  : [
+      BullModule.forRootAsync({
+        inject: [ConfigService],
+        useFactory: (config: ConfigService) => {
+          const redisUrl = new URL(config.get<string>('REDIS_URL') ?? 'redis://127.0.0.1:6379');
+          return {
+            connection: {
+              host: redisUrl.hostname,
+              port: Number(redisUrl.port || 6379),
+              password: redisUrl.password || undefined,
+            },
+          };
+        },
+      }),
+    ];
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -23,19 +42,7 @@ import { AnalyticsModule } from './modules/analytics/analytics.module';
     CacheConfigModule,
     ThrottlerModule.forRoot([{ ttl: 60, limit: 120 }]),
     ScheduleModule.forRoot(),
-    BullModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        const redisUrl = new URL(config.get<string>('REDIS_URL') ?? 'redis://127.0.0.1:6379');
-        return {
-          connection: {
-            host: redisUrl.hostname,
-            port: Number(redisUrl.port || 6379),
-            password: redisUrl.password || undefined,
-          },
-        };
-      },
-    }),
+    ...bullImports,
     AuthModule,
     LeadsModule,
     UtmModule,

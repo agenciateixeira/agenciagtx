@@ -10,10 +10,14 @@ import {
   removeLeadDuplicates,
   sanitizeText,
 } from '../../shared/utils/normalizers';
+import { AutomationsService } from '../automations/automations.service';
 
 @Injectable()
 export class LeadsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly automationsService: AutomationsService,
+  ) {}
 
   async create(payload: CreateLeadDto) {
     const normalizedEmail = payload.email ? normalizeEmail(payload.email) : undefined;
@@ -62,6 +66,8 @@ export class LeadsService {
         metadata: { source: payload.source ?? 'unknown' },
       },
     });
+
+    await this.automationsService.scheduleNoResponse({ leadId: lead.id });
 
     return lead;
   }

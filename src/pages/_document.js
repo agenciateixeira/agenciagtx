@@ -7,9 +7,10 @@ export default function Document() {
         {/* Favicon */}
         <link rel="icon" href="/images/favicon.png" />
 
-        {/* Google Fonts - Lexend */}
+        {/* Google Fonts - Lexend com preload */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" as="style" />
         <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
         {/* Meta Tags SEO */}
@@ -30,6 +31,35 @@ export default function Document() {
         <meta property="twitter:title" content="GTX Marketing e Vendas" />
         <meta property="twitter:description" content="Especialistas em tráfego pago focado em resultados reais" />
         
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "MarketingAgency",
+              "name": "GTX Marketing e Vendas",
+              "url": "https://agenciagtx.com.br",
+              "logo": "https://agenciagtx.com.br/images/favicon.png",
+              "description": "Especialistas em tráfego pago, e-commerce e transformação digital para seu negócio.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "BR"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+55-19-99012-2773",
+                "contactType": "customer service",
+                "availableLanguage": "Portuguese"
+              },
+              "sameAs": [
+                "https://www.instagram.com/agenciagtx",
+                "https://www.facebook.com/agenciagtx"
+              ]
+            })
+          }}
+        />
+
         {/* Meta Pixel Code */}
         <script
           dangerouslySetInnerHTML={{

@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { LeadsService } from './leads.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { QueryLeadDto } from './dto/query-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
 import { IdParamDto } from '../../shared/dto/id-param.dto';
 
+@ApiTags('leads')
 @Controller('leads')
 export class LeadsController {
   constructor(private readonly leadsService: LeadsService) {}

@@ -1,6 +1,84 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MessageCircle, TrendingUp, Target, Users, BarChart3, Zap, CheckCircle, Star, Menu, X, ArrowRight, Phone, Mail, MapPin, Award, Rocket, Shield, ChevronLeft, ChevronRight, Clock, DollarSign, LineChart } from 'lucide-react';
 
+const ROICalculator = ({ onCTA }) => {
+  const [budget, setBudget] = useState(1000);
+  const [segment, setSegment] = useState('ecommerce');
+
+  const multipliers = {
+    ecommerce: { roi: 3.8, label: 'E-commerce' },
+    restaurante: { roi: 4.2, label: 'Restaurante/Food' },
+    servicos: { roi: 3.2, label: 'Serviços' },
+    saude: { roi: 3.5, label: 'Saúde/Clínica' },
+  };
+
+  const m = multipliers[segment];
+  const revenue = Math.round(budget * m.roi);
+  const profit = revenue - budget;
+  const roiPct = Math.round(((revenue - budget) / budget) * 100);
+
+  return (
+    <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+      <div className="grid md:grid-cols-2 gap-8">
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Segmento do negócio</label>
+            <select
+              value={segment}
+              onChange={e => setSegment(e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 focus:outline-none text-gray-700"
+            >
+              {Object.entries(multipliers).map(([k, v]) => (
+                <option key={k} value={k}>{v.label}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Investimento mensal em tráfego: <span className="text-green-500">R$ {budget.toLocaleString('pt-BR')}</span>
+            </label>
+            <input
+              type="range"
+              min="500"
+              max="50000"
+              step="500"
+              value={budget}
+              onChange={e => setBudget(Number(e.target.value))}
+              className="w-full accent-green-500"
+            />
+            <div className="flex justify-between text-xs text-gray-400 mt-1">
+              <span>R$ 500</span><span>R$ 50.000</span>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white flex flex-col justify-between">
+          <div>
+            <p className="text-green-100 text-sm font-medium mb-1">Retorno estimado/mês</p>
+            <p className="text-4xl font-bold">R$ {revenue.toLocaleString('pt-BR')}</p>
+          </div>
+          <div className="grid grid-cols-2 gap-4 my-4">
+            <div className="bg-white/10 rounded-xl p-3">
+              <p className="text-green-100 text-xs">Lucro estimado</p>
+              <p className="text-xl font-bold">R$ {profit.toLocaleString('pt-BR')}</p>
+            </div>
+            <div className="bg-white/10 rounded-xl p-3">
+              <p className="text-green-100 text-xs">ROI</p>
+              <p className="text-xl font-bold">{roiPct}%</p>
+            </div>
+          </div>
+          <button
+            onClick={onCTA}
+            className="w-full bg-white text-green-600 py-3 rounded-xl font-bold hover:bg-green-50 transition-all text-sm"
+          >
+            Quero esses resultados →
+          </button>
+        </div>
+      </div>
+      <p className="text-xs text-gray-400 mt-4 text-center">* Estimativa baseada na média dos nossos clientes. Resultados podem variar.</p>
+    </div>
+  );
+};
+
 const GTXLanding = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -11,6 +89,17 @@ const GTXLanding = () => {
   const [isClosingModal, setIsClosingModal] = useState(false);
   const [whatsappMessage, setWhatsappMessage] = useState('Olá! Gostaria de saber mais sobre os serviços da GTX.');
   const neuralCanvasRef = useRef(null);
+  const [statsVisible, setStatsVisible] = useState(false);
+  const [counters, setCounters] = useState([0, 0, 0, 0]);
+  const statsRef = useRef(null);
+  const [showExitPopup, setShowExitPopup] = useState(false);
+  const exitPopupShown = useRef(false);
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
+  const [typewriterText, setTypewriterText] = useState('');
+  const typewriterWords = ['Inteligência Estratégica', 'Resultados Reais', 'Crescimento Sustentável', 'Tráfego que Converte'];
+  const [parallaxY, setParallaxY] = useState(0);
+  const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [cursorHover, setCursorHover] = useState(false);
 
   // Tracking Functions
   const trackWhatsAppClick = () => {
@@ -66,10 +155,100 @@ const GTXLanding = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      setParallaxY(window.scrollY * 0.3);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Custom Cursor
+  useEffect(() => {
+    const moveCursor = (e) => setCursor({ x: e.clientX, y: e.clientY });
+    const handleEnter = () => setCursorHover(true);
+    const handleLeave = () => setCursorHover(false);
+    window.addEventListener('mousemove', moveCursor);
+    document.querySelectorAll('button, a, [role="button"]').forEach(el => {
+      el.addEventListener('mouseenter', handleEnter);
+      el.addEventListener('mouseleave', handleLeave);
+    });
+    return () => window.removeEventListener('mousemove', moveCursor);
+  }, []);
+
+  // Typewriter Effect
+  useEffect(() => {
+    let wordIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    let timeout;
+
+    const type = () => {
+      const word = typewriterWords[wordIndex];
+      if (!deleting) {
+        setTypewriterText(word.slice(0, charIndex + 1));
+        charIndex++;
+        if (charIndex === word.length) {
+          deleting = true;
+          timeout = setTimeout(type, 2000);
+          return;
+        }
+      } else {
+        setTypewriterText(word.slice(0, charIndex - 1));
+        charIndex--;
+        if (charIndex === 0) {
+          deleting = false;
+          wordIndex = (wordIndex + 1) % typewriterWords.length;
+        }
+      }
+      timeout = setTimeout(type, deleting ? 40 : 80);
+    };
+
+    timeout = setTimeout(type, 800);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // Cookie Consent
+  useEffect(() => {
+    const consent = localStorage.getItem('gtx_cookie_consent');
+    if (!consent) setShowCookieBanner(true);
+  }, []);
+
+  // Exit Intent Detection
+  useEffect(() => {
+    const handleMouseLeave = (e) => {
+      if (e.clientY <= 0 && !exitPopupShown.current) {
+        exitPopupShown.current = true;
+        setShowExitPopup(true);
+      }
+    };
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => document.removeEventListener('mouseleave', handleMouseLeave);
+  }, []);
+
+  // Stats Counter Animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !statsVisible) {
+          setStatsVisible(true);
+          const targets = [200, 5, 400, 98];
+          const duration = 2000;
+          const steps = 60;
+          const interval = duration / steps;
+          let step = 0;
+          const timer = setInterval(() => {
+            step++;
+            const progress = step / steps;
+            const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            setCounters(targets.map(t => Math.round(t * eased)));
+            if (step >= steps) clearInterval(timer);
+          }, interval);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, [statsVisible]);
 
   // Neural Network Canvas Animation
   useEffect(() => {
@@ -347,23 +526,23 @@ const GTXLanding = () => {
   ];
 
   const stats = [
-    { 
-      number: "200+", 
+    {
+      value: 200, prefix: "", suffix: "+",
       label: "Clientes Atendidos",
       icon: <Users className="w-8 h-8" />
     },
-    { 
-      number: "R$ 5M+", 
+    {
+      value: 5, prefix: "R$ ", suffix: "M+",
       label: "Investimento Gerenciado",
       icon: <DollarSign className="w-8 h-8" />
     },
-    { 
-      number: "4x%", 
+    {
+      value: 400, prefix: "", suffix: "%",
       label: "ROI Médio",
       icon: <TrendingUp className="w-8 h-8" />
     },
-    { 
-      number: "98%", 
+    {
+      value: 98, prefix: "", suffix: "%",
       label: "Taxa de Satisfação",
       icon: <Award className="w-8 h-8" />
     }
@@ -475,9 +654,15 @@ const GTXLanding = () => {
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{ opacity: 0.7 }}
         />
-        {/* Subtle animated background elements */}
-        <div className="absolute top-20 right-10 w-96 h-96 bg-green-500/5 rounded-full filter blur-3xl animate-blob"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-green-400/5 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+        {/* Parallax background elements */}
+        <div
+          className="absolute top-20 right-10 w-96 h-96 bg-green-500/5 rounded-full filter blur-3xl animate-blob"
+          style={{ transform: `translateY(${parallaxY * 0.5}px)` }}
+        ></div>
+        <div
+          className="absolute bottom-20 left-10 w-96 h-96 bg-green-400/5 rounded-full filter blur-3xl animate-blob animation-delay-2000"
+          style={{ transform: `translateY(${parallaxY * 0.3}px)` }}
+        ></div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
@@ -488,7 +673,10 @@ const GTXLanding = () => {
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.05] text-gray-900 animate-fadeInUp">
               Escale Sua Operação Digital com
-              <span className="block mt-3 text-green-500">Inteligência Estratégica</span>
+              <span className="block mt-3 text-green-500">
+                {typewriterText}
+                <span className="inline-block w-0.5 h-[0.85em] bg-green-500 ml-1 animate-pulse align-middle"></span>
+              </span>
             </h1>
             <p className="text-xl md:text-2xl mb-12 text-gray-600 max-w-4xl mx-auto leading-relaxed animate-fadeInUp animation-delay-200">
               Implementação completa de <strong className="text-gray-900">infraestrutura digital</strong>, <strong className="text-gray-900">gestão de performance</strong> e <strong className="text-gray-900">inteligência de mercado</strong> para empresas que buscam crescimento sustentável e resultados mensuráveis.
@@ -521,7 +709,7 @@ const GTXLanding = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 bg-gray-50">
+      <section ref={statsRef} className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {stats.map((stat, index) => (
@@ -529,7 +717,9 @@ const GTXLanding = () => {
                 <div className="text-green-500 mb-4 flex justify-center">
                   {stat.icon}
                 </div>
-                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">{stat.number}</div>
+                <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+                  {stat.prefix}{counters[index]}{stat.suffix}
+                </div>
                 <div className="text-gray-600 text-sm font-medium">{stat.label}</div>
               </div>
             ))}
@@ -556,7 +746,7 @@ const GTXLanding = () => {
 
             <div className={`grid md:grid-cols-3 gap-8 transition-all duration-1000 delay-300 ${visibleSections.implementacoes ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {/* E-commerce */}
-              <div className="group bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-100 hover:border-green-500 transition-all hover:shadow-2xl">
+              <div className="card-3d group bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-100 hover:border-green-500 transition-all hover:shadow-2xl">
                 <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <TrendingUp className="w-8 h-8 text-white" />
                 </div>
@@ -581,7 +771,7 @@ const GTXLanding = () => {
               </div>
 
               {/* Marketplaces */}
-              <div className="group bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border-2 border-green-200 hover:border-green-500 transition-all hover:shadow-2xl transform hover:scale-105">
+              <div className="card-3d group bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border-2 border-green-200 hover:border-green-500 transition-all hover:shadow-2xl">
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
                   <Rocket className="w-8 h-8 text-white" />
                 </div>
@@ -606,7 +796,7 @@ const GTXLanding = () => {
               </div>
 
               {/* Integração */}
-              <div className="group bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-100 hover:border-green-500 transition-all hover:shadow-2xl">
+              <div className="card-3d group bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-100 hover:border-green-500 transition-all hover:shadow-2xl">
                 <div className="w-16 h-16 bg-gray-900 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Zap className="w-8 h-8 text-green-500" />
                 </div>
@@ -735,7 +925,7 @@ const GTXLanding = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className={`group relative bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl border-2 border-gray-200 hover:border-green-500 transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 overflow-hidden ${visibleSections.servicos ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                className={`card-3d group relative bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl border-2 border-gray-200 hover:border-green-500 transition-all duration-500 hover:shadow-2xl overflow-hidden ${visibleSections.servicos ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${index * 150}ms`, transitionDuration: '800ms' }}
               >
                 {/* Background Gradient Overlay on Hover */}
@@ -810,6 +1000,7 @@ const GTXLanding = () => {
                     <img
                       src={client.logo}
                       alt={client.name}
+                      loading="lazy"
                       className="relative z-10 max-w-full h-24 md:h-32 object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
                       onError={(e) => {
                         e.target.style.display = 'none';
@@ -1011,6 +1202,20 @@ const GTXLanding = () => {
       </section>
 
       {/* Contact Section */}
+      {/* ROI Calculator Section */}
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-green-500 font-medium text-sm uppercase tracking-widest">Calculadora</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-3 mb-4">Quanto você pode crescer?</h2>
+              <p className="text-gray-600 text-lg">Simule o retorno do seu investimento com a GTX</p>
+            </div>
+            <ROICalculator onCTA={handleWhatsAppClick} />
+          </div>
+        </div>
+      </section>
+
       <section id="contato" className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -1165,6 +1370,107 @@ const GTXLanding = () => {
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-ping"></span>
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"></span>
       </button>
+
+      {/* Custom Cursor */}
+      <div
+        className="fixed pointer-events-none z-[9999] hidden md:block"
+        style={{
+          left: cursor.x,
+          top: cursor.y,
+          transform: 'translate(-50%, -50%)',
+          transition: 'transform 0.1s ease',
+        }}
+      >
+        <div
+          className="rounded-full border-2 border-green-500 transition-all duration-200"
+          style={{
+            width: cursorHover ? 40 : 20,
+            height: cursorHover ? 40 : 20,
+            opacity: cursorHover ? 0.8 : 0.5,
+            backgroundColor: cursorHover ? 'rgba(154, 205, 50, 0.1)' : 'transparent',
+          }}
+        />
+      </div>
+
+      {/* Sticky Mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden" style={{ animation: 'modalSlideUp 0.5s ease-out 1s both' }}>
+        <div className="bg-white border-t border-gray-100 shadow-2xl px-4 py-3 flex gap-3">
+          <button
+            onClick={handleWhatsAppClick}
+            className="flex-1 bg-green-500 text-white py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 hover:bg-green-600 transition-all"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Falar no WhatsApp
+          </button>
+          <a href="#contato" className="flex-1 border-2 border-gray-200 text-gray-700 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 hover:border-green-500 transition-all">
+            Consultoria Estratégica
+          </a>
+        </div>
+      </div>
+
+      {/* LGPD Cookie Consent Banner */}
+      {showCookieBanner && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6" style={{ animation: 'modalSlideUp 0.4s ease-out' }}>
+          <div className="max-w-4xl mx-auto bg-gray-900 text-white rounded-2xl shadow-2xl p-5 flex flex-col md:flex-row items-start md:items-center gap-4">
+            <div className="flex-1">
+              <p className="text-sm font-semibold mb-1">🍪 Utilizamos cookies</p>
+              <p className="text-xs text-gray-300">
+                Usamos cookies para melhorar sua experiência, personalizar conteúdo e analisar nosso tráfego. Ao continuar, você concorda com nossa{' '}
+                <a href="/politica-privacidade" className="underline text-green-400 hover:text-green-300">Política de Privacidade</a>.
+              </p>
+            </div>
+            <div className="flex gap-3 shrink-0">
+              <button
+                onClick={() => { localStorage.setItem('gtx_cookie_consent', 'rejected'); setShowCookieBanner(false); }}
+                className="text-xs text-gray-400 hover:text-white transition-colors px-4 py-2"
+              >
+                Recusar
+              </button>
+              <button
+                onClick={() => { localStorage.setItem('gtx_cookie_consent', 'accepted'); setShowCookieBanner(false); }}
+                className="bg-green-500 hover:bg-green-600 text-white text-xs font-semibold px-5 py-2 rounded-lg transition-all"
+              >
+                Aceitar todos
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Exit Intent Popup */}
+      {showExitPopup && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" style={{ animation: 'fadeIn 0.3s ease-out' }}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative" style={{ animation: 'modalSlideUp 0.35s ease-out' }}>
+            <button onClick={() => setShowExitPopup(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+              <X className="w-6 h-6" />
+            </button>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Zap className="w-8 h-8 text-green-500" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Espera! Temos algo para você</h3>
+              <p className="text-gray-600 mb-6">
+                Antes de sair, que tal uma <strong className="text-green-500">consultoria estratégica</strong> para descobrir quanto sua empresa pode crescer com a GTX?
+              </p>
+              <div className="bg-green-50 border border-green-100 rounded-xl p-4 mb-6">
+                <p className="text-sm text-green-700 font-medium">🎯 Diagnóstico digital completo</p>
+                <p className="text-sm text-green-700 font-medium">📈 Estimativa de ROI personalizada</p>
+                <p className="text-sm text-green-700 font-medium">⚡ Sem compromisso • 100% gratuito</p>
+              </div>
+              <button
+                onClick={() => { setShowExitPopup(false); handleWhatsAppClick({ preventDefault: () => {} }); }}
+                className="w-full bg-green-500 text-white py-4 px-6 rounded-xl font-semibold hover:bg-green-600 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Quero minha consultoria estratégica
+              </button>
+              <button onClick={() => setShowExitPopup(false)} className="mt-3 text-sm text-gray-400 hover:text-gray-600 transition-colors w-full">
+                Não, obrigado
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* WhatsApp Chat Widget Modal */}
       {showWhatsAppModal && (
@@ -1322,6 +1628,15 @@ const GTXLanding = () => {
             opacity: 0;
             transform: translateY(16px);
           }
+        }
+
+        .card-3d {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transform-style: preserve-3d;
+        }
+        .card-3d:hover {
+          transform: perspective(800px) rotateX(3deg) rotateY(-3deg) translateY(-4px);
+          box-shadow: 8px 16px 40px rgba(154, 205, 50, 0.15);
         }
 
         .animate-fadeIn {

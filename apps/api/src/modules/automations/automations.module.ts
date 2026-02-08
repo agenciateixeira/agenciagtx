@@ -5,10 +5,14 @@ import { AutomationsController } from './automations.controller';
 import { AutomationsProcessor } from './automations.processor';
 import { PipelineModule } from '../pipeline/pipeline.module';
 
+const automationsDisabled = process.env.AUTOMATIONS_DISABLED === 'true';
+const queueImports = automationsDisabled ? [] : [BullModule.registerQueue({ name: 'automations' })];
+const providers = automationsDisabled ? [AutomationsService] : [AutomationsService, AutomationsProcessor];
+
 @Module({
-  imports: [BullModule.registerQueue({ name: 'automations' }), PipelineModule],
+  imports: [...queueImports, PipelineModule],
   controllers: [AutomationsController],
-  providers: [AutomationsService, AutomationsProcessor],
+  providers,
   exports: [AutomationsService],
 })
 export class AutomationsModule {}
