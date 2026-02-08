@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
 import { Home } from 'lucide-react';
 
@@ -27,6 +28,11 @@ export default function NotFound() {
   }, []);
 
   return (
+    <>
+    <Head>
+      <title>Página não encontrada — GTX Marketing e Vendas</title>
+      <meta name="robots" content="noindex" />
+    </Head>
     <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
       {/* Custom Cursor */}
       <div
@@ -119,5 +125,6 @@ export default function NotFound() {
         </div>
       </div>
     </div>
+    </>
   );
 }

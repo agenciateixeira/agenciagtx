@@ -114,10 +114,20 @@ const GTXLanding = () => {
 
   const trackConsultoriaClick = () => {
     if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'Lead', { content_name: 'Consultoria Gratuita' });
+      window.fbq('track', 'Lead', { content_name: 'Consultoria Estratégica' });
     }
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'generate_lead', { event_label: 'Consultoria Gratuita' });
+      window.gtag('event', 'generate_lead', { event_label: 'Consultoria Estratégica' });
+    }
+  };
+
+  const trackWhatsAppSend = () => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Lead', { content_name: 'WhatsApp Enviado' });
+    }
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'generate_lead', { event_label: 'WhatsApp Enviado' });
+      window.gtag('event', 'conversion', { send_to: 'AW-16834266345' });
     }
   };
 
@@ -141,6 +151,7 @@ const GTXLanding = () => {
   };
 
   const handleSendWhatsApp = () => {
+    trackWhatsAppSend();
     const encodedMessage = encodeURIComponent(whatsappMessage);
     const whatsappUrl = `https://wa.me/5519990122773?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');

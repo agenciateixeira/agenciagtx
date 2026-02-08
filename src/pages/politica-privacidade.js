@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
 import { ArrowLeft, Mail, Phone, MapPin, MessageCircle, Shield, Lock, Eye, Database, UserCheck, FileText, X } from 'lucide-react';
 
@@ -62,22 +63,48 @@ const PoliticaPrivacidade = () => {
     }, 250);
   };
 
+  const trackWhatsAppClick = () => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Contact', { contact_method: 'whatsapp' });
+    }
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'contact', { method: 'whatsapp' });
+    }
+  };
+
+  const trackWhatsAppSend = () => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Lead', { content_name: 'WhatsApp Enviado' });
+    }
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'generate_lead', { event_label: 'WhatsApp Enviado' });
+      window.gtag('event', 'conversion', { send_to: 'AW-16834266345' });
+    }
+  };
+
   const handleWhatsAppClick = (e) => {
     if (e && e.preventDefault) e.preventDefault();
     if (showWhatsAppModal) {
       closeModal();
     } else {
       setShowWhatsAppModal(true);
+      trackWhatsAppClick();
     }
   };
 
   const handleSendWhatsApp = () => {
+    trackWhatsAppSend();
     const encodedMessage = encodeURIComponent(whatsappMessage);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
     closeModal();
   };
 
   return (
+    <>
+    <Head>
+      <title>Políticas e Termos — GTX Marketing e Vendas</title>
+      <meta name="description" content="Política de privacidade, termos de uso e política de cookies da GTX Marketing e Vendas. CNPJ 41.768.146/0001-69." />
+    </Head>
     <div className="min-h-screen bg-white">
       {/* Custom Cursor */}
       <div
@@ -509,6 +536,7 @@ const PoliticaPrivacidade = () => {
         }
       `}</style>
     </div>
+    </>
   );
 };
 

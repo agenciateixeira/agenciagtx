@@ -2,7 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'agenciagtx.com.br' },
+      { protocol: 'http', hostname: 'localhost' },
+    ],
   },
 }
 
