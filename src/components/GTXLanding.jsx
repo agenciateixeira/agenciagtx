@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { MessageCircle, TrendingUp, Target, Users, BarChart3, Zap, CheckCircle, Star, Menu, X, ArrowRight, Phone, Mail, MapPin, Award, Rocket, Shield, ChevronLeft, ChevronRight, Clock, DollarSign, LineChart } from 'lucide-react';
 
 const ROICalculator = ({ onCTA }) => {
@@ -593,21 +594,16 @@ const GTXLanding = () => {
       <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-md'}`}>
         <nav className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo - Replace with actual image */}
+            {/* Logo */}
             <div className="flex items-center">
-              <img 
-                src="/images/logo.png" 
-                alt="GTX Marketing e Vendas" 
+              <Image
+                src="/images/logo.png"
+                alt="GTX Marketing e Vendas"
+                width={160}
+                height={48}
                 className="h-12 w-auto"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'block';
-                }}
+                priority
               />
-              <div style={{display: 'none'}} className="text-2xl font-bold">
-                <span className="text-green-500">GTX</span>
-                <span className="text-gray-800">.</span>
-              </div>
             </div>
             
             {/* Desktop Menu */}
@@ -997,19 +993,13 @@ const GTXLanding = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-600/0 group-hover:from-green-500/5 group-hover:to-green-600/5 rounded-2xl transition-all duration-500"></div>
 
                     {/* Logo */}
-                    <img
+                    <Image
                       src={client.logo}
                       alt={client.name}
-                      loading="lazy"
+                      width={200}
+                      height={128}
                       className="relative z-10 max-w-full h-24 md:h-32 object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
                     />
-                    <div style={{display: 'none'}} className="relative z-10 text-gray-500 font-bold text-center text-lg group-hover:text-green-600">
-                      {client.name}
-                    </div>
 
                     {/* Corner Accent */}
                     <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-green-500/0 to-green-500/10 group-hover:from-green-500/20 group-hover:to-green-500/30 rounded-bl-full rounded-tr-2xl transition-all duration-500"></div>
@@ -1279,18 +1269,13 @@ const GTXLanding = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div className="md:col-span-2">
-              <img
+              <Image
                 src="/images/logo.png"
                 alt="GTX Marketing e Vendas"
+                width={160}
+                height={48}
                 className="h-12 w-auto mb-6"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextSibling.style.display = 'block';
-                }}
               />
-              <div style={{display: 'none'}} className="text-3xl font-bold mb-6">
-                <span className="text-green-500">GTX</span> Marketing
-              </div>
               <p className="text-gray-600 leading-relaxed mb-6 max-w-md">
                 Especialistas em tráfego pago e transformação digital. Transformamos visitas em vendas com estratégias inteligentes e resultados mensuráveis.
               </p>

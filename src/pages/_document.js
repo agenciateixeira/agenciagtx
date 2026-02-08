@@ -23,7 +23,9 @@ export default function Document() {
         <meta property="og:url" content="https://agenciagtx.com.br/" />
         <meta property="og:title" content="GTX Marketing e Vendas - Transforme Visitas em Vendas" />
         <meta property="og:description" content="Especialistas em tráfego pago focado em resultados reais. Consultoria gratuita." />
-        <meta property="og:image" content="https://agenciagtx.com.br/images/og-image.jpg" />
+        <meta property="og:image" content="https://agenciagtx.com.br/api/og" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
