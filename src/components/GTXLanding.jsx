@@ -7,6 +7,9 @@ const GTXLanding = () => {
   const [currentClient, setCurrentClient] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [visibleSections, setVisibleSections] = useState({});
+  const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
+  const [isClosingModal, setIsClosingModal] = useState(false);
+  const [whatsappMessage, setWhatsappMessage] = useState('Olá! Gostaria de saber mais sobre os serviços da GTX.');
 
   // Tracking Functions
   const trackWhatsAppClick = () => {
@@ -25,6 +28,38 @@ const GTXLanding = () => {
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'generate_lead', { event_label: 'Consultoria Gratuita' });
     }
+  };
+
+  // WhatsApp Modal Functions
+  const closeModal = () => {
+    setIsClosingModal(true);
+    setTimeout(() => {
+      setShowWhatsAppModal(false);
+      setIsClosingModal(false);
+    }, 250);
+  };
+
+  const handleWhatsAppClick = (e) => {
+    e.preventDefault();
+    if (showWhatsAppModal) {
+      closeModal();
+    } else {
+      setShowWhatsAppModal(true);
+      trackWhatsAppClick();
+    }
+  };
+
+  const handleSendWhatsApp = () => {
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappUrl = `https://wa.me/5519990122773?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+    closeModal();
+  };
+
+  const handleConsultoriaClick = (e) => {
+    e.preventDefault();
+    setShowWhatsAppModal(true);
+    trackConsultoriaClick();
   };
 
   useEffect(() => {
@@ -203,18 +238,6 @@ const GTXLanding = () => {
     }
   ];
 
-const consultoriaLink = 'https://forms.agenciagtx.com.br';
-const whatsappMessage = encodeURIComponent("Olá! Vim do site e gostaria de conhecer mais sobre a consultoria gratuita da GTX.");
-const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
-
-  const handleWhatsAppClick = () => {
-    trackWhatsAppClick();
-  };
-
-  const handleConsultoriaClick = () => {
-    trackConsultoriaClick();
-  };
-
   const nextClient = () => {
     setCurrentClient((prev) => (prev + 1) % Math.ceil(clients.length / 4));
   };
@@ -262,9 +285,9 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
               <a href="#clientes" className="text-gray-700 hover:text-green-500 transition-colors font-medium">Clientes</a>
               <a href="#depoimentos" className="text-gray-700 hover:text-green-500 transition-colors font-medium">Casos de Sucesso</a>
               <a href="#contato" className="text-gray-700 hover:text-green-500 transition-colors font-medium">Contato</a>
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" onClick={handleWhatsAppClick} className="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition-all transform hover:scale-105 shadow-lg font-semibold">
+              <button onClick={handleWhatsAppClick} className="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition-all transform hover:scale-105 shadow-lg font-semibold">
                 Entrar em Contato
-              </a>
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -282,9 +305,9 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
               <a href="#clientes" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-green-500 font-medium py-2">Clientes</a>
               <a href="#depoimentos" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-green-500 font-medium py-2">Casos de Sucesso</a>
               <a href="#contato" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-green-500 font-medium py-2">Contato</a>
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" onClick={handleWhatsAppClick} className="block bg-green-500 text-white px-6 py-3 rounded-full text-center hover:bg-green-600 font-semibold">
+              <button onClick={(e) => { setIsMenuOpen(false); handleWhatsAppClick(e); }} className="block bg-green-500 text-white px-6 py-3 rounded-full text-center hover:bg-green-600 font-semibold w-full">
                 Entrar em Contato
-              </a>
+              </button>
             </div>
           )}
         </nav>
@@ -311,10 +334,10 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
               Implementação completa de <strong className="text-gray-900">infraestrutura digital</strong>, <strong className="text-gray-900">gestão de performance</strong> e <strong className="text-gray-900">inteligência de mercado</strong> para empresas que buscam crescimento sustentável e resultados mensuráveis.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp animation-delay-400 mb-16">
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" onClick={handleWhatsAppClick} className="group bg-green-500 text-white px-12 py-6 rounded-full text-lg font-semibold hover:bg-green-600 hover:shadow-2xl transition-all transform hover:scale-105 flex items-center gap-3">
+              <button onClick={handleWhatsAppClick} className="group bg-green-500 text-white px-12 py-6 rounded-full text-lg font-semibold hover:bg-green-600 hover:shadow-2xl transition-all transform hover:scale-105 flex items-center gap-3">
                 Agendar Reunião Estratégica
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </button>
               <a href="#servicos" className="border-2 border-gray-200 text-gray-700 px-12 py-6 rounded-full text-lg font-semibold hover:border-gray-300 hover:bg-gray-50 transition-all">
                 Conhecer Soluções
               </a>
@@ -454,10 +477,10 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
                 <p className="text-lg text-gray-700 mb-4">
                   <strong className="text-gray-900">Do zero ao omnichannel</strong> em menos de 90 dias
                 </p>
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-green-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-600 transition-all">
+                <button onClick={handleWhatsAppClick} className="inline-flex items-center gap-2 bg-green-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-600 transition-all">
                   Solicitar Implementação
                   <ArrowRight className="w-5 h-5" />
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -812,17 +835,14 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
                 <p className="text-xl md:text-2xl mb-10 text-white/95 leading-relaxed max-w-3xl mx-auto">
                   Agende agora uma consultoria gratuita e descubra como podemos transformar seu negócio
                 </p>
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
                   onClick={handleConsultoriaClick}
                   className="inline-flex items-center gap-3 bg-white text-green-600 px-10 py-5 rounded-full text-lg font-bold hover:bg-gray-50 transition-all transform hover:scale-105 shadow-xl"
                 >
                   <Phone className="w-6 h-6" />
                   Falar com Especialista Agora
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </button>
                 <p className="text-sm text-white/90 mt-6">⚡ Atendimento imediato via WhatsApp</p>
               </div>
             </div>
@@ -845,12 +865,9 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
                 onClick={handleWhatsAppClick}
-                className={`bg-gradient-to-br from-green-500 to-green-600 p-8 rounded-2xl text-white hover:shadow-2xl transition-all hover:-translate-y-2 group ${visibleSections.contato ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                className={`bg-gradient-to-br from-green-500 to-green-600 p-8 rounded-2xl text-white hover:shadow-2xl transition-all hover:-translate-y-2 group text-left w-full ${visibleSections.contato ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDuration: '800ms', transitionDelay: '200ms' }}
               >
                 <div className="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -859,7 +876,7 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
                 <h3 className="text-2xl font-bold mb-3">WhatsApp</h3>
                 <p className="opacity-90 mb-4">Atendimento rápido e direto</p>
                 <p className="font-semibold text-lg">+55 19 99012-2773</p>
-              </a>
+              </button>
 
               <div
                 className={`bg-gray-50 p-8 rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2 border border-gray-200 ${visibleSections.contato ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
@@ -913,11 +930,11 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
                 Especialistas em tráfego pago e transformação digital. Transformamos visitas em vendas com estratégias inteligentes e resultados mensuráveis.
               </p>
               <div className="flex gap-4">
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" onClick={handleWhatsAppClick} className="bg-green-500 hover:bg-green-600 w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110">
+                <button onClick={handleWhatsAppClick} className="bg-green-500 hover:bg-green-600 w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                   </svg>
-                </a>
+                </button>
                 <a href="https://www.instagram.com/agenciagtx" target="_blank" rel="noopener noreferrer" className="bg-gray-200 hover:bg-pink-600 text-gray-700 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -935,10 +952,10 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
               <h3 className="text-lg font-bold mb-6 text-gray-900">Contato</h3>
               <ul className="space-y-4">
                 <li>
-                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-green-600 transition-colors flex items-center gap-3">
+                  <button onClick={handleWhatsAppClick} className="text-gray-600 hover:text-green-600 transition-colors flex items-center gap-3">
                     <Phone className="w-5 h-5 flex-shrink-0" />
                     <span>+55 19 99012-2773</span>
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <a href="mailto:contato@agenciagtx.com.br" className="text-gray-600 hover:text-green-600 transition-colors flex items-center gap-3">
@@ -977,10 +994,7 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
       </footer>
 
       {/* WhatsApp Floating Button */}
-      <a
-        href={whatsappLink}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
         onClick={handleWhatsAppClick}
         className="fixed bottom-8 right-8 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all z-50 hover:scale-110 group"
         aria-label="WhatsApp"
@@ -990,7 +1004,93 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
         </svg>
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-ping"></span>
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"></span>
-      </a>
+      </button>
+
+      {/* WhatsApp Chat Widget Modal */}
+      {showWhatsAppModal && (
+        <>
+          {/* Backdrop muito sutil */}
+          <div
+            className="fixed inset-0 bg-black/10 z-40"
+            style={{
+              animation: isClosingModal ? 'fadeOut 0.4s ease-out' : 'fadeIn 0.3s ease-out'
+            }}
+            onClick={closeModal}
+          ></div>
+
+          {/* Modal estilo chat widget com efeito Genie suave e rápido */}
+          <div
+            className="fixed bottom-24 right-4 md:right-8 w-[calc(100%-2rem)] md:w-96 z-50"
+            style={{
+              animation: isClosingModal
+                ? 'modalSlideDown 0.25s ease-in forwards'
+                : 'modalSlideUp 0.3s ease-out forwards'
+            }}
+          >
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+              {/* Header */}
+              <div className="bg-gradient-to-r from-green-500 to-green-600 p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="relative">
+                      <div className="bg-white/20 p-2 rounded-full">
+                        <MessageCircle className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></span>
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-sm">GTX Marketing</h3>
+                      <p className="text-white/90 text-xs flex items-center gap-1">
+                        <span className="w-2 h-2 bg-green-300 rounded-full"></span>
+                        Online agora
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={closeModal}
+                    className="text-white/80 hover:text-white transition-colors p-1"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Body */}
+              <div className="p-4 bg-gray-50">
+                <div className="bg-white rounded-lg p-3 mb-3 shadow-sm">
+                  <p className="text-sm text-gray-600 mb-2">
+                    Olá! 👋 Como podemos ajudar você hoje?
+                  </p>
+                </div>
+
+                <textarea
+                  value={whatsappMessage}
+                  onChange={(e) => setWhatsappMessage(e.target.value)}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500/20 focus:outline-none transition-all resize-none text-sm text-gray-700"
+                  placeholder="Digite sua mensagem aqui..."
+                />
+                <p className="text-xs text-gray-500 mt-2">
+                  Pressione enviar para continuar no WhatsApp
+                </p>
+              </div>
+
+              {/* Footer */}
+              <div className="p-4 bg-white border-t border-gray-100">
+                <button
+                  onClick={handleSendWhatsApp}
+                  className="w-full bg-green-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-600 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-sm flex items-center justify-center gap-2"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                  </svg>
+                  Continuar no WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Tracking Scripts Placeholder */}
       <div id="tracking-scripts">
@@ -1001,6 +1101,11 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+          from { opacity: 1; }
+          to { opacity: 0; }
         }
         
         @keyframes fadeInUp {
@@ -1025,9 +1130,46 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
           0% { transform: translateY(0); }
           100% { transform: translateY(12px); }
         }
-        
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes modalSlideUp {
+          from {
+            opacity: 0;
+            transform: translateY(16px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes modalSlideDown {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(16px);
+          }
+        }
+
         .animate-fadeIn {
           animation: fadeIn 0.8s ease-out;
+        }
+
+        .animate-slideUp {
+          animation: slideUp 0.3s ease-out;
         }
         
         .animate-fadeInUp {
