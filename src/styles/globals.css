@@ -10,11 +10,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
-}
-
-section {
-  scroll-snap-align: start;
 }
 
 @media (min-width: 768px) {
