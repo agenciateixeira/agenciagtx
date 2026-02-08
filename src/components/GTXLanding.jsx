@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MessageCircle, TrendingUp, Target, Users, BarChart3, Zap, CheckCircle, Star, Menu, X, ArrowRight, Phone, Mail, MapPin, Award, Rocket, Shield, ChevronLeft, ChevronRight, Clock, DollarSign, LineChart } from 'lucide-react';
 
 const GTXLanding = () => {
@@ -10,6 +10,7 @@ const GTXLanding = () => {
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
   const [isClosingModal, setIsClosingModal] = useState(false);
   const [whatsappMessage, setWhatsappMessage] = useState('Olá! Gostaria de saber mais sobre os serviços da GTX.');
+  const neuralCanvasRef = useRef(null);
 
   // Tracking Functions
   const trackWhatsAppClick = () => {
@@ -68,6 +69,159 @@ const GTXLanding = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Neural Network Canvas Animation
+  useEffect(() => {
+    const canvas = neuralCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let animationId;
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const NODE_COUNT = 55;
+    const CONNECTION_DISTANCE = 160;
+    const colors = ['#9ACD32', '#7BA428', '#bae648', '#5c7b1e'];
+
+    const nodes = Array.from({ length: NODE_COUNT }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      radius: Math.random() * 2.5 + 1,
+      depth: Math.random(),
+      color: colors[Math.floor(Math.random() * colors.length)],
+    }));
+
+    // Lightning bolts system
+    const lightnings = [];
+    const MAX_LIGHTNINGS = 6;
+
+    const spawnLightning = () => {
+      if (lightnings.length >= MAX_LIGHTNINGS) return;
+      const i = Math.floor(Math.random() * nodes.length);
+      let j = Math.floor(Math.random() * nodes.length);
+      while (j === i) j = Math.floor(Math.random() * nodes.length);
+      lightnings.push({
+        from: i,
+        to: j,
+        life: 1.0,
+        decay: 0.025 + Math.random() * 0.025, // estrela cadente: vida ~40-80 frames
+        progress: 0, // 0 a 1: cabeça do raio viajando do nó A ao B
+      });
+    };
+
+    const drawShootingStar = (x1, y1, x2, y2, progress, alpha) => {
+      // Apenas desenha a parte já percorrida (trail)
+      const tailLength = 0.35;
+      const head = progress;
+      const tail = Math.max(0, progress - tailLength);
+      const hx = x1 + (x2 - x1) * head;
+      const hy = y1 + (y2 - y1) * head;
+      const tx = x1 + (x2 - x1) * tail;
+      const ty = y1 + (y2 - y1) * tail;
+
+      const grad = ctx.createLinearGradient(tx, ty, hx, hy);
+      grad.addColorStop(0, `rgba(154, 205, 50, 0)`);
+      grad.addColorStop(0.6, `rgba(186, 230, 72, ${alpha * 0.5})`);
+      grad.addColorStop(1, `rgba(255, 255, 255, ${alpha})`);
+
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(hx, hy);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.5;
+      ctx.shadowColor = '#9ACD32';
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Brilho na cabeça
+      ctx.beginPath();
+      ctx.arc(hx, hy, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.9})`;
+      ctx.fill();
+    };
+
+    let frameCount = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frameCount++;
+
+      // Spawn novas estrelas cadentes
+      if (frameCount % 20 === 0 && Math.random() < 0.6) spawnLightning();
+
+      // Update positions
+      nodes.forEach(node => {
+        node.x += node.vx;
+        node.y += node.vy;
+        if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+      });
+
+      // Draw proximity connections (subtle)
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECTION_DISTANCE) {
+            const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.15;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(154, 205, 50, ${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw shooting stars
+      for (let k = lightnings.length - 1; k >= 0; k--) {
+        const bolt = lightnings[k];
+        const a = nodes[bolt.from];
+        const b = nodes[bolt.to];
+
+        bolt.progress = Math.min(1, bolt.progress + bolt.decay * 1.8);
+        drawShootingStar(a.x, a.y, b.x, b.y, bolt.progress, bolt.life);
+
+        bolt.life -= bolt.decay;
+        if (bolt.life <= 0) lightnings.splice(k, 1);
+      }
+
+      // Draw nodes
+      nodes.forEach(node => {
+        const opacity = 0.3 + node.depth * 0.5;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius * (0.5 + node.depth * 0.8), 0, Math.PI * 2);
+        ctx.fillStyle = node.color + Math.round(opacity * 255).toString(16).padStart(2, '0');
+        ctx.fill();
+
+        // Glow effect for deeper nodes
+        if (node.depth > 0.7) {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(154, 205, 50, 0.05)`;
+          ctx.fill();
+        }
+      });
+
+      animationId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', resize);
+    };
   }, []);
 
   // Scroll Animation Observer
@@ -315,6 +469,12 @@ const GTXLanding = () => {
 
       {/* Hero Section - Claro e Refinado */}
       <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-gradient-to-br from-white via-gray-50 to-white">
+        {/* Neural Network Canvas */}
+        <canvas
+          ref={neuralCanvasRef}
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{ opacity: 0.7 }}
+        />
         {/* Subtle animated background elements */}
         <div className="absolute top-20 right-10 w-96 h-96 bg-green-500/5 rounded-full filter blur-3xl animate-blob"></div>
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-green-400/5 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
