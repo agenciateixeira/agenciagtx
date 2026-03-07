@@ -309,20 +309,38 @@ export const markSessionAsConverted = async (leadId) => {
 
   try {
     const supabase = getTrackingSupabaseClient();
-    if (!supabase) return;
+    if (!supabase) {
+      logError('[GTX Sessions] ❌ Supabase client não disponível');
+      return;
+    }
 
     const sessionID = getSessionID();
-    if (!sessionID) return;
+    if (!sessionID) {
+      logError('[GTX Sessions] ❌ Session ID não encontrado');
+      return;
+    }
 
-    await supabase
+    log('[GTX Sessions] 🔄 Marcando sessão como convertida:', sessionID, 'Lead:', leadId);
+
+    const { data, error } = await supabase
       .from('sessions')
       .update({
         converted: true,
         lead_id: leadId
       })
-      .eq('session_id', sessionID);
+      .eq('session_id', sessionID)
+      .select();
 
-    log('[GTX Sessions] ✅ Sessão marcada como convertida');
+    if (error) {
+      logError('[GTX Sessions] ❌ Erro ao atualizar sessão:', error);
+      return;
+    }
+
+    if (data && data.length > 0) {
+      log('[GTX Sessions] ✅ Sessão marcada como convertida:', data[0].id);
+    } else {
+      logError('[GTX Sessions] ⚠️ Nenhuma sessão foi atualizada. Session ID:', sessionID);
+    }
 
   } catch (error) {
     logError('[GTX Sessions] ❌ Erro ao marcar conversão:', error);
