@@ -134,9 +134,9 @@ const GTXLanding = () => {
         mensagem: whatsappMessage,
         origem: 'landing_page_modal'
       });
-      console.log('[GTX] ✅ Server-side tracking concluído');
+      // console.log('[GTX] ✅ Server-side tracking concluído');
     } catch (error) {
-      console.error('[GTX] ⚠️ Erro no server-side tracking:', error);
+      // console.error('[GTX] ⚠️ Erro no server-side tracking:', error);
       // Continua mesmo com erro - não bloqueia o usuário
     }
 
@@ -188,7 +188,7 @@ const GTXLanding = () => {
       // 4. Fecha o modal
       closeModal();
     } catch (error) {
-      console.error('[GTX] Erro ao enviar WhatsApp:', error);
+      // console.error('[GTX] Erro ao enviar WhatsApp:', error);
       // Redireciona mesmo com erro (não bloqueia usuário)
       const encodedMessage = encodeURIComponent(whatsappMessage);
       const whatsappUrl = `https://wa.me/5519990122773?text=${encodedMessage}`;

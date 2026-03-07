@@ -7,11 +7,13 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     // GTX Session Tracking - Registra cada visita ao site
+    const DEBUG = false; // Set to true to see tracking logs
+
     import('../lib/sessionTracking')
       .then((module) => {
         module.trackSession()
           .then((session) => {
-            if (session) {
+            if (session && DEBUG) {
               console.log('[GTX] ✅ Sessão registrada:', session.id);
 
               // Busca quantas sessões o usuário já teve
@@ -28,7 +30,7 @@ function MyApp({ Component, pageProps }) {
             }
           })
           .catch((error) => {
-            console.error('[GTX] Erro ao rastrear sessão:', error);
+            // console.error('[GTX] Erro ao rastrear sessão:', error);
           });
       });
 

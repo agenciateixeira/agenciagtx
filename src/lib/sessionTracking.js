@@ -5,6 +5,11 @@
 
 import { createClient } from '@supabase/supabase-js';
 
+// Debug mode - set to false in production
+const DEBUG = false;
+const log = (...args) => DEBUG && console.log(...args);
+const logError = (...args) => console.error(...args); // Errors always show
+
 // Cliente Supabase para tracking
 let trackingClient = null;
 
@@ -14,7 +19,7 @@ const getTrackingSupabaseClient = () => {
     const key = process.env.NEXT_PUBLIC_TRACKING_SUPABASE_ANON_KEY;
 
     if (!url || !key) {
-      console.error('[GTX Sessions] ❌ Tracking Supabase credentials missing');
+      logError('[GTX Sessions] ❌ Tracking Supabase credentials missing');
       return null;
     }
 
@@ -45,7 +50,7 @@ export const getGTXUserID = () => {
   expires.setTime(expires.getTime() + (365 * 24 * 60 * 60 * 1000));
   document.cookie = `${cookieName}=${newID}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
 
-  console.log('[GTX Sessions] 🆔 Novo GTX User ID criado:', newID);
+  log('[GTX Sessions] 🆔 Novo GTX User ID criado:', newID);
   return newID;
 };
 
@@ -66,7 +71,7 @@ export const getSessionID = () => {
   const newSessionID = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   sessionStorage.setItem(storageKey, newSessionID);
 
-  console.log('[GTX Sessions] 🎯 Nova sessão iniciada:', newSessionID);
+  log('[GTX Sessions] 🎯 Nova sessão iniciada:', newSessionID);
   return newSessionID;
 };
 
@@ -158,7 +163,7 @@ const getUserIP = async () => {
     const data = await response.json();
     return data.ip;
   } catch (error) {
-    console.error('[GTX Sessions] Erro ao buscar IP:', error);
+    logError('[GTX Sessions] Erro ao buscar IP:', error);
     return null;
   }
 };
@@ -210,7 +215,7 @@ export const trackSession = async () => {
       converted: false
     };
 
-    console.log('[GTX Sessions] 📊 Registrando sessão...', sessionID);
+    log('[GTX Sessions] 📊 Registrando sessão...', sessionID);
 
     const { data, error } = await supabase
       .from('sessions')
@@ -218,15 +223,15 @@ export const trackSession = async () => {
       .select();
 
     if (error) {
-      console.error('[GTX Sessions] ❌ Erro ao salvar sessão:', error);
+      logError('[GTX Sessions] ❌ Erro ao salvar sessão:', error);
       return null;
     }
 
-    console.log('[GTX Sessions] ✅ Sessão registrada:', data[0].id);
+    log('[GTX Sessions] ✅ Sessão registrada:', data[0].id);
     return data[0];
 
   } catch (error) {
-    console.error('[GTX Sessions] ❌ Erro:', error);
+    logError('[GTX Sessions] ❌ Erro:', error);
     return null;
   }
 };
@@ -250,15 +255,15 @@ export const getUserSessionCount = async () => {
       .eq('gtx_uid', gtxUID);
 
     if (error) {
-      console.error('[GTX Sessions] ❌ Erro ao contar sessões:', error);
+      logError('[GTX Sessions] ❌ Erro ao contar sessões:', error);
       return 0;
     }
 
-    console.log(`[GTX Sessions] 📊 Usuário tem ${count} sessões`);
+    log(`[GTX Sessions] 📊 Usuário tem ${count} sessões`);
     return count || 0;
 
   } catch (error) {
-    console.error('[GTX Sessions] ❌ Erro:', error);
+    logError('[GTX Sessions] ❌ Erro:', error);
     return 0;
   }
 };
@@ -287,11 +292,11 @@ export const getUserInfo = async () => {
       return null;
     }
 
-    console.log('[GTX Sessions] 👤 Usuário identificado:', data[0].nome);
+    log('[GTX Sessions] 👤 Usuário identificado:', data[0].nome);
     return data[0];
 
   } catch (error) {
-    console.error('[GTX Sessions] ❌ Erro:', error);
+    logError('[GTX Sessions] ❌ Erro:', error);
     return null;
   }
 };
@@ -317,9 +322,9 @@ export const markSessionAsConverted = async (leadId) => {
       })
       .eq('session_id', sessionID);
 
-    console.log('[GTX Sessions] ✅ Sessão marcada como convertida');
+    log('[GTX Sessions] ✅ Sessão marcada como convertida');
 
   } catch (error) {
-    console.error('[GTX Sessions] ❌ Erro ao marcar conversão:', error);
+    logError('[GTX Sessions] ❌ Erro ao marcar conversão:', error);
   }
 };

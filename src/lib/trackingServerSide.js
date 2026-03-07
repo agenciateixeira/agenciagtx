@@ -6,6 +6,11 @@
 import { createClient } from '@supabase/supabase-js';
 import { getGTXUserID, markSessionAsConverted } from './sessionTracking';
 
+// Debug mode - set to false in production
+const DEBUG = false;
+const log = (...args) => DEBUG && console.log(...args);
+const logError = (...args) => console.error(...args);
+
 // Cliente Supabase dedicado para TRACKING (não usa o supabaseClient.js original)
 let trackingClient = null;
 
@@ -15,7 +20,7 @@ const getTrackingSupabaseClient = () => {
     const key = process.env.NEXT_PUBLIC_TRACKING_SUPABASE_ANON_KEY;
 
     if (!url || !key) {
-      console.error('[GTX] ❌ Tracking Supabase credentials missing');
+      logError('[GTX] ❌ Tracking Supabase credentials missing');
       return null;
     }
 
@@ -63,7 +68,7 @@ const getUserIP = async () => {
     const data = await response.json();
     return data.ip;
   } catch (error) {
-    console.error('[GTX] Erro ao buscar IP:', error);
+    logError('[GTX] Erro ao buscar IP:', error);
     return null;
   }
 };
@@ -123,7 +128,7 @@ export const saveLeadToSupabase = async (leadData) => {
     const supabase = getTrackingSupabaseClient();
 
     if (!supabase) {
-      console.error('[GTX] ❌ Tracking Supabase não configurado');
+      logError('[GTX] ❌ Tracking Supabase não configurado');
       return null;
     }
 
@@ -133,15 +138,15 @@ export const saveLeadToSupabase = async (leadData) => {
       .select();
 
     if (error) {
-      console.error('[GTX] Erro ao salvar lead:', error);
+      logError('[GTX] Erro ao salvar lead:', error);
       return null;
     }
 
-    console.log('[GTX] ✅ Lead salvo com sucesso:', data[0].id);
+    log('[GTX] ✅ Lead salvo com sucesso:', data[0].id);
     return data[0];
 
   } catch (error) {
-    console.error('[GTX] Erro ao salvar lead:', error);
+    logError('[GTX] Erro ao salvar lead:', error);
     return null;
   }
 };
@@ -152,7 +157,7 @@ export const saveLeadToSupabase = async (leadData) => {
 export const sendPixelEvent = (eventName, eventID, additionalParams = {}) => {
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('track', eventName, additionalParams, { eventID: eventID });
-    console.log('[GTX] ✅ Pixel Event:', eventName, eventID);
+    log('[GTX] ✅ Pixel Event:', eventName, eventID);
   }
 };
 
@@ -162,13 +167,13 @@ export const sendPixelEvent = (eventName, eventID, additionalParams = {}) => {
  */
 export const trackWhatsAppClick = async (additionalData = {}) => {
   try {
-    console.log('[GTX] 📊 Iniciando tracking WhatsApp...');
+    log('[GTX] 📊 Iniciando tracking WhatsApp...');
 
     // 1. Captura dados de tracking
     const trackingData = await captureTrackingData();
 
     if (!trackingData) {
-      console.warn('[GTX] ⚠️ Tracking data não disponível');
+      log('[GTX] ⚠️ Tracking data não disponível');
       return;
     }
 
@@ -197,7 +202,7 @@ export const trackWhatsAppClick = async (additionalData = {}) => {
     return savedLead;
 
   } catch (error) {
-    console.error('[GTX] ❌ Erro no tracking:', error);
+    logError('[GTX] ❌ Erro no tracking:', error);
     return null;
   }
 };
@@ -250,7 +255,7 @@ export const trackConsultoriaClick = async (formData = {}) => {
     return savedLead;
 
   } catch (error) {
-    console.error('[GTX] Erro no tracking consultoria:', error);
+    logError('[GTX] Erro no tracking consultoria:', error);
     return null;
   }
 };
