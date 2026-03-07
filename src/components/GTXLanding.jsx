@@ -91,6 +91,7 @@ const GTXLanding = () => {
   const [isClosingModal, setIsClosingModal] = useState(false);
   const [whatsappMessage, setWhatsappMessage] = useState('Olá! Gostaria de saber mais sobre os serviços da GTX.');
   const [whatsappNome, setWhatsappNome] = useState('');
+  const [whatsappEmail, setWhatsappEmail] = useState('');
   const [whatsappTelefone, setWhatsappTelefone] = useState('');
   const [isSendingWhatsApp, setIsSendingWhatsApp] = useState(false);
   const neuralCanvasRef = useRef(null);
@@ -130,6 +131,7 @@ const GTXLanding = () => {
     try {
       await trackWhatsAppClickServerSide({
         nome: whatsappNome,
+        email: whatsappEmail,
         telefone: whatsappTelefone,
         mensagem: whatsappMessage,
         origem: 'landing_page_modal'
@@ -1581,6 +1583,21 @@ const GTXLanding = () => {
                   />
                 </div>
 
+                {/* Email */}
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    value={whatsappEmail}
+                    onChange={(e) => setWhatsappEmail(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500/20 focus:outline-none transition-all text-sm text-gray-700"
+                    placeholder="seu@email.com"
+                    required
+                  />
+                </div>
+
                 {/* Telefone */}
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -1619,7 +1636,7 @@ const GTXLanding = () => {
               <div className="p-4 bg-white border-t border-gray-100">
                 <button
                   onClick={handleSendWhatsApp}
-                  disabled={isSendingWhatsApp || !whatsappNome || !whatsappTelefone}
+                  disabled={isSendingWhatsApp || !whatsappNome || !whatsappEmail || !whatsappTelefone}
                   className="w-full bg-green-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-600 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {isSendingWhatsApp ? (
