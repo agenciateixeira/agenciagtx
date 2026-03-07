@@ -90,6 +90,8 @@ const GTXLanding = () => {
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
   const [isClosingModal, setIsClosingModal] = useState(false);
   const [whatsappMessage, setWhatsappMessage] = useState('Olá! Gostaria de saber mais sobre os serviços da GTX.');
+  const [whatsappNome, setWhatsappNome] = useState('');
+  const [whatsappTelefone, setWhatsappTelefone] = useState('');
   const [isSendingWhatsApp, setIsSendingWhatsApp] = useState(false);
   const neuralCanvasRef = useRef(null);
   const [statsVisible, setStatsVisible] = useState(false);
@@ -127,6 +129,8 @@ const GTXLanding = () => {
     // 1. Server-side tracking (salva no Supabase + prepara para CAPI)
     try {
       await trackWhatsAppClickServerSide({
+        nome: whatsappNome,
+        telefone: whatsappTelefone,
         mensagem: whatsappMessage,
         origem: 'landing_page_modal'
       });
@@ -1555,22 +1559,59 @@ const GTXLanding = () => {
               </div>
 
               {/* Body */}
-              <div className="p-4 bg-gray-50">
-                <div className="bg-white rounded-lg p-3 mb-3 shadow-sm">
-                  <p className="text-sm text-gray-600 mb-2">
-                    Olá! 👋 Como podemos ajudar você hoje?
+              <div className="p-4 bg-gray-50 space-y-3">
+                <div className="bg-white rounded-lg p-3 shadow-sm">
+                  <p className="text-sm text-gray-600">
+                    Olá! 👋 Preencha os dados abaixo para continuar
                   </p>
                 </div>
 
-                <textarea
-                  value={whatsappMessage}
-                  onChange={(e) => setWhatsappMessage(e.target.value)}
-                  rows={4}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500/20 focus:outline-none transition-all resize-none text-sm text-gray-700"
-                  placeholder="Digite sua mensagem aqui..."
-                />
-                <p className="text-xs text-gray-500 mt-2">
-                  Pressione enviar para continuar no WhatsApp
+                {/* Nome */}
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                    Nome *
+                  </label>
+                  <input
+                    type="text"
+                    value={whatsappNome}
+                    onChange={(e) => setWhatsappNome(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500/20 focus:outline-none transition-all text-sm text-gray-700"
+                    placeholder="Seu nome completo"
+                    required
+                  />
+                </div>
+
+                {/* Telefone */}
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                    Telefone/WhatsApp *
+                  </label>
+                  <input
+                    type="tel"
+                    value={whatsappTelefone}
+                    onChange={(e) => setWhatsappTelefone(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500/20 focus:outline-none transition-all text-sm text-gray-700"
+                    placeholder="(11) 99999-9999"
+                    required
+                  />
+                </div>
+
+                {/* Mensagem */}
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                    Mensagem
+                  </label>
+                  <textarea
+                    value={whatsappMessage}
+                    onChange={(e) => setWhatsappMessage(e.target.value)}
+                    rows={3}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500/20 focus:outline-none transition-all resize-none text-sm text-gray-700"
+                    placeholder="Como podemos ajudar?"
+                  />
+                </div>
+
+                <p className="text-xs text-gray-500">
+                  * Campos obrigatórios
                 </p>
               </div>
 
@@ -1578,7 +1619,7 @@ const GTXLanding = () => {
               <div className="p-4 bg-white border-t border-gray-100">
                 <button
                   onClick={handleSendWhatsApp}
-                  disabled={isSendingWhatsApp}
+                  disabled={isSendingWhatsApp || !whatsappNome || !whatsappTelefone}
                   className="w-full bg-green-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-600 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {isSendingWhatsApp ? (

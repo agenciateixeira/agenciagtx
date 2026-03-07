@@ -6,6 +6,32 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter()
 
   useEffect(() => {
+    // GTX Session Tracking - Registra cada visita ao site
+    import('../lib/sessionTracking')
+      .then((module) => {
+        module.trackSession()
+          .then((session) => {
+            if (session) {
+              console.log('[GTX] ✅ Sessão registrada:', session.id);
+
+              // Busca quantas sessões o usuário já teve
+              module.getUserSessionCount().then((count) => {
+                console.log(`[GTX] 📊 Total de sessões do usuário: ${count}`);
+              });
+
+              // Verifica se usuário já converteu antes
+              module.getUserInfo().then((user) => {
+                if (user) {
+                  console.log(`[GTX] 👤 Usuário retornando: ${user.nome}`);
+                }
+              });
+            }
+          })
+          .catch((error) => {
+            console.error('[GTX] Erro ao rastrear sessão:', error);
+          });
+      });
+
     // Meta Pixel
     import('react-facebook-pixel')
       .then((x) => x.default)

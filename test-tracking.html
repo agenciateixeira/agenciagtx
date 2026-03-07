@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTX - Teste de Tracking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #9FD356;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    button {
+      background: #9FD356;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px 5px;
+    }
+    button:hover {
+      background: #8CC245;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .log {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-top: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .log-line {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .success { color: #28a745; }
+    .error { color: #dc3545; }
+    .info { color: #17a2b8; }
+    .warning { color: #ffc107; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 GTX - Teste de Tracking Server-Side</h1>
+    <p class="subtitle">Use este arquivo para testar se o tracking está funcionando corretamente.</p>
+
+    <div>
+      <button id="testConnection">1️⃣ Testar Conexão Supabase</button>
+      <button id="testTracking">2️⃣ Testar Tracking Completo</button>
+      <button id="viewLeads">3️⃣ Ver Últimos Leads</button>
+      <button id="clearLog">🗑️ Limpar Log</button>
+    </div>
+
+    <div id="log" class="log">
+      <div class="log-line info">📋 Aguardando testes...</div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Configuração do Supabase
+    const SUPABASE_URL = 'https://cffpqwynoftzqpdkaqoj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNmZnBxd3lub2Z0enFwZGthcW9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDQxNzIsImV4cCI6MjA4ODM4MDE3Mn0.K1FtTA4akissZGMIz1tbZ6fB8_QQOxymO52gSfPO6yA';
+
+    // Import Supabase
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Função para adicionar log
+    function addLog(message, type = 'info') {
+      const logDiv = document.getElementById('log');
+      const line = document.createElement('div');
+      line.className = `log-line ${type}`;
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logDiv.appendChild(line);
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    // 1️⃣ Testar Conexão
+    document.getElementById('testConnection').addEventListener('click', async () => {
+      addLog('🔍 Testando conexão com Supabase...', 'info');
+
+      try {
+        const { data, error } = await supabase
+          .from('leads')
+          .select('count', { count: 'exact', head: true });
+
+        if (error) {
+          addLog(`❌ ERRO: ${error.message}`, 'error');
+          addLog(`📝 Detalhes: ${error.details || 'N/A'}`, 'error');
+          addLog(`💡 Hint: ${error.hint || 'N/A'}`, 'warning');
+        } else {
+          addLog('✅ Conexão OK! Supabase respondeu.', 'success');
+          addLog(`📊 Total de leads na tabela: ${data || 0}`, 'success');
+        }
+      } catch (err) {
+        addLog(`❌ ERRO CRÍTICO: ${err.message}`, 'error');
+        console.error(err);
+      }
+    });
+
+    // 2️⃣ Testar Tracking Completo
+    document.getElementById('testTracking').addEventListener('click', async () => {
+      addLog('🚀 Iniciando teste de tracking completo...', 'info');
+
+      try {
+        // Gerar dados de teste
+        const eventId = 'test_' + Date.now();
+        const testData = {
+          event_id: eventId,
+          fbp: '_fbp_test_' + Math.random().toString(36).substr(2, 9),
+          fbc: '_fbc_test_' + Math.random().toString(36).substr(2, 9),
+          utm_source: 'teste',
+          utm_medium: 'manual',
+          utm_campaign: 'debug',
+          mensagem: 'Teste de tracking via arquivo HTML',
+          origem: 'test-tracking.html',
+          status: 'novo',
+          user_agent: navigator.userAgent,
+          url_origem: window.location.href
+        };
+
+        addLog(`📝 Dados preparados: event_id = ${eventId}`, 'info');
+        addLog('💾 Enviando para Supabase...', 'info');
+
+        const { data, error } = await supabase
+          .from('leads')
+          .insert([testData])
+          .select();
+
+        if (error) {
+          addLog(`❌ ERRO ao salvar: ${error.message}`, 'error');
+          addLog(`📝 Code: ${error.code}`, 'error');
+          addLog(`📝 Details: ${error.details || 'N/A'}`, 'error');
+        } else {
+          addLog('✅ Lead salvo com sucesso!', 'success');
+          addLog(`🆔 ID: ${data[0].id}`, 'success');
+          addLog(`🔑 Event ID: ${data[0].event_id}`, 'success');
+          addLog(`📅 Criado em: ${data[0].created_at}`, 'success');
+        }
+      } catch (err) {
+        addLog(`❌ ERRO CRÍTICO: ${err.message}`, 'error');
+        console.error(err);
+      }
+    });
+
+    // 3️⃣ Ver Últimos Leads
+    document.getElementById('viewLeads').addEventListener('click', async () => {
+      addLog('📊 Buscando últimos 5 leads...', 'info');
+
+      try {
+        const { data, error } = await supabase
+          .from('leads')
+          .select('id, event_id, mensagem, origem, created_at, status')
+          .order('created_at', { ascending: false })
+          .limit(5);
+
+        if (error) {
+          addLog(`❌ ERRO: ${error.message}`, 'error');
+        } else if (data.length === 0) {
+          addLog('⚠️ Nenhum lead encontrado no banco.', 'warning');
+        } else {
+          addLog(`✅ Encontrados ${data.length} leads:`, 'success');
+          data.forEach((lead, index) => {
+            addLog(`  ${index + 1}. [${lead.status}] ${lead.mensagem || 'Sem mensagem'} (${new Date(lead.created_at).toLocaleString()})`, 'info');
+          });
+        }
+      } catch (err) {
+        addLog(`❌ ERRO CRÍTICO: ${err.message}`, 'error');
+        console.error(err);
+      }
+    });
+
+    // Limpar Log
+    document.getElementById('clearLog').addEventListener('click', () => {
+      document.getElementById('log').innerHTML = '<div class="log-line info">📋 Log limpo.</div>';
+    });
+
+    // Teste inicial automático
+    addLog('✅ Arquivo carregado com sucesso!', 'success');
+    addLog('💡 Clique nos botões acima para testar o tracking.', 'info');
+  </script>
+</body>
+</html>

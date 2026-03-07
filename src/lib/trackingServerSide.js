@@ -4,6 +4,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
+import { getGTXUserID, markSessionAsConverted } from './sessionTracking';
 
 // Cliente Supabase dedicado para TRACKING (não usa o supabaseClient.js original)
 let trackingClient = null;
@@ -84,6 +85,9 @@ export const captureTrackingData = async () => {
   const userIP = await getUserIP();
 
   return {
+    // GTX User ID (cookie único)
+    gtx_uid: getGTXUserID(),
+
     // Cookies Meta
     fbp: getCookie('_fbp'),
     fbc: getCookie('_fbc'),
@@ -174,7 +178,12 @@ export const trackWhatsAppClick = async (additionalData = {}) => {
     // 3. Salva no Supabase
     const savedLead = await saveLeadToSupabase(leadData);
 
-    // 4. Envia evento Lead para Pixel (client-side)
+    // 4. Marca sessão como convertida
+    if (savedLead) {
+      await markSessionAsConverted(savedLead.id);
+    }
+
+    // 5. Envia evento Lead para Pixel (client-side)
     if (savedLead) {
       sendPixelEvent('Lead', trackingData.event_id, {
         content_name: 'WhatsApp Click',
@@ -182,7 +191,7 @@ export const trackWhatsAppClick = async (additionalData = {}) => {
       });
     }
 
-    // 5. Aguarda um pouco para garantir que salvou
+    // 6. Aguarda um pouco para garantir que salvou
     await new Promise(resolve => setTimeout(resolve, 300));
 
     return savedLead;
