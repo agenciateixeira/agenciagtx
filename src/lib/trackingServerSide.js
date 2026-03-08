@@ -74,6 +74,36 @@ const getUserIP = async () => {
 };
 
 /**
+ * Busca geolocalização (país, estado, cidade) baseado no IP
+ * Usa ip-api.com (free, sem registro, 45 req/min)
+ */
+const getGeolocation = async (ip) => {
+  if (!ip) return { pais: null, estado: null, cidade: null };
+
+  try {
+    const response = await fetch(`http://ip-api.com/json/${ip}?fields=status,country,regionName,city,countryCode,region`);
+    const data = await response.json();
+
+    if (data.status === 'success') {
+      return {
+        pais: data.country || null,           // Ex: "Brazil"
+        pais_codigo: data.countryCode || null, // Ex: "BR"
+        estado: data.regionName || null,       // Ex: "São Paulo"
+        estado_codigo: data.region || null,    // Ex: "SP"
+        cidade: data.city || null              // Ex: "São Paulo"
+      };
+    }
+
+    log('[GTX] ⚠️ Geolocalização falhou:', data);
+    return { pais: null, estado: null, cidade: null };
+
+  } catch (error) {
+    logError('[GTX] Erro ao buscar geolocalização:', error);
+    return { pais: null, estado: null, cidade: null };
+  }
+};
+
+/**
  * Gera ID único para evento
  */
 const generateEventID = () => {
@@ -88,6 +118,9 @@ export const captureTrackingData = async () => {
 
   const urlParams = getUrlParams();
   const userIP = await getUserIP();
+
+  // Buscar geolocalização baseada no IP
+  const geolocation = await getGeolocation(userIP);
 
   return {
     // GTX User ID (cookie único)
@@ -114,6 +147,13 @@ export const captureTrackingData = async () => {
     user_agent: navigator.userAgent,
     ip_address: userIP,
     url_origem: window.location.href,
+
+    // Geolocalização
+    pais: geolocation.pais,
+    pais_codigo: geolocation.pais_codigo,
+    estado: geolocation.estado,
+    estado_codigo: geolocation.estado_codigo,
+    cidade: geolocation.cidade,
 
     // Status inicial
     status: 'novo'
