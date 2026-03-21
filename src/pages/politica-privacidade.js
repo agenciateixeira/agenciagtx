@@ -103,7 +103,7 @@ const PoliticaPrivacidade = () => {
     <>
     <Head>
       <title>Políticas e Termos — GTX Marketing e Vendas</title>
-      <meta name="description" content="Política de privacidade, termos de uso e política de cookies da GTX Marketing e Vendas. CNPJ 41.768.146/0001-69." />
+      <meta name="description" content="Política de privacidade, termos de uso e política de cookies da GTX Marketing e Vendas." />
     </Head>
     <div className="min-h-screen bg-white">
       {/* Custom Cursor */}
@@ -179,7 +179,7 @@ const PoliticaPrivacidade = () => {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-3">Políticas e Termos</h1>
           <p className="text-green-100 max-w-xl mx-auto text-sm">
-            Agencia GTX Marketing e Vendas LTDA — CNPJ 41.768.146/0001-69
+            Agencia GTX Marketing e Vendas LTDA
           </p>
         </div>
       </div>
@@ -206,7 +206,7 @@ const PoliticaPrivacidade = () => {
           <div className="space-y-10">
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2"><span className="text-green-500 text-2xl font-black">1.</span> Introdução</h3>
-              <p className="text-gray-700 leading-relaxed mb-4">O objetivo desta Política de Privacidade é esclarecer quais dados são coletados no site <strong>www.agenciagtx.com.br</strong>, que pertence à empresa <strong>Agencia GTX Marketing e Vendas LTDA</strong>, inscrita no CNPJ <strong>41.768.146/0001-69</strong>.</p>
+              <p className="text-gray-700 leading-relaxed mb-4">O objetivo desta Política de Privacidade é esclarecer quais dados são coletados no site <strong>www.agenciagtx.com.br</strong>, que pertence à empresa <strong>Agencia GTX Marketing e Vendas LTDA</strong>.</p>
               <p className="text-gray-700 leading-relaxed mb-4">Além de esclarecer como os dados são coletados, esta Política também informa como eles são utilizados, compartilhados e armazenados por meio do nosso site e dos respectivos serviços.</p>
               <p className="text-gray-700 leading-relaxed">A aceitação desta Política ocorre quando você se cadastra neste site para utilizar nossos serviços. Dessa forma, entendemos que você está ciente e de acordo com a forma que utilizaremos os seus dados.</p>
             </div>
@@ -263,7 +263,7 @@ const PoliticaPrivacidade = () => {
               <div className="space-y-3 bg-white/10 backdrop-blur-sm p-5 rounded-xl mb-5">
                 <div className="flex items-center gap-3"><Mail className="w-5 h-5 flex-shrink-0" /><span>contato@agenciagtx.com.br</span></div>
                 <div className="flex items-center gap-3"><Phone className="w-5 h-5 flex-shrink-0" /><span>(19) 99012-2773</span></div>
-                <div className="flex items-start gap-3"><MapPin className="w-5 h-5 flex-shrink-0 mt-1" /><div><div className="font-semibold">Agencia GTX Marketing e Vendas LTDA</div><div className="text-sm opacity-90">CNPJ: 41.768.146/0001-69</div></div></div>
+                <div className="flex items-start gap-3"><MapPin className="w-5 h-5 flex-shrink-0 mt-1" /><div><div className="font-semibold">Agencia GTX Marketing e Vendas LTDA</div></div></div>
               </div>
               <button onClick={handleWhatsAppClick} className="inline-flex items-center gap-2 bg-white text-green-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-all">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d={WA_PATH} /></svg>
@@ -419,7 +419,6 @@ const PoliticaPrivacidade = () => {
               <p className="text-gray-600 text-center md:text-left text-sm">
                 GTX Gestão e Implementações Digitais. Todos os direitos reservados.
               </p>
-              <p className="text-gray-500 text-sm">CNPJ: 41.768.146/0001-69</p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-500">
               <a href="/politica-privacidade" className="hover:text-green-600 transition-colors">Política de Privacidade</a>

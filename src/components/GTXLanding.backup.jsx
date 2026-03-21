@@ -828,9 +828,6 @@ const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
               <p className="text-gray-400 text-center md:text-left">
                 &copy; 2025 GTX Marketing e Vendas. Todos os direitos reservados.
               </p>
-              <p className="text-gray-500 text-sm">
-                CNPJ: 41.768.146/0001-69
-              </p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-500">
               <a href="/politica-privacidade" className="hover:text-green-500 transition-colors">

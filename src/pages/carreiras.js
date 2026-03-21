@@ -549,7 +549,6 @@ const Carreiras = () => {
           <div className="border-t border-gray-800 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
               <p className="text-gray-400 text-center md:text-left">&copy; 2025 GTX Marketing e Vendas. Todos os direitos reservados.</p>
-              <p className="text-gray-500 text-sm">CNPJ: 41.768.146/0001-69</p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-500">
               <a href="/politica-privacidade" className="hover:text-green-500 transition-colors">Política de Privacidade</a>
