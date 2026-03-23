@@ -15,6 +15,7 @@ import { PipelineModule } from './modules/pipeline/pipeline.module';
 import { WhatsappModule } from './modules/whatsapp/whatsapp.module';
 import { AutomationsModule } from './modules/automations/automations.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
+import { MetaAdsModule } from './modules/meta-ads/meta-ads.module';
 
 const automationsDisabled = process.env.AUTOMATIONS_DISABLED === 'true';
 const bullImports = automationsDisabled
@@ -51,6 +52,7 @@ const bullImports = automationsDisabled
     WhatsappModule,
     AutomationsModule,
     AnalyticsModule,
+    MetaAdsModule,
   ],
   providers: [
     {

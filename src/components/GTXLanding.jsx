@@ -1380,9 +1380,6 @@ const GTXLanding = () => {
               <p className="text-gray-600 text-center md:text-left text-sm">
                 GTX Gestão e Implementações Digitais. Todos os direitos reservados.
               </p>
-              <p className="text-gray-500 text-sm">
-                CNPJ: 41.768.146/0001-69
-              </p>
             </div>
             <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-500">
               <a href="/politica-privacidade" className="hover:text-green-600 transition-colors">
