@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { BarChart3, Settings, Users, Workflow } from "lucide-react";
+import { BarChart3, Megaphone, Settings, Users, Workflow } from "lucide-react";
 import { Logo } from "../logo";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
   { href: "/leads", label: "Leads", icon: Users },
   { href: "/pipeline", label: "Pipeline", icon: Workflow },
+  { href: "/meta-ads", label: "Meta Ads", icon: Megaphone },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
