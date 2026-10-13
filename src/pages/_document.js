@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import { siteGraph } from '../lib/seo'
 
 export default function Document() {
   return (
@@ -12,7 +13,7 @@ export default function Document() {
         <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://agenciagtx.com.br/api/og" />
+        <meta property="og:image" content="https://www.agenciagtx.com.br/api/og" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="twitter:card" content="summary_large_image" />
@@ -21,28 +22,7 @@ export default function Document() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "MarketingAgency",
-              "name": "GTX",
-              "url": "https://agenciagtx.com.br",
-              "logo": "https://agenciagtx.com.br/images/logo-gtx.png",
-              "description": "A GTX implementa inteligência artificial na operação de empresas brasileiras.",
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "BR"
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+5519990122773",
-                "contactType": "customer service",
-                "availableLanguage": "Portuguese"
-              },
-              "sameAs": [
-                "https://www.instagram.com/agenciagtx",
-                "https://www.facebook.com/agenciagtx"
-              ]
-            })
+            __html: JSON.stringify(siteGraph),
           }}
         />
 

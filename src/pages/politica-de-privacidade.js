@@ -5,6 +5,7 @@ export default function Politica() {
     <Layout
       title="Política de privacidade | GTX"
       description="O que o site da GTX coleta no formulário, no WhatsApp e nos anúncios."
+      crumbs={[{ href: '/', label: 'Início' }, { href: '/politica-de-privacidade', label: 'Privacidade' }]}
     >
       <article className="page">
         <section className="hero">

@@ -6,6 +6,11 @@ export default function SneakerSociety() {
     <Layout
       title="Sneaker Society | GTX"
       description="De R$ 19 mil para mais de R$ 60 mil por mês, com o mesmo custo de anúncio. Relato de Leonardo Utida."
+      crumbs={[
+        { href: '/', label: 'Início' },
+        { href: '/cases', label: 'Cases' },
+        { href: '/cases/sneaker-society', label: 'Sneaker Society' },
+      ]}
     >
       <article className="page">
         <section className="hero">

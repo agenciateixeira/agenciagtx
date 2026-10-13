@@ -1,4 +1,4 @@
-const BASE_URL = 'https://agenciagtx.com.br';
+const BASE_URL = 'https://www.agenciagtx.com.br';
 
 const pages = [
   { url: '/', priority: '1.0', changefreq: 'weekly' },

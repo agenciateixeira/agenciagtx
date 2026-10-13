@@ -6,6 +6,7 @@ export default function Carreiras() {
     <Layout
       title="Trabalhe na GTX | GTX"
       description="Vagas remotas na GTX. Conte sua experiência. Sem anexo."
+      crumbs={[{ href: '/', label: 'Início' }, { href: '/carreiras', label: 'Carreiras' }]}
     >
       <section className="hero roomy">
         <div className="shell">
