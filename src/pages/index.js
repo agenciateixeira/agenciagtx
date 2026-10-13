@@ -8,13 +8,13 @@ import Solutions from '../components/site/Solutions';
 import { faqSchema } from '../lib/seo';
 
 const clients = [
-  { src: '/images/clients/logofl.png', alt: 'Logo da Frasco Life', mark: 1.51 },
-  { src: '/images/clients/LOGODZS.png', alt: 'Logo do Depósito Zona Sul', mark: 1.22 },
-  { src: '/images/clients/logosneakers.png', alt: 'Logo da Sneaker Society', mark: 1.13 },
-  { src: '/images/clients/logojsete.png', alt: 'Logo da Jsete', mark: 1.3, ink: true },
-  { src: '/images/clients/logoroute.png', alt: 'Logo da Route Cred', mark: 1.5 },
-  { src: '/images/clients/logoflypro.png', alt: 'Logo da FlyPro', mark: 2.15 },
-  { src: '/images/clients/podologia.png', alt: 'Logo da Podologia', mark: 1 },
+  { src: '/images/clients/logofl.png', alt: 'Logo da Frasco Life', mark: 1.5, vcenter: 0.52 },
+  { src: '/images/clients/LOGODZS.png', alt: 'Logo do Depósito Zona Sul', mark: 1.22, vcenter: 0.517 },
+  { src: '/images/clients/logosneakers.png', alt: 'Logo da Sneaker Society', mark: 1.12, vcenter: 0.515 },
+  { src: '/images/clients/logojsete.png', alt: 'Logo da Jsete', mark: 1.3, vcenter: 0.508 },
+  { src: '/images/clients/logoroute.png', alt: 'Logo da Route Cred', mark: 1.49, vcenter: 0.549 },
+  { src: '/images/clients/logoflypro.png', alt: 'Logo da FlyPro', mark: 2.04, vcenter: 0.571, knockout: true },
+  { src: '/images/clients/podologia.png', alt: 'Logo da Podologia', mark: 1, vcenter: 0.499 },
 ];
 
 const problems = [
@@ -205,14 +205,25 @@ export default function Home() {
           <p className="eyebrow">Quem já passou pela GTX</p>
         </div>
         <div className="marquee">
-          <ul className="marquee-track">
-            {clients.map((client) => (
-              <li key={client.src}><img src={client.src} alt={client.alt} className={client.ink ? 'is-ink' : undefined} style={{ '--mark': client.mark }} /></li>
+          <svg className="logo-filters" aria-hidden="true" width="0" height="0">
+            <filter id="logo-knockout" colorInterpolationFilters="sRGB" x="0" y="0" width="100%" height="100%">
+              <feColorMatrix in="SourceGraphic" type="matrix" result="dark" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.2126 -0.7152 -0.0722 0 1" />
+              <feComposite in="dark" in2="SourceGraphic" operator="in" result="masked" />
+              <feFlood floodColor="#ece5d8" result="cream" />
+              <feComposite in="cream" in2="masked" operator="in" />
+            </filter>
+          </svg>
+          <div className="marquee-track">
+            {[0, 1].map((copy) => (
+              <ul className="marquee-set" key={copy} aria-hidden={copy === 1 ? true : undefined}>
+                {clients.map((client) => (
+                  <li key={client.src} style={{ '--mark': client.mark, '--vcenter': client.vcenter }}>
+                    <img src={client.src} alt={copy === 0 ? client.alt : ''} className={client.knockout ? 'is-knockout' : undefined} />
+                  </li>
+                ))}
+              </ul>
             ))}
-            {clients.map((client) => (
-              <li key={`${client.src}-copia`} aria-hidden="true"><img src={client.src} alt="" className={client.ink ? 'is-ink' : undefined} style={{ '--mark': client.mark }} /></li>
-            ))}
-          </ul>
+          </div>
         </div>
       </section>
 

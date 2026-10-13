@@ -474,46 +474,77 @@ main > .crumbs + .page > .hero {
   color: var(--paper);
 }
 
-.proof { padding: 0.15rem 0 clamp(1.5rem, 4vw, 2.5rem); }
+.proof { padding: 0.15rem 0 clamp(1.5rem, 4vw, 2.5rem); overflow-x: clip; }
+.logo-filters { position: absolute; width: 0; height: 0; overflow: hidden; }
 .marquee {
+  --logo-h: 2rem;
   overflow: hidden;
-  margin-top: 0.2rem;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  width: 100%;
+  margin-top: 0.85rem;
+  container-type: inline-size;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 .marquee-track {
   display: flex;
-  align-items: center;
   width: max-content;
   margin: 0;
-  padding: 0.55rem 0 0.7rem;
-  list-style: none;
-  animation: marquee-right 32s linear infinite;
+  padding: 0.35rem 0 0.55rem;
+  animation: marquee-right 48s linear infinite;
 }
 .marquee:hover .marquee-track,
 .marquee:focus-within .marquee-track { animation-play-state: paused; }
-.marquee-track li {
+.marquee-set {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: clamp(2.75rem, 4.5cqi, 5rem);
+  width: max-content;
+  min-width: calc(100cqi + 18rem);
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  margin: 0;
+  padding-inline: clamp(1.5rem, 3cqi, 2.75rem);
+  list-style: none;
+}
+.marquee-set li {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4.5rem;
-  margin-inline: 0.45rem;
-  padding: 0.7rem 1rem;
-  background: #f6f0e9;
-  border-radius: 0.8rem;
+  height: var(--logo-h);
+  margin: 0;
+  padding: 0;
+  background: none;
   overflow: hidden;
 }
-.marquee-track img {
-  height: calc(1.9rem * var(--mark, 1));
+.marquee-set img {
+  height: calc(var(--logo-h) * var(--mark, 1));
   width: auto;
   max-width: none;
   object-fit: contain;
   object-position: center;
-  filter: none;
-  opacity: 1;
+  transform: translateY(calc((0.5 - var(--vcenter, 0.5)) * 100%));
+  filter: brightness(0) invert(1) sepia(0.55) saturate(0.8) hue-rotate(348deg) brightness(1.04);
+  opacity: 0.62;
+  transition: filter 0.35s ease, opacity 0.35s ease;
 }
-.marquee-track img.is-ink { filter: brightness(0); }
+.marquee-set img.is-knockout {
+  filter: url('#logo-knockout');
+  opacity: 0.62;
+}
+@media (hover: hover) {
+  .marquee-set li:hover img,
+  .marquee-set li:focus-within img {
+    filter: none;
+    opacity: 1;
+  }
+  .marquee-set li:hover img.is-knockout,
+  .marquee-set li:focus-within img.is-knockout {
+    filter: url('#logo-knockout');
+    opacity: 0.95;
+  }
+}
 @keyframes marquee-right {
   from { transform: translateX(-50%); }
   to { transform: translateX(0); }
@@ -1168,8 +1199,12 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
   .compare tbody th { padding-bottom: 0.2rem; }
 }
 @media (max-width: 879px) {
-  .marquee-track li { height: 3.6rem; margin-inline: 0.35rem; padding: 0.5rem 0.75rem; }
-  .marquee-track img { height: calc(1.5rem * var(--mark, 1)); max-width: none; }
+  .marquee {
+    --logo-h: 1.55rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+  .marquee-set { gap: 2.35rem; padding-inline: 1.15rem; }
   .outcomes article { min-height: 0; }
 }
 .hero { position: relative; }
@@ -1477,19 +1512,30 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
   .marquee {
     -webkit-mask-image: none;
     mask-image: none;
+    overflow: visible;
+    container-type: normal;
   }
   .marquee-track {
     animation: none;
     transform: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: auto;
+    display: block;
+    width: min(100%, var(--max));
     max-width: var(--max);
     margin-inline: auto;
-    row-gap: 1rem;
   }
-  .marquee-track li[aria-hidden="true"] { display: none; }
-  .marquee-track img { transition: none; }
+  .marquee-set[aria-hidden="true"] { display: none; }
+  .marquee-set {
+    width: auto;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8.25rem, 1fr));
+    justify-items: center;
+    align-items: center;
+    gap: 1.35rem 2rem;
+    padding: 0.35rem 1.25rem 0.15rem;
+  }
+  .marquee-set img,
+  .marquee-set img.is-knockout { transition: none; }
   .outcomes article { transition: none; }
   .hero .shell { animation: none; }
   .sol-card, .sol-app { transition: none; }
