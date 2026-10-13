@@ -1,5 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 import { siteGraph } from '../lib/seo'
+import { GA_MEASUREMENT_ID } from '../lib/ga4'
 
 export default function Document() {
   return (
@@ -53,46 +55,21 @@ export default function Document() {
           />
         </noscript>
         
-        {/* Google Analytics (gtag.js) */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-VH9BW7ET06"
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="beforeInteractive"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-VH9BW7ET06');
-              gtag('config', 'AW-16834266345');
-            `,
-          }}
-        />
-
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtag/js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GT-WPQPP6RK');
-            `,
-          }}
-        />
+        <Script id="ga4" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function gtag(){window.dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', '${GA_MEASUREMENT_ID}');
+            window.gtag('config', 'AW-16834266345');
+          `}
+        </Script>
       </Head>
       <body>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GT-WPQPP6RK"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
         <Main />
         <NextScript />
       </body>
