@@ -19,11 +19,10 @@ function RiskIcon({ children }) {
 
 const risks = [
   {
-    n: '01',
     step: 'Diagnóstico',
     title: 'Automatizar o fluxo errado',
     problem: 'O tempo vai para uma automação que não tira cópia, cobrança ou lembrete. Ou para anúncio antes de ver a conta.',
-    answer: 'O diagnóstico dura 30 minutos, sem contrato. Se a IA não cabe, ou se o tráfego não cabe agora, a conversa acaba ali. Não há proposta de retorno antes de ver a operação.',
+    answer: 'O diagnóstico dura 30 minutos, sem contrato. Se a implantação não cabe, ou se o tráfego não cabe agora, a conversa acaba ali. Não há proposta de retorno antes de ver a operação.',
     icon: (
       <RiskIcon>
         <path d="M36 10 L58 22 L36 34 L14 22 Z" />
@@ -35,7 +34,6 @@ const risks = [
     ),
   },
   {
-    n: '02',
     step: 'Plano',
     title: 'Crescer em cima de uma automação frágil',
     problem: 'O fluxo entra no ar, mas o próximo passo não foi escolhido. Quando o volume sobe, o que era atalho vira trava.',
@@ -54,11 +52,10 @@ const risks = [
     ),
   },
   {
-    n: '03',
     step: 'Acompanhamento',
     title: 'Ficar preso à ferramenta ou a quem implantou',
     problem: 'A operação passa a depender de um aplicativo novo. Ou a conta de anúncio sai de quem é dono dela.',
-    answer: 'A IA entra no WhatsApp, no CRM, no ERP ou na planilha que a empresa já usa. A GTX não troca esse sistema por um aplicativo novo. A conta de anúncio continua com o cliente. Todo mês, enquanto o plano estiver ativo, o acompanhamento desliga o que ninguém usa.',
+    answer: 'A GTX implementa IAs no WhatsApp, no CRM, no ERP ou na planilha que a empresa já usa. A GTX não troca esse sistema por um aplicativo novo. A conta de anúncio continua com o cliente. Todo mês, enquanto o plano estiver ativo, o acompanhamento desliga o que ninguém usa.',
     icon: (
       <RiskIcon>
         <path d="M28 18 L48 28 L28 38 L8 28 Z" />
@@ -77,7 +74,7 @@ const rows = [
   {
     topic: 'O pedido',
     heavy: 'Alguém copia da conversa para o sistema.',
-    light: 'A IA lança no sistema que a empresa já usa.',
+    light: 'O pedido entra no sistema que a empresa já usa.',
   },
   {
     topic: 'A cobrança',
@@ -136,7 +133,7 @@ export default function Solutions() {
           <div className="section-intro">
             <p className="eyebrow">Soluções</p>
             <h2 id="solucoes-titulo">Nossas soluções.</h2>
-            <p className="lede">Implantação de IA, gestão de tráfego pago e um diagnóstico de 30 minutos.</p>
+            <p className="lede">IAs implementadas dentro da empresa, gestão de tráfego pago e um diagnóstico de 30 minutos.</p>
           </div>
 
           <div className="sol-stage sol-hero-stage" ref={stage}>
@@ -168,11 +165,11 @@ export default function Solutions() {
           <div className="section-intro">
             <p className="eyebrow">Comparação</p>
             <h2 id="compare-titulo">Operação pesada, operação leve.</h2>
-            <p className="lede">O mesmo pedido, a mesma cobrança, o mesmo resumo. Muda quem faz o trabalho repetido.</p>
+            <p className="lede">O mesmo pedido, a mesma cobrança, o mesmo resumo. A implantação otimiza o processo que já existe.</p>
           </div>
           <div className="compare-wrap">
             <table className="compare">
-              <caption>Como o trabalho repetido fica com e sem a IA no fluxo atual.</caption>
+              <caption>Como o trabalho repetido fica quando a implantação entra no processo que a empresa já tem.</caption>
               <thead>
                 <tr>
                   <th scope="col">Tema</th>
@@ -203,8 +200,8 @@ export default function Solutions() {
           </div>
           <div className="risk-grid">
             {risks.map((item) => (
-              <article key={item.n}>
-                <p className="risk-kicker"><span>[{item.n}]</span> {item.step}</p>
+              <article key={item.step}>
+                <p className="risk-kicker">{item.step}</p>
                 {item.icon}
                 <h3>{item.title}</h3>
                 <p className="risk-problem">{item.problem}</p>
