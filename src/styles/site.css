@@ -1360,6 +1360,118 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
   .outcome-stage h3 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
 }
 
+.sol-card-stage:has(.implant-flow) {
+  aspect-ratio: auto;
+  min-height: 0;
+  padding: 1.15rem 1.05rem 1.2rem;
+}
+.implant-flow {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+.implant-flow figcaption {
+  margin: 0 0 0.95rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+.implant-track { position: relative; }
+.implant-wave {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+}
+.implant-wave.is-x { display: none; }
+.implant-wave.is-y {
+  left: 0;
+  top: 0;
+  width: 2.15rem;
+  height: 100%;
+}
+.implant-wash {
+  fill: rgba(212, 165, 116, 0.28);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.implant-line {
+  fill: none;
+  stroke: #d4a574;
+  stroke-width: 2.25px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.implant-flow.is-drawn .implant-wash { opacity: 1; }
+.implant-flow.is-drawn .implant-line {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.15s ease;
+}
+.implant-flow ol {
+  list-style: none;
+  margin: 0;
+  padding: 0.15rem 0 0.15rem 2.35rem;
+  display: grid;
+  gap: 1.05rem;
+}
+.implant-flow li {
+  display: grid;
+  gap: 0.22rem;
+  min-width: 0;
+}
+.implant-flow strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.28rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.implant-flow li span {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+.implant-flow.is-drawn li { animation: implant-rise 0.55s ease both; }
+.implant-flow.is-drawn li:nth-child(2) { animation-delay: 0.08s; }
+.implant-flow.is-drawn li:nth-child(3) { animation-delay: 0.16s; }
+.implant-flow.is-drawn li:nth-child(4) { animation-delay: 0.24s; }
+.implant-flow.is-drawn li:nth-child(5) { animation-delay: 0.32s; }
+@keyframes implant-rise {
+  from { transform: translateY(8px); }
+  to { transform: none; }
+}
+@media (min-width: 880px) {
+  .sol-board:has(.implant-flow) {
+    grid-template-columns: 15.25rem minmax(0, 1fr);
+  }
+  .sol-card-stage:has(.implant-flow) {
+    padding: 1.2rem 1.15rem 0.85rem;
+    min-height: 15.5rem;
+  }
+  .implant-wave.is-y { display: none; }
+  .implant-wave.is-x {
+    display: block;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3.4rem;
+  }
+  .implant-flow ol {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.7rem 0.85rem;
+    padding: 0.2rem 0 3.5rem;
+    align-items: start;
+  }
+  .implant-flow strong { font-size: 1.12rem; }
+  .implant-flow li span { font-size: 0.84rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee {
@@ -1391,4 +1503,8 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
   .chevron, .services-rail { transition: none; }
   .story { height: auto; }
   .story-pin { position: static; min-height: 0; }
+  .implant-wash { opacity: 1; transition: none; }
+  .implant-line { stroke-dashoffset: 0; transition: none; }
+  .implant-flow li,
+  .implant-flow.is-drawn li { animation: none; transform: none; }
 }

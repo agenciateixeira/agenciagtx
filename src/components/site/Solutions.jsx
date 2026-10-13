@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { solutions } from '../../lib/solutions';
-import { AdsArt, InboxArt, MatrixArt } from './SolutionArt';
+import ImplantFlow from './ImplantFlow';
+import { AdsArt, MatrixArt } from './SolutionArt';
 
 const arts = {
-  ia: InboxArt,
   trafego: AdsArt,
   diagnostico: MatrixArt,
 };
@@ -160,7 +160,7 @@ export default function Solutions() {
             </div>
             <div className="sol-board-stage">
               <div className="sol-stage sol-card-stage">
-                <Art />
+                {item.id === 'ia' ? <ImplantFlow /> : <Art />}
               </div>
               <div className="sol-card-body">
                 <p>{item.text}</p>

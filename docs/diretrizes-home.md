@@ -21,7 +21,9 @@ Quase todas as seções ficam sem sequência numerada. Problemas também fica se
 
 Nossas soluções, a comparação entre operação pesada e operação leve, e os riscos usam o formato novo: escolha na hora, pouco texto, o detalhe aparece no painel.
 
-O bloco de IA não é um pipeline com nós e canos. É o resultado. Pedido, cobrança e resumo do dia, um de cada vez, com o que pesava e o que fica.
+O bloco de resultado não é um pipeline com nós e canos. É o resultado. Pedido, cobrança e resumo do dia, um de cada vez, com o que pesava e o que fica.
+
+No painel de Implantação de IA, em Nossas soluções, o desenho mostra o caminho geral. Diagnóstico dos processos atuais, desenho da IA dentro do processo que já existe, implantação nas ferramentas que a empresa já usa, adoção do time e acompanhamento. É um fluxo contínuo, sem nós, sem fios e sem números.
 
 Exemplos, só estes:
 
