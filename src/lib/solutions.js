@@ -12,7 +12,7 @@ export const solutions = [
     href: '/produtos/gestao-de-trafego-pago',
     title: 'Gestão de tráfego pago',
     menu: 'Meta, Google e LinkedIn.',
-    text: 'A conta continua com a empresa. O painel acima é uma ilustração, não um resultado.',
+    text: 'Meta, Google e LinkedIn. A conta de anúncio continua com a empresa.',
     link: 'Ver gestão de tráfego',
   },
   {

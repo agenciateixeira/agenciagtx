@@ -78,7 +78,6 @@ export default function Solutions() {
           <div className="sol-stage sol-hero-stage" ref={stage}>
             <DeskArt />
           </div>
-          <p className="sol-caption">Ilustração. Dados de exemplo, não de um cliente.</p>
 
           <div className="sol-grid">
             {solutions.map((item) => {

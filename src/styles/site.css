@@ -722,14 +722,32 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
   aspect-ratio: 4 / 3;
   padding: 0.85rem;
 }
-.sol-caption {
-  margin: 0.75rem 0 1.75rem;
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--olive);
+.sol-hero-stage { margin-bottom: 1.75rem; }
+.sol-bar {
+  display: block;
+  margin-top: 0.55rem;
+  height: 0.42rem;
+  width: 70%;
+  border-radius: 999px;
+  background: rgba(158, 234, 108, 0.4);
 }
+.sol-bar.mid { width: 52%; }
+.sol-bar.short { width: 34%; }
+.sol-skel {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  height: 3.6rem;
+  margin-top: 0.2rem;
+}
+.sol-skel i {
+  display: block;
+  flex: 1;
+  height: 55%;
+  border-radius: 0.3rem 0.3rem 0.12rem 0.12rem;
+  background: rgba(158, 234, 108, 0.22);
+}
+.sol-skel i:nth-child(odd) { height: 72%; background: rgba(158, 234, 108, 0.34); }
 .sol-grid {
   display: grid;
   gap: 1rem;
