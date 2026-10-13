@@ -6,6 +6,7 @@ export default function Contato() {
     <Layout
       title="Diga onde a operação pesa | GTX"
       description="Diagnóstico de 30 minutos, sem contrato. Resposta em horário comercial."
+      crumbs={[{ href: '/', label: 'Início' }, { href: '/contato', label: 'Contato' }]}
     >
       <section className="contact" id="contato">
         <div className="shell contact-grid">

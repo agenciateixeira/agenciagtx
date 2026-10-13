@@ -5,6 +5,7 @@ export default function Termos() {
     <Layout
       title="Termos de uso | GTX"
       description="Como o site da GTX pode ser usado."
+      crumbs={[{ href: '/', label: 'Início' }, { href: '/termos', label: 'Termos' }]}
     >
       <article className="page">
         <section className="hero">

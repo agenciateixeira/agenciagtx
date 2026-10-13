@@ -24,6 +24,7 @@ export default function Cases() {
     <Layout
       title="Trabalho com nome | GTX"
       description="Cases da GTX com nome de quem assina. Um número só quando a conta foi conferida."
+      crumbs={[{ href: '/', label: 'Início' }, { href: '/cases', label: 'Cases' }]}
     >
       <section className="hero">
         <div className="shell">
