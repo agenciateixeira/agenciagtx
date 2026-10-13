@@ -1243,4 +1243,397 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
   .sol-thread p, .sol-chat p, .is-typing span, .sol-chart-line, .sol-dot { animation: none; }
   .sol-thread p, .sol-chat p { opacity: 1; transform: none; }
   .sol-chart-line { stroke-dashoffset: 0; }
+  .proto-icon .lift { transition: none; }
+  .proto-card:hover .proto-icon .lift,
+  .proto-card.is-open .proto-icon .lift { transform: none; }
+  .proto-more { transition: none; }
+}
+
+.proto h1 { max-width: 16em; }
+.proto .lede { margin-bottom: 2.25rem; }
+.proto-path-grid { display: grid; gap: 1.5rem; align-items: start; }
+.proto-rail { display: grid; }
+.proto-rail button,
+.proto-lanes button,
+.proto-card,
+.proto-band button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.proto-rail button {
+  display: grid;
+  grid-template-columns: 1.15rem 1fr;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0 0 1.45rem;
+  border: 0;
+  background: none;
+}
+.proto-rail button i {
+  position: relative;
+  width: 0.72rem;
+  height: 0.72rem;
+  margin-top: 0.45rem;
+  border: 1.5px solid var(--deep);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.proto-rail button i::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 1px;
+  height: 2.85rem;
+  background: var(--line);
+  transform: translateX(-50%);
+}
+.proto-rail button i[data-last="true"]::after { display: none; }
+.proto-rail button.is-on i {
+  background: var(--avocado);
+  box-shadow: 0 0 0 4px rgba(158, 234, 108, 0.35);
+}
+.proto-rail strong,
+.proto-lanes strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--ink);
+}
+.proto-rail strong { font-size: 1.55rem; }
+.proto-rail button:not(.is-on) strong { color: var(--ink-soft); }
+.proto-rail small,
+.proto-lanes small {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.proto-reading {
+  display: grid;
+  gap: 1.35rem;
+  padding: 1.35rem 1.3rem 1.45rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--paper-2);
+}
+.proto-reading h3 {
+  margin: 0.35rem 0 0.55rem;
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+}
+.proto-reading p { margin: 0; color: var(--ink-soft); }
+.proto-bridge {
+  margin: 1.35rem 0;
+  max-width: 42rem;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1.55;
+  color: var(--olive);
+}
+.proto-lanes { display: grid; gap: 0.75rem; }
+.proto-lanes button {
+  padding: 1rem 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: #fffdfb;
+}
+.proto-lanes strong { font-size: 1.25rem; }
+.proto-lanes button.is-on {
+  border-color: var(--deep);
+  background: var(--wash);
+}
+.proto-card-grid {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.proto-card {
+  display: block;
+  width: 100%;
+  padding: 1.3rem 1.2rem 1.4rem;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+}
+.proto-card:first-child { border-top: 0; }
+.proto-icon {
+  display: block;
+  width: 4.1rem;
+  height: 4.55rem;
+  margin-bottom: 0.35rem;
+  color: var(--deep);
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.25;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.proto-icon .lift { transition: transform 0.45s ease; }
+.proto-card:hover .proto-icon .lift,
+.proto-card.is-open .proto-icon .lift { transform: translate(3px, -4px); }
+.proto-kicker {
+  margin: 0 0 0.45rem;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+.proto-card h3 { margin: 0; font-size: 1.28rem; line-height: 1.3; }
+.proto-more {
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: var(--ink-soft);
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+.proto-card:hover .proto-more,
+.proto-card:focus-visible .proto-more,
+.proto-card.is-open .proto-more {
+  max-height: 9rem;
+  margin-top: 0.8rem;
+  opacity: 1;
+}
+.proto-loom-head {
+  display: none;
+}
+.proto-corner { display: none; }
+.proto-col {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--olive);
+  text-align: center;
+}
+.proto-col.is-on { color: var(--deep); }
+.proto-loom-bands {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fffdfb;
+}
+.proto-band + .proto-band { border-top: 1px solid var(--line); }
+.proto-band-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0.95rem 0.35rem;
+}
+.proto-band-label strong,
+.proto-band-label small { display: block; }
+.proto-band-label strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+.proto-band-label small {
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+.proto-mark {
+  flex: none;
+  width: 2.15rem;
+  height: 2.15rem;
+  color: var(--deep);
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.proto-band-cells {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.proto-band button {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.35rem;
+  min-height: 4.7rem;
+  padding: 0.55rem 0.25rem 0.65rem;
+  border: 0;
+  background: transparent;
+  text-align: center;
+}
+.proto-band button::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(31, 70, 71, 0.28);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+.proto-band button small {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.35rem;
+  z-index: 1;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+.proto-knot {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.proto-band.is-diagnostico { background: var(--wash); }
+.proto-band.is-diagnostico .proto-band-cells::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, var(--avocado), var(--deep), transparent);
+  background-size: 42% 100%;
+  background-repeat: no-repeat;
+  animation: proto-scan-move 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.proto-band.is-diagnostico .proto-knot {
+  width: 1.45rem;
+  height: 1.45rem;
+  border: 1.5px solid var(--deep);
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--deep), var(--deep)) center / 1px 62% no-repeat,
+    linear-gradient(var(--deep), var(--deep)) center / 62% 1px no-repeat,
+    #fff;
+}
+.proto-band.is-diagnostico button.is-on .proto-knot {
+  background:
+    linear-gradient(var(--deep), var(--deep)) center / 1px 62% no-repeat,
+    linear-gradient(var(--deep), var(--deep)) center / 62% 1px no-repeat,
+    var(--avocado);
+  box-shadow: 0 0 0 6px rgba(158, 234, 108, 0.45);
+}
+.proto-band.is-plano {
+  background-color: #f7f6f1;
+  background-image:
+    linear-gradient(rgba(31, 70, 71, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 70, 71, 0.08) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+.proto-band.is-plano .proto-band-cells::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  border-top: 1.5px dashed var(--deep);
+  pointer-events: none;
+}
+.proto-band.is-plano .proto-knot {
+  width: 0.62rem;
+  height: 0.62rem;
+  border: 1.5px solid var(--deep);
+  background: #fff;
+  transform: rotate(45deg);
+}
+.proto-band.is-plano button.is-on .proto-knot {
+  background: var(--deep);
+  box-shadow: 0 0 0 5px rgba(31, 70, 71, 0.12);
+}
+.proto-band.is-acompanhamento { background: var(--paper); }
+.proto-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  width: 100%;
+  height: 2.1rem;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+.proto-wave path {
+  fill: none;
+  stroke: var(--deep);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10 7;
+  animation: proto-rhythm 2.2s linear infinite;
+}
+.proto-band.is-acompanhamento .proto-knot {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: var(--deep);
+}
+.proto-band.is-acompanhamento button.is-on .proto-knot {
+  background: var(--avocado);
+  box-shadow: 0 0 0 6px rgba(31, 70, 71, 0.16);
+  animation: proto-beat 1.6s ease-in-out infinite;
+}
+.proto-band button.is-hot { background: rgba(255, 253, 251, 0.28); }
+.proto-band.is-active { box-shadow: inset 3px 0 0 var(--deep); }
+@keyframes proto-scan-move {
+  0% { background-position: -30% 0; }
+  100% { background-position: 130% 0; }
+}
+@keyframes proto-rhythm { to { stroke-dashoffset: -34; } }
+@keyframes proto-beat {
+  50% { transform: scale(1.28); }
+}
+@media (min-width: 880px) {
+  .proto-path-grid { grid-template-columns: minmax(16rem, 0.9fr) 1.1fr; gap: 2rem; }
+  .proto-lanes { grid-template-columns: repeat(3, 1fr); }
+  .proto-card-grid { grid-template-columns: repeat(3, 1fr); }
+  .proto-card { border-top: 0; border-left: 1px solid var(--line); }
+  .proto-card:first-child { border-left: 0; }
+  .proto-loom-head {
+    display: grid;
+    grid-template-columns: minmax(11rem, 15rem) repeat(3, 1fr);
+    gap: 0.35rem;
+    align-items: end;
+    margin-bottom: 0.55rem;
+  }
+  .proto-corner { display: block; }
+  .proto-band {
+    display: grid;
+    grid-template-columns: minmax(11rem, 15rem) 1fr;
+    align-items: stretch;
+  }
+  .proto-band-label { padding: 1rem 1rem 1rem 0.95rem; }
+  .proto-band button small {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .proto-icon .lift { transition: none; }
+  .proto-card:hover .proto-icon .lift,
+  .proto-card.is-open .proto-icon .lift { transform: none; }
+  .proto-more { transition: none; }
+  .proto-band.is-diagnostico .proto-band-cells::after,
+  .proto-wave path,
+  .proto-band.is-acompanhamento button.is-on .proto-knot { animation: none; }
+  .proto-wave path { stroke-dasharray: none; }
 }
