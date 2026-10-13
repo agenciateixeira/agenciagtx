@@ -1256,7 +1256,7 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
 .proto-rail button,
 .proto-lanes button,
 .proto-card,
-.proto-weave button {
+.proto-band button {
   font: inherit;
   color: inherit;
   cursor: pointer;
@@ -1401,67 +1401,203 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
   margin-top: 0.8rem;
   opacity: 1;
 }
-.proto-weave {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
-  align-items: center;
+.proto-loom-head {
+  display: none;
 }
 .proto-corner { display: none; }
-.proto-col,
-.proto-row-label {
-  color: var(--olive);
-}
 .proto-col {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: var(--olive);
+  text-align: center;
 }
-.proto-row-label {
-  grid-column: 1 / -1;
-  padding-top: 0.85rem;
+.proto-col.is-on { color: var(--deep); }
+.proto-loom-bands {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fffdfb;
+}
+.proto-band + .proto-band { border-top: 1px solid var(--line); }
+.proto-band-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0.95rem 0.35rem;
+}
+.proto-band-label strong,
+.proto-band-label small { display: block; }
+.proto-band-label strong {
   font-family: var(--serif);
+  font-weight: 400;
   font-size: 1.25rem;
   color: var(--ink);
 }
-.proto-col.is-on,
-.proto-row-label.is-on { color: var(--deep); }
-.proto-weave button {
-  position: relative;
-  min-height: 4.25rem;
-  border: 1px solid var(--line);
-  border-radius: 0.85rem;
-  background:
-    linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat,
-    linear-gradient(var(--line), var(--line)) center / 1px 100% no-repeat,
-    #fffdfb;
+.proto-band-label small {
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
 }
-.proto-weave button i {
+.proto-mark {
+  flex: none;
+  width: 2.15rem;
+  height: 2.15rem;
+  color: var(--deep);
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.proto-band-cells {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.proto-band button {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.35rem;
+  min-height: 4.7rem;
+  padding: 0.55rem 0.25rem 0.65rem;
+  border: 0;
+  background: transparent;
+  text-align: center;
+}
+.proto-band button::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(31, 70, 71, 0.28);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+.proto-band button small {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.35rem;
+  z-index: 1;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+.proto-knot {
+  position: relative;
+  z-index: 1;
   display: block;
-  width: 0.55rem;
-  height: 0.55rem;
-  margin: 0 auto;
+}
+.proto-band.is-diagnostico { background: var(--wash); }
+.proto-band.is-diagnostico .proto-band-cells::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, var(--avocado), var(--deep), transparent);
+  background-size: 42% 100%;
+  background-repeat: no-repeat;
+  animation: proto-scan-move 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.proto-band.is-diagnostico .proto-knot {
+  width: 1.45rem;
+  height: 1.45rem;
   border: 1.5px solid var(--deep);
   border-radius: 50%;
-  background: var(--paper);
-}
-.proto-weave button.is-hot {
   background:
-    linear-gradient(rgba(31, 70, 71, 0.45), rgba(31, 70, 71, 0.45)) center / 100% 1px no-repeat,
-    linear-gradient(rgba(31, 70, 71, 0.45), rgba(31, 70, 71, 0.45)) center / 1px 100% no-repeat,
-    var(--paper-2);
+    linear-gradient(var(--deep), var(--deep)) center / 1px 62% no-repeat,
+    linear-gradient(var(--deep), var(--deep)) center / 62% 1px no-repeat,
+    #fff;
 }
-.proto-weave button.is-on {
-  border-color: var(--deep);
+.proto-band.is-diagnostico button.is-on .proto-knot {
   background:
-    linear-gradient(var(--deep), var(--deep)) center / 100% 1px no-repeat,
-    linear-gradient(var(--deep), var(--deep)) center / 1px 100% no-repeat,
-    var(--wash);
+    linear-gradient(var(--deep), var(--deep)) center / 1px 62% no-repeat,
+    linear-gradient(var(--deep), var(--deep)) center / 62% 1px no-repeat,
+    var(--avocado);
+  box-shadow: 0 0 0 6px rgba(158, 234, 108, 0.45);
 }
-.proto-weave button.is-on i {
+.proto-band.is-plano {
+  background-color: #f7f6f1;
+  background-image:
+    linear-gradient(rgba(31, 70, 71, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 70, 71, 0.08) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+.proto-band.is-plano .proto-band-cells::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  border-top: 1.5px dashed var(--deep);
+  pointer-events: none;
+}
+.proto-band.is-plano .proto-knot {
+  width: 0.62rem;
+  height: 0.62rem;
+  border: 1.5px solid var(--deep);
+  background: #fff;
+  transform: rotate(45deg);
+}
+.proto-band.is-plano button.is-on .proto-knot {
+  background: var(--deep);
+  box-shadow: 0 0 0 5px rgba(31, 70, 71, 0.12);
+}
+.proto-band.is-acompanhamento { background: var(--paper); }
+.proto-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  width: 100%;
+  height: 2.1rem;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+.proto-wave path {
+  fill: none;
+  stroke: var(--deep);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10 7;
+  animation: proto-rhythm 2.2s linear infinite;
+}
+.proto-band.is-acompanhamento .proto-knot {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: var(--deep);
+}
+.proto-band.is-acompanhamento button.is-on .proto-knot {
   background: var(--avocado);
-  box-shadow: 0 0 0 5px rgba(158, 234, 108, 0.45);
+  box-shadow: 0 0 0 6px rgba(31, 70, 71, 0.16);
+  animation: proto-beat 1.6s ease-in-out infinite;
+}
+.proto-band button.is-hot { background: rgba(255, 253, 251, 0.28); }
+.proto-band.is-active { box-shadow: inset 3px 0 0 var(--deep); }
+@keyframes proto-scan-move {
+  0% { background-position: -30% 0; }
+  100% { background-position: 130% 0; }
+}
+@keyframes proto-rhythm { to { stroke-dashoffset: -34; } }
+@keyframes proto-beat {
+  50% { transform: scale(1.28); }
 }
 @media (min-width: 880px) {
   .proto-path-grid { grid-template-columns: minmax(16rem, 0.9fr) 1.1fr; gap: 2rem; }
@@ -1469,13 +1605,35 @@ footer.foot-wrap { padding: clamp(4.5rem, 8vw, 6.5rem) 0 2.75rem; color: var(--m
   .proto-card-grid { grid-template-columns: repeat(3, 1fr); }
   .proto-card { border-top: 0; border-left: 1px solid var(--line); }
   .proto-card:first-child { border-left: 0; }
-  .proto-weave { grid-template-columns: minmax(9.5rem, 13rem) repeat(3, 1fr); }
+  .proto-loom-head {
+    display: grid;
+    grid-template-columns: minmax(11rem, 15rem) repeat(3, 1fr);
+    gap: 0.35rem;
+    align-items: end;
+    margin-bottom: 0.55rem;
+  }
   .proto-corner { display: block; }
-  .proto-row-label { grid-column: auto; padding-top: 0; font-size: 1.35rem; }
+  .proto-band {
+    display: grid;
+    grid-template-columns: minmax(11rem, 15rem) 1fr;
+    align-items: stretch;
+  }
+  .proto-band-label { padding: 1rem 1rem 1rem 0.95rem; }
+  .proto-band button small {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .proto-icon .lift { transition: none; }
   .proto-card:hover .proto-icon .lift,
   .proto-card.is-open .proto-icon .lift { transform: none; }
   .proto-more { transition: none; }
+  .proto-band.is-diagnostico .proto-band-cells::after,
+  .proto-wave path,
+  .proto-band.is-acompanhamento button.is-on .proto-knot { animation: none; }
+  .proto-wave path { stroke-dasharray: none; }
 }

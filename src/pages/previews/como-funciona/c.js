@@ -13,7 +13,7 @@ export default function PreviewC() {
         <div className="shell">
           <p className="eyebrow">Protótipo C</p>
           <h1>Uma trama entre etapa e área.</h1>
-          <p className="lede">Cada cruzamento junta uma etapa do método a uma área da operação. A seção publicada continua igual.</p>
+          <p className="lede">Cada cruzamento junta uma etapa a uma área. Diagnóstico, plano e acompanhamento seguem com desenhos diferentes. A seção publicada continua igual.</p>
           <WeavePreview />
         </div>
       </section>

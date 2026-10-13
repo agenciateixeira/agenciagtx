@@ -186,6 +186,33 @@ export function CardsPreview() {
   );
 }
 
+function StageMark({ id }) {
+  if (id === 'diagnostico') {
+    return (
+      <svg className="proto-mark" viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="15" cy="15" r="8" />
+        <path d="M21 21 L30 30" />
+        <path className="proto-scan" d="M7 15 H23" />
+      </svg>
+    );
+  }
+  if (id === 'plano') {
+    return (
+      <svg className="proto-mark" viewBox="0 0 36 36" aria-hidden="true">
+        <path d="M5 27 H13 L19 12 H31" />
+        <circle cx="5" cy="27" r="2.2" />
+        <circle cx="19" cy="12" r="2.2" />
+        <circle cx="31" cy="12" r="2.2" />
+      </svg>
+    );
+  }
+  return (
+    <svg className="proto-mark" viewBox="0 0 36 36" aria-hidden="true">
+      <path className="proto-pulse" d="M2 18 H8 L13 8 L20 28 L25 18 H34" />
+    </svg>
+  );
+}
+
 export function WeavePreview() {
   const [stageId, setStageId] = useState(stages[0].id);
   const [fieldId, setFieldId] = useState(fields[0].id);
@@ -194,35 +221,53 @@ export function WeavePreview() {
 
   return (
     <div className="proto-weave-wrap">
-      <div className="proto-weave" role="group" aria-label="Etapa e área">
-        <span className="proto-corner" />
-        {fields.map((item) => (
-          <span key={item.id} className={item.id === fieldId ? 'proto-col is-on' : 'proto-col'}>{item.label}</span>
-        ))}
-        {stages.flatMap((row) => (
-          [
-            <span key={`${row.id}-label`} className={row.id === stageId ? 'proto-row-label is-on' : 'proto-row-label'}>{row.label}</span>,
-            ...fields.map((col) => {
-              const on = row.id === stageId && col.id === fieldId;
-              const hot = row.id === stageId || col.id === fieldId;
-              return (
-                <button
-                  key={`${row.id}-${col.id}`}
-                  type="button"
-                  className={on ? 'is-on' : hot ? 'is-hot' : ''}
-                  aria-pressed={on}
-                  aria-label={`${row.label}, ${col.label}`}
-                  onClick={() => {
-                    setStageId(row.id);
-                    setFieldId(col.id);
-                  }}
-                >
-                  <i />
-                </button>
-              );
-            }),
-          ]
-        ))}
+      <div className="proto-loom" role="group" aria-label="Etapa e área">
+        <div className="proto-loom-head">
+          <span className="proto-corner" />
+          {fields.map((item) => (
+            <span key={item.id} className={item.id === fieldId ? 'proto-col is-on' : 'proto-col'}>{item.label}</span>
+          ))}
+        </div>
+        <div className="proto-loom-bands">
+          {stages.map((row) => (
+            <div key={row.id} className={row.id === stageId ? `proto-band is-${row.id} is-active` : `proto-band is-${row.id}`}>
+              <div className="proto-band-label">
+                <StageMark id={row.id} />
+                <span>
+                  <strong>{row.label}</strong>
+                  <small>{row.line}</small>
+                </span>
+              </div>
+              <div className="proto-band-cells">
+                {row.id === 'acompanhamento' ? (
+                  <svg className="proto-wave" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M0 40 H25 L50 16 L75 64 L100 40 H125 L150 16 L175 64 L200 40 H225 L250 16 L275 64 L300 40" />
+                  </svg>
+                ) : null}
+                {fields.map((col) => {
+                  const on = row.id === stageId && col.id === fieldId;
+                  const hot = col.id === fieldId;
+                  return (
+                    <button
+                      key={col.id}
+                      type="button"
+                      className={on ? 'is-on' : hot ? 'is-hot' : ''}
+                      aria-pressed={on}
+                      aria-label={`${row.label}, ${col.label}`}
+                      onClick={() => {
+                        setStageId(row.id);
+                        setFieldId(col.id);
+                      }}
+                    >
+                      <i className="proto-knot" />
+                      <small>{col.label}</small>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <p className="proto-bridge">{bridge}</p>
       <Reading stage={stage} field={field} />
