@@ -1,5 +1,6 @@
 import Layout from '../components/site/Layout';
 import LeadForm from '../components/site/LeadForm';
+import FlowMap from '../components/site/FlowMap';
 
 const clients = [
   { src: '/images/clients/logofl.png', alt: 'Frasco Life' },
@@ -44,6 +45,15 @@ export default function Home() {
               <p>O time para de copiar e lembrar. Quem decide continua decidindo.</p>
             </li>
           </ol>
+        </div>
+      </section>
+
+      <section className="flow-section" aria-label="IA no fluxo que a empresa já tem">
+        <div className="shell">
+          <p className="eyebrow">O fluxo</p>
+          <h2>IA no fluxo que a empresa já tem.</h2>
+          <p className="lede">Pedido, cobrança e resumo do dia, no canal que o time já usa.</p>
+          <FlowMap />
         </div>
       </section>
 

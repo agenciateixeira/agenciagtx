@@ -1,5 +1,6 @@
 import Layout from '../../components/site/Layout';
 import LeadForm from '../../components/site/LeadForm';
+import FlowMap from '../../components/site/FlowMap';
 
 export default function ImplantacaoIa() {
   return (
@@ -16,19 +17,9 @@ export default function ImplantacaoIa() {
           </div>
         </section>
         <section>
-          <div className="shell stack">
-            <article>
-              <h2>Pedido que chega no WhatsApp.</h2>
-              <p>Entra no sistema sem retrabalho.</p>
-            </article>
-            <article>
-              <h2>Cobrança que se repete.</h2>
-              <p>O lembrete sai sem alguém montar a lista.</p>
-            </article>
-            <article>
-              <h2>Resumo do dia.</h2>
-              <p>O que entrou, o que travou e o que vence amanhã.</p>
-            </article>
+          <div className="shell">
+            <FlowMap />
+            <div className="stack">
             <article>
               <h2>O que não entra.</h2>
               <p>Aplicativo do zero, modelo treinado do nada e promessa de cortar equipe.</p>
@@ -37,6 +28,7 @@ export default function ImplantacaoIa() {
               <h2>Da conversa à primeira automação.</h2>
               <p>Diagnóstico, plano curto, e a automação no canal que o time já usa.</p>
             </article>
+            </div>
           </div>
         </section>
       </article>
