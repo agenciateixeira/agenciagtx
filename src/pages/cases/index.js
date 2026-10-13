@@ -32,12 +32,15 @@ export default function Cases() {
           <p className="lede">Um número só quando a conta foi conferida.</p>
         </div>
       </section>
-      <section className="page">
-        <div className="shell stack">
-          {cases.map((item) => (
+      <section className="section">
+        <div className="shell case-list">
+          {cases.map((item, index) => (
             <article key={item.title}>
-              <h2><Link href={item.href}>{item.title}</Link></h2>
-              <p>{item.text}</p>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h2><Link href={item.href}>{item.title}</Link></h2>
+                <p>{item.text}</p>
+              </div>
             </article>
           ))}
         </div>

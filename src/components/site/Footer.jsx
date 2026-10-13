@@ -5,7 +5,10 @@ export default function Footer() {
     <footer className="foot-wrap">
       <div className="shell">
         <div className="foot">
-          <img src="/images/logo-gtx.png" alt="GTX" width="472" height="130" />
+          <div className="foot-brand">
+            <img src="/images/logo-gtx.png" alt="GTX" width="472" height="130" />
+            <p>contato@agenciagtx.com.br<br />+55 19 99012 2773</p>
+          </div>
           <nav aria-label="Rodapé">
             <Link href="/produtos/implantacao-de-ia">Implantação de IA</Link>
             <Link href="/produtos/gestao-de-trafego-pago">Gestão de tráfego pago</Link>
@@ -16,7 +19,6 @@ export default function Footer() {
             <Link href="/termos">Termos</Link>
             <Link href="/carreiras">Carreiras</Link>
           </nav>
-          <span>contato@agenciagtx.com.br · +55 19 99012 2773</span>
         </div>
         <p className="legal">GTX Gestão e Implementações Digitais · CNPJ 41.768.146/0001-69</p>
       </div>

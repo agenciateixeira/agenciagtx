@@ -13,7 +13,7 @@ export default function Obrigado() {
           <p className="eyebrow">Contato</p>
           <h1>Recebemos.</h1>
           <p className="lede">O retorno chega em horário comercial, no WhatsApp que você deixou.</p>
-          <p style={{ marginTop: '1.5rem' }}><Link className="btn" href="/">Voltar ao início</Link></p>
+          <p className="hero-actions"><Link className="btn" href="/">Voltar ao início</Link></p>
         </div>
       </section>
     </Layout>

@@ -7,7 +7,7 @@ export default function Carreiras() {
       title="Trabalhe na GTX | GTX"
       description="Vagas remotas na GTX. Conte sua experiência. Sem anexo."
     >
-      <section className="hero">
+      <section className="hero roomy">
         <div className="shell">
           <p className="eyebrow">Carreiras</p>
           <h1>Trabalhe na GTX.</h1>

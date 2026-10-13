@@ -9,7 +9,7 @@ export default function Document() {
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet" />
 
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://agenciagtx.com.br/api/og" />

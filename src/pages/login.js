@@ -1,106 +1,40 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import { ArrowRight, Shield, Lock, Headphones } from 'lucide-react';
+import Layout from '../components/site/Layout';
 
 const loginUrl = 'https://app.agenciagtx.com.br';
-const whatsappMessage = encodeURIComponent('Olá! Preciso de ajuda para acessar minha conta.');
-const whatsappLink = `https://wa.me/5519990122773?text=${whatsappMessage}`;
+const whatsappLink = `https://wa.me/5519990122773?text=${encodeURIComponent('Olá! Preciso de ajuda para acessar minha conta.')}`;
+
+const points = [
+  { title: 'Segurança e transparência', text: 'Acesso protegido e informações sempre atualizadas para o seu time.' },
+  { title: 'Autenticação simples', text: 'Use seu email corporativo e a senha cadastrada para entrar.' },
+  { title: 'Suporte dedicado', text: 'Especialistas disponíveis para ajudar com qualquer dúvida no acesso.' },
+];
 
 export default function LoginPage() {
   return (
-    <>
-      <Head>
-        <title>Área do cliente | GTX</title>
-        <meta name="robots" content="noindex, nofollow" />
-        <meta
-          name="description"
-          content="Acesse o painel da GTX."
-        />
-      </Head>
-
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-green-50 text-gray-900">
-        <div className="container mx-auto px-6 py-16">
-          <div className="grid gap-12 lg:grid-cols-2 items-center">
-            <div>
-              <div className="flex items-center gap-4 mb-10">
-                <div className="relative w-20 h-20 rounded-3xl bg-white shadow-lg flex items-center justify-center">
-                  <Image src="/images/logo-gtx.png" alt="GTX" width={120} height={33} priority />
-                </div>
-                <div>
-                  <p className="text-sm uppercase tracking-[0.3em] text-green-600">GTX</p>
-                  <p className="text-2xl font-semibold text-gray-900">Portal do cliente</p>
-                </div>
-              </div>
-
-              <span className="text-green-600 font-semibold text-sm uppercase tracking-widest">Área restrita</span>
-              <h1 className="text-4xl lg:text-5xl font-bold leading-tight mt-4 mb-6">
-                Bem vindo ao portal do cliente GTX
-              </h1>
-              <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-xl">
-                Aqui você acompanha relatórios e o andamento do trabalho, em um ambiente seguro.
-              </p>
-
-              <div className="space-y-6">
-                {[{
-                  icon: Shield,
-                  title: 'Segurança e transparência',
-                  description: 'Acesso protegido e informações sempre atualizadas para o seu time.'
-                }, {
-                  icon: Lock,
-                  title: 'Autenticação simples',
-                  description: 'Use seu email corporativo e a senha cadastrada para entrar.'
-                }, {
-                  icon: Headphones,
-                  title: 'Suporte dedicado',
-                  description: 'Especialistas disponíveis para ajudar com qualquer dúvida no acesso.'
-                }].map((item) => (
-                  <div key={item.title} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-white shadow-md flex items-center justify-center text-green-600">
-                      <item.icon className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-gray-100 shadow-2xl p-10">
-                <div className="text-center mb-10">
-                  <p className="text-sm font-semibold text-green-600 uppercase tracking-[0.3em]">Login</p>
-                  <h2 className="text-3xl font-bold text-gray-900 mt-2 mb-4">Acesse o aplicativo GTX</h2>
-                  <p className="text-gray-600">Clique no botão abaixo para abrir o painel oficial em uma nova aba.</p>
-                </div>
-
-                <a
-                  href={loginUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group w-full inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-semibold text-lg py-4 rounded-2xl transition-all shadow-lg"
-                >
-                  Ir para o app
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-
-                <div className="mt-10 p-6 rounded-2xl bg-gray-50 border border-gray-100 text-center">
-                  <p className="text-sm text-gray-600 mb-3">Está com dificuldades para acessar?</p>
-                  <a
-                    href={whatsappLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-green-600 font-semibold"
-                  >
-                    Fale com nosso atendimento no WhatsApp
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+    <Layout title="Área do cliente | GTX" description="Acesse o painel da GTX." noindex>
+      <section className="hero">
+        <div className="shell">
+          <p className="eyebrow">Área restrita</p>
+          <h1>Bem vindo ao portal do cliente.</h1>
+          <p className="lede">Aqui você acompanha relatórios e o andamento do trabalho, em um ambiente seguro.</p>
+          <p className="hero-actions">
+            <a className="btn" href={loginUrl} target="_blank" rel="noopener noreferrer">Ir para o app</a>
+          </p>
         </div>
-      </div>
-    </>
+      </section>
+      <section className="section">
+        <div className="shell">
+          <ol className="cards">
+            {points.map((item) => (
+              <li key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="lede"><a href={whatsappLink}>Fale com o atendimento no WhatsApp</a></p>
+        </div>
+      </section>
+    </Layout>
   );
 }
