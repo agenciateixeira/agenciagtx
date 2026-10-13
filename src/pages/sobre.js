@@ -21,10 +21,8 @@ export default function Sobre() {
               <img src="/images/guilherme-teixeira.jpg" alt="Guilherme Teixeira" width="720" height="1080" />
               <div>
                 <h2>Guilherme Teixeira.</h2>
-                <p>Fundador da APEX Consulting. 9 anos em growth marketing.</p>
-                <p>O problema que se repetia: sem transparência e sem visão do conjunto, o dado não sustenta a decisão. Ele fundou a APEX para montar a infraestrutura que mostra o desempenho real, tira a suposição e deixa a decisão em informação confiável.</p>
-                <p>O método pede transparência, visão do negócio e dado que corresponde à operação. A precisão técnica vem na frente.</p>
-                <p>Na GTX, a implantação de IA parte dessa base e entra no fluxo que a empresa já tem.</p>
+                <p>Fundador da Agência GTX. 9 anos em growth marketing.</p>
+                <p>Sem transparência e sem visão do conjunto, o dado não sustenta a decisão. A implantação de IA entra no fluxo que a empresa já tem.</p>
               </div>
             </article>
             <article>
