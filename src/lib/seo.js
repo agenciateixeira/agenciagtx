@@ -44,7 +44,7 @@ export const siteGraph = {
       url: `${SITE}/`,
       name: 'GTX',
       inLanguage: 'pt-BR',
-      description: 'A GTX implementa inteligência artificial no trabalho repetido da empresa.',
+      description: 'A GTX implementa IAs dentro da empresa, nos processos que já existem.',
       publisher: { '@id': businessId },
     },
     {
@@ -58,7 +58,7 @@ export const siteGraph = {
       telephone: '+5519990122773',
       email: 'contato@agenciagtx.com.br',
       taxID: '41.768.146/0001-69',
-      description: 'Implantação de IA na operação e gestão de tráfego pago, com atendimento remoto no Brasil desde 2017.',
+      description: 'Implementação de IAs na operação da empresa e gestão de tráfego pago, com atendimento remoto no Brasil desde 2017.',
       areaServed: {
         '@type': 'Country',
         name: 'Brasil',
@@ -76,7 +76,7 @@ export const siteGraph = {
       url: `${SITE}/produtos/implantacao-de-ia`,
       provider: { '@id': businessId },
       areaServed: 'Brasil',
-      description: 'Automação no fluxo que a empresa já tem. Pedido, cobrança e resumo do dia, no canal atual. O investimento é definido depois do diagnóstico, conforme o escopo.',
+      description: 'IAs nos processos que a empresa já tem. Pedido, cobrança e resumo do dia, no canal atual. O investimento é definido depois do diagnóstico, conforme o escopo.',
     },
     {
       '@type': 'Service',

@@ -1,9 +1,9 @@
-export default function Steps({ items, label }) {
+export default function Steps({ items, label, numbered = true }) {
   return (
-    <ol className="editorial" aria-label={label}>
+    <ol className={numbered ? 'editorial' : 'editorial plain'} aria-label={label}>
       {items.map((item) => (
-        <li key={item.n}>
-          <span>{item.n}</span>
+        <li key={item.label}>
+          {numbered ? <span>{item.n}</span> : null}
           <div>
             <p className="label">{item.label}</p>
             <p className="line">{item.line}</p>

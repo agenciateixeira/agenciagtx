@@ -3,8 +3,8 @@ export const solutions = [
     id: 'ia',
     href: '/produtos/implantacao-de-ia',
     title: 'Implantação de IA',
-    menu: 'No fluxo que a empresa já tem.',
-    text: 'A IA lê o WhatsApp, lança o pedido e cobra no canal que o time já usa.',
+    menu: 'Nos processos que a empresa já tem.',
+    text: 'IAs nos processos que a empresa já tem. O pedido entra, a cobrança sai e o resumo chega.',
     link: 'Ver implantação de IA',
   },
   {

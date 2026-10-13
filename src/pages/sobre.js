@@ -12,7 +12,7 @@ const method = [
     n: '01',
     label: 'Diagnóstico',
     line: '30 minutos, e pode terminar em não.',
-    text: 'A conversa vê o fluxo. Se a IA não cabe, o trabalho para ali. Sem contrato.',
+    text: 'A conversa vê o processo. Se a implantação não cabe, o trabalho para ali. Sem contrato.',
   },
   {
     n: '02',
@@ -57,14 +57,14 @@ const values = [
     n: '04',
     label: 'Quem decide',
     line: 'A decisão fica com quem já decide.',
-    text: 'A IA tira cópia, cobrança e lembrete. Não toma o lugar de quem escolhe.',
+    text: 'A implantação tira cópia, cobrança e lembrete. Não toma o lugar de quem escolhe.',
   },
 ];
 
 export default function Sobre() {
   return (
     <Layout
-      title="Implantamos IA em empresas | GTX"
+      title="Implementamos IAs em empresas | GTX"
       description="GTX Gestão e Implementações Digitais, desde 2017, atendimento remoto no Brasil. Guilherme Teixeira é o fundador da Agência GTX."
       crumbs={crumbs}
     >
@@ -72,7 +72,7 @@ export default function Sobre() {
         <section className="hero">
           <div className="shell">
             <p className="eyebrow">Quem somos</p>
-            <h1>Implantamos IA<br />em empresas.</h1>
+            <h1>Implementamos IAs<br />em empresas.</h1>
             <p className="lede">GTX Gestão e Implementações Digitais, desde 2017, atendimento remoto no Brasil.</p>
           </div>
         </section>
@@ -90,7 +90,7 @@ export default function Sobre() {
               <p className="eyebrow">Fundador</p>
               <h2>Guilherme Teixeira.</h2>
               <p className="role">Fundador da Agência GTX. 9 anos em growth marketing.</p>
-              <p className="bio">Sem transparência e sem visão do conjunto, o dado não sustenta a decisão. A implantação de IA entra no fluxo que a empresa já tem.</p>
+              <p className="bio">Sem transparência e sem visão do conjunto, o dado não sustenta a decisão. A GTX implementa IAs dentro da empresa, nos processos que já existem.</p>
               <p className="bio">A conversa comercial é com ele. O atendimento é remoto, no Brasil, desde 2017.</p>
               <p className="hero-actions"><Link className="btn" href="/contato">Pedir diagnóstico</Link></p>
             </div>
@@ -106,11 +106,11 @@ export default function Sobre() {
             <div className="stack">
               <article>
                 <h2>O que faltava.</h2>
-                <p>Guilherme Teixeira tem 9 anos em growth marketing. Sem transparência e sem visão do conjunto, o dado não sustenta a decisão. A Agência GTX implanta a IA no fluxo que a empresa já tem.</p>
+                <p>Guilherme Teixeira tem 9 anos em growth marketing. Sem transparência e sem visão do conjunto, o dado não sustenta a decisão. A Agência GTX implementa IAs dentro da empresa, nos processos que já existem.</p>
               </article>
               <article>
                 <h2>O que a empresa faz hoje.</h2>
-                <p>Implanta IA no fluxo que a empresa já tem. Pedido, cobrança e resumo do dia. Em outro produto, faz a gestão de tráfego pago no Meta, no Google e no LinkedIn.</p>
+                <p>Implementa IAs nos processos que a empresa já tem. Pedido, cobrança e resumo do dia. Em outro produto, faz a gestão de tráfego pago no Meta, no Google e no LinkedIn.</p>
               </article>
               <article>
                 <h2>Quem fala com você.</h2>

@@ -117,7 +117,7 @@ const metrics = [
 const faq = [
   {
     q: 'O que entra no escopo?',
-    a: 'Automação no fluxo que a empresa já tem. Pedido, cobrança, resumo do dia e a pergunta que hoje alguém responde na mão.',
+    a: 'IAs nos processos que a empresa já tem. Pedido, cobrança, resumo do dia e a pergunta que hoje alguém responde na mão.',
   },
   {
     q: 'O que não entra?',
@@ -137,7 +137,7 @@ const faq = [
   },
   {
     q: 'Vocês trocam o sistema da empresa?',
-    a: 'Não. A IA entra no WhatsApp, no CRM, no ERP ou na planilha que a operação já usa.',
+    a: 'Não. A GTX implementa IAs no WhatsApp, no CRM, no ERP ou na planilha que a operação já usa.',
   },
   {
     q: 'Vocês treinam um modelo do zero?',
@@ -156,8 +156,8 @@ const faq = [
 export default function ImplantacaoIa() {
   return (
     <Layout
-      title="IA no fluxo que a empresa já tem | GTX"
-      description="Automação onde hoje alguém copia, cobra ou lembra. Diagnóstico de 30 minutos. O investimento é definido depois do diagnóstico, conforme o escopo. Se não couber, a conversa acaba ali."
+      title="IAs dentro da empresa | GTX"
+      description="IAs nos processos que a empresa já tem, onde hoje alguém copia, cobra ou lembra. Diagnóstico de 30 minutos. O investimento é definido depois do diagnóstico, conforme o escopo."
       crumbs={crumbs}
       jsonLd={[faqSchema(faq)]}
     >
@@ -165,13 +165,18 @@ export default function ImplantacaoIa() {
         <section className="hero">
           <div className="shell">
             <p className="eyebrow">Produtos</p>
-            <h1>IA no fluxo que a empresa já tem.</h1>
-            <p className="lede">Automação onde hoje alguém copia, cobra ou lembra. O investimento é definido depois do diagnóstico, conforme o escopo.</p>
+            <h1>IAs dentro da empresa.</h1>
+            <p className="lede">Nos processos que já existem, onde hoje alguém copia, cobra ou lembra. O investimento é definido depois do diagnóstico, conforme o escopo.</p>
           </div>
         </section>
 
-        <section className="section flush-top">
+        <section className="section flush-top" aria-label="Resultado nos processos que a empresa já tem">
           <div className="shell">
+            <div className="section-intro">
+              <p className="eyebrow">Resultado</p>
+              <h2>O processo que a empresa já tem, sem o trabalho repetido.</h2>
+              <p className="lede">A GTX implementa IAs dentro da empresa. O pedido entra, a cobrança sai e o resumo chega para quem decide.</p>
+            </div>
             <FlowMap />
           </div>
         </section>
@@ -256,7 +261,7 @@ export default function ImplantacaoIa() {
         <div className="shell contact-grid">
           <div>
             <p className="eyebrow">Diagnóstico</p>
-            <h2>Ver se a IA cabe na sua operação.</h2>
+            <h2>Ver se a implantação cabe na sua operação.</h2>
             <p className="lede">30 minutos, sem contrato. O investimento é definido depois do diagnóstico, conforme o escopo. Se não couber, a conversa acaba aqui.</p>
             <ul className="cta-points">
               <li>Para empresas de R$ 100 mil a R$ 1 milhão por mês.</li>
