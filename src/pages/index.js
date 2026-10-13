@@ -50,9 +50,14 @@ export default function Home() {
       <section className="proof" aria-label="Clientes">
         <div className="shell">
           <p className="eyebrow">Quem já passou pela GTX</p>
-          <ul className="marks">
+        </div>
+        <div className="marquee">
+          <ul className="marquee-track">
             {clients.map((client) => (
               <li key={client.src}><img src={client.src} alt={client.alt} /></li>
+            ))}
+            {clients.map((client) => (
+              <li key={`${client.src}-copia`} aria-hidden="true"><img src={client.src} alt="" /></li>
             ))}
           </ul>
         </div>
