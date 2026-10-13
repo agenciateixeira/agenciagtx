@@ -4,6 +4,7 @@ import LeadForm from '../components/site/LeadForm';
 import FlowMap from '../components/site/FlowMap';
 import Faq from '../components/site/Faq';
 import Steps from '../components/site/Steps';
+import Solutions from '../components/site/Solutions';
 import { faqSchema } from '../lib/seo';
 
 const clients = [
@@ -242,6 +243,8 @@ export default function Home() {
           </ol>
         </div>
       </section>
+
+      <Solutions />
 
       <section className="section" id="problemas" aria-label="Problemas que resolvemos">
         <div className="shell">

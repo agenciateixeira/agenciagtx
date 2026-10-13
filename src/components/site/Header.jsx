@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-const produtos = [
-  { href: '/produtos/implantacao-de-ia', title: 'Implantação de IA', text: 'No fluxo que a empresa já tem.' },
-  { href: '/produtos/gestao-de-trafego-pago', title: 'Gestão de tráfego pago', text: 'Meta, Google e LinkedIn.' },
-];
+import { solutions } from '../../lib/solutions';
+import { SolutionPreview } from './SolutionArt';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -38,22 +36,35 @@ export default function Header() {
           {open ? 'Fechar' : 'Menu'}
         </button>
         <nav className={`nav-links${open ? ' open' : ''}`} aria-label="Principal">
-          <div className={`produtos${productsOpen ? ' open' : ''}`}>
+          <div className={`mega${productsOpen ? ' open' : ''}`}>
             <button
               className="menu-btn"
               type="button"
               aria-expanded={productsOpen}
+              aria-controls="menu-solucoes"
               onClick={() => setProductsOpen((value) => !value)}
             >
-              Produtos
+              Soluções
             </button>
-            <div className="produtos-panel">
-              {produtos.map((item) => (
-                <Link key={item.href} href={item.href} onClick={close}>
-                  {item.title}
-                  <small>{item.text}</small>
-                </Link>
-              ))}
+            <div className="mega-panel" id="menu-solucoes">
+              <div className="mega-list">
+                {solutions.map((item, index) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={index === active ? 'is-on' : undefined}
+                    onMouseEnter={() => setActive(index)}
+                    onFocus={() => setActive(index)}
+                    onClick={close}
+                  >
+                    {item.title}
+                    <small>{item.menu}</small>
+                  </Link>
+                ))}
+              </div>
+              <div className="mega-preview sol-stage" aria-hidden="true">
+                <SolutionPreview id={solutions[active].id} />
+              </div>
             </div>
           </div>
           <Link href="/cases" onClick={close}>Cases</Link>
