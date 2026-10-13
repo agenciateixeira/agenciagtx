@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Layout from '../components/site/Layout';
 import LeadForm from '../components/site/LeadForm';
-import FlowMap from '../components/site/FlowMap';
+import { OutcomePin } from '../components/site/FlowMap';
 import Faq from '../components/site/Faq';
-import Steps from '../components/site/Steps';
+import Picker from '../components/site/Picker';
 import Solutions from '../components/site/Solutions';
 import { faqSchema } from '../lib/seo';
 
@@ -49,7 +49,7 @@ const steps = [
     n: '01',
     label: 'Diagnóstico',
     line: '30 minutos, sem contrato.',
-    text: 'Entrega: onde a operação pesa, e se a IA cabe. Se não couber, a conversa acaba ali.',
+    text: 'Entrega: onde a operação pesa, e se a implantação cabe. Se não couber, a conversa acaba ali.',
   },
   {
     n: '02',
@@ -115,13 +115,13 @@ const tools = [
     n: '01',
     label: 'WhatsApp',
     line: 'Onde o pedido e a cobrança já acontecem.',
-    text: 'A automação lê o que chega e devolve o que o time precisa registrar.',
+    text: 'A implantação lê o que chega e devolve o que o time precisa registrar.',
   },
   {
     n: '02',
     label: 'CRM',
     line: 'Onde o comercial já anota.',
-    text: 'A IA organiza o que hoje alguém copia de uma conversa para o cadastro.',
+    text: 'A implantação organiza o que hoje alguém copia de uma conversa para o cadastro.',
   },
   {
     n: '03',
@@ -140,11 +140,11 @@ const tools = [
 const faq = [
   {
     q: 'O que a GTX implementa?',
-    a: 'Inteligência artificial no trabalho repetido. Pedido, cobrança e resumo do dia, no canal que o time já usa.',
+    a: 'IAs dentro da empresa, nos processos que já existem. Pedido, cobrança e resumo do dia, no canal que o time já usa.',
   },
   {
     q: 'Quanto tempo dura o diagnóstico?',
-    a: '30 minutos, sem contrato. Se a IA não couber, a conversa acaba ali.',
+    a: '30 minutos, sem contrato. Se a implantação não couber, a conversa acaba ali.',
   },
   {
     q: 'O que sai do diagnóstico?',
@@ -164,7 +164,7 @@ const faq = [
   },
   {
     q: 'Quais ferramentas entram?',
-    a: 'WhatsApp, CRM, ERP e planilhas. A IA entra no que a empresa já usa. Não trocamos o sistema por um aplicativo novo.',
+    a: 'WhatsApp, CRM, ERP e planilhas. A GTX implementa IAs no que a empresa já usa. Não trocamos o sistema por um aplicativo novo.',
   },
   {
     q: 'O que a GTX não faz?',
@@ -172,7 +172,7 @@ const faq = [
   },
   {
     q: 'Quem decide continua decidindo?',
-    a: 'Sim. A IA tira o trabalho de copiar, cobrar e lembrar. A decisão fica com quem já decide na empresa.',
+    a: 'Sim. A implantação tira o trabalho de copiar, cobrar e lembrar. A decisão fica com quem já decide na empresa.',
   },
   {
     q: 'Como peço o diagnóstico?',
@@ -186,7 +186,7 @@ export default function Home() {
   return (
     <Layout
       title="IA na operação da sua empresa | GTX"
-      description="IA no trabalho repetido da empresa. Diagnóstico de 30 minutos, sem contrato. O investimento é definido depois do diagnóstico, conforme o escopo."
+      description="IAs implementadas nos processos que a empresa já tem. Diagnóstico de 30 minutos, sem contrato. O investimento é definido depois do diagnóstico, conforme o escopo."
       crumbs={[{ href: '/', label: 'Início' }]}
       showCrumbs={false}
       jsonLd={[faqSchema(faq)]}
@@ -216,34 +216,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" aria-label="O que fazemos, como e por quê">
-        <div className="shell">
-          <ol className="editorial">
-            <li>
-              <span>01</span>
-              <div>
-                <p className="label">O quê</p>
-                <p className="line">IA no processo repetido. Pedido, cobrança, resumo do dia.</p>
-              </div>
-            </li>
-            <li>
-              <span>02</span>
-              <div>
-                <p className="label">Como</p>
-                <p className="line">Diagnóstico de 30 minutos, um plano curto e a primeira automação no canal atual.</p>
-              </div>
-            </li>
-            <li>
-              <span>03</span>
-              <div>
-                <p className="label">Por quê</p>
-                <p className="line">O time para de copiar e lembrar. Quem decide continua decidindo.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
       <Solutions />
 
       <section className="section" id="problemas" aria-label="Problemas que resolvemos">
@@ -251,20 +223,18 @@ export default function Home() {
           <div className="section-intro">
             <p className="eyebrow">Problemas</p>
             <h2>Onde a operação pesa hoje.</h2>
-            <p className="lede">Quatro áreas. O exemplo é o trabalho que alguém ainda copia, cobra ou lembra.</p>
           </div>
-          <Steps items={problems} label="Problemas por área" />
+          <Picker items={problems} label="Problemas" />
         </div>
       </section>
 
-      <section className="section" aria-label="IA no fluxo que a empresa já tem">
+      <section className="section story-section" aria-label="Resultado nos processos que a empresa já tem">
         <div className="shell">
           <div className="section-intro">
-            <p className="eyebrow">O fluxo</p>
-            <h2>IA no fluxo que a empresa já tem.</h2>
-            <p className="lede">Pedido, cobrança e resumo do dia, no canal que o time já usa.</p>
+            <p className="eyebrow">Resultado</p>
+            <h2>O processo que a empresa já tem, sem o trabalho repetido.</h2>
           </div>
-          <FlowMap />
+          <OutcomePin />
           <p className="more"><Link className="text-link" href="/produtos/implantacao-de-ia">Ver implantação de IA</Link></p>
         </div>
       </section>
@@ -274,9 +244,8 @@ export default function Home() {
           <div className="section-intro">
             <p className="eyebrow">Como funciona</p>
             <h2>Do diagnóstico ao acompanhamento.</h2>
-            <p className="lede">Cada etapa tem uma entrega. O único prazo fixo, antes de ver a operação, é o diagnóstico.</p>
           </div>
-          <Steps items={steps} label="Etapas" />
+          <Picker items={steps} label="Etapas" />
         </div>
       </section>
 
@@ -285,15 +254,9 @@ export default function Home() {
           <div className="section-intro">
             <p className="eyebrow">Plano</p>
             <h2>O investimento sai depois do diagnóstico.</h2>
-            <p className="lede">Ele acompanha o escopo de cada empresa. O diagnóstico continua sem contrato.</p>
           </div>
-          <Steps items={included} label="O que está incluso" />
-          <div className="stack">
-            <article>
-              <h2>O que não entra.</h2>
-              <p>Aplicativo do zero sem processo, modelo treinado do nada, promessa de cortar equipe e retorno prometido antes de ver a operação.</p>
-            </article>
-          </div>
+          <Picker items={included} label="Plano" />
+          <p className="note">Não entra aplicativo do zero, modelo treinado do nada, promessa de cortar equipe nem retorno prometido antes de ver a operação.</p>
         </div>
       </section>
 
@@ -301,10 +264,9 @@ export default function Home() {
         <div className="shell">
           <div className="section-intro">
             <p className="eyebrow">Ferramentas</p>
-            <h2>A IA entra no que a empresa já usa.</h2>
-            <p className="lede">WhatsApp, CRM, ERP e planilhas. Não trocamos o sistema por um aplicativo novo.</p>
+            <h2>IAs nos processos que a empresa já tem.</h2>
           </div>
-          <Steps items={tools} label="Integrações" />
+          <Picker items={tools} label="Ferramentas" />
         </div>
       </section>
 

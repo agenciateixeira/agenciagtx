@@ -28,7 +28,7 @@ export function DeskArt() {
         </ul>
         <div className="sol-thread">
           <p className="from-them">O pedido chegou no WhatsApp.</p>
-          <p className="from-ia">Lancei no sistema. A cobrança sai hoje.</p>
+          <p className="from-ia">Pedido no sistema. A cobrança sai hoje.</p>
           <p className="from-ia is-typing"><span /><span /><span /></p>
         </div>
       </div>
@@ -44,7 +44,7 @@ export function InboxArt() {
         <em>WhatsApp</em>
       </div>
       <p className="from-them">O pedido chegou no WhatsApp.</p>
-      <p className="from-ia">Lancei no sistema.</p>
+      <p className="from-ia">Pedido lançado no sistema.</p>
       <p className="sol-sys">Pedido no sistema</p>
       <p className="from-them late">A cobrança sai neste chat?</p>
       <p className="from-ia later">A cobrança já saiu no WhatsApp.</p>
