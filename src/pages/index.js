@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Layout from '../components/site/Layout';
 import LeadForm from '../components/site/LeadForm';
 import FlowMap from '../components/site/FlowMap';
@@ -21,39 +22,9 @@ export default function Home() {
       <section className="hero">
         <div className="shell">
           <p className="eyebrow">Agência GTX</p>
-          <h1>IA na operação da sua empresa.</h1>
+          <h1>IA na operação<br />da sua empresa.</h1>
           <p className="lede">No trabalho que hoje alguém copia, cobra ou lembra.</p>
           <p className="hero-actions"><a className="btn" href="#contato">Pedir diagnóstico</a></p>
-        </div>
-      </section>
-
-      <section className="section" aria-label="O que fazemos, como e por quê">
-        <div className="shell">
-          <ol className="three">
-            <li>
-              <span>O quê</span>
-              <p>IA no processo repetido. Pedido, cobrança, resumo do dia.</p>
-            </li>
-            <li>
-              <span>Como</span>
-              <p>Diagnóstico de 30 minutos, um plano curto e a primeira automação no canal atual.</p>
-            </li>
-            <li>
-              <span>Por quê</span>
-              <p>O time para de copiar e lembrar. Quem decide continua decidindo.</p>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section className="section" aria-label="IA no fluxo que a empresa já tem">
-        <div className="shell">
-          <div className="section-intro">
-            <p className="eyebrow">O fluxo</p>
-            <h2>IA no fluxo que a empresa já tem.</h2>
-            <p className="lede">Pedido, cobrança e resumo do dia, no canal que o time já usa.</p>
-          </div>
-          <FlowMap />
         </div>
       </section>
 
@@ -70,6 +41,46 @@ export default function Home() {
               <li key={`${client.src}-copia`} aria-hidden="true"><img src={client.src} alt="" /></li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="section" aria-label="O que fazemos, como e por quê">
+        <div className="shell">
+          <ol className="editorial">
+            <li>
+              <span>01</span>
+              <div>
+                <p className="label">O quê</p>
+                <p className="line">IA no processo repetido. Pedido, cobrança, resumo do dia.</p>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <p className="label">Como</p>
+                <p className="line">Diagnóstico de 30 minutos, um plano curto e a primeira automação no canal atual.</p>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <p className="label">Por quê</p>
+                <p className="line">O time para de copiar e lembrar. Quem decide continua decidindo.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section className="section" aria-label="IA no fluxo que a empresa já tem">
+        <div className="shell">
+          <div className="section-intro">
+            <p className="eyebrow">O fluxo</p>
+            <h2>IA no fluxo que a empresa já tem.</h2>
+            <p className="lede">Pedido, cobrança e resumo do dia, no canal que o time já usa.</p>
+          </div>
+          <FlowMap />
+          <p className="more"><Link className="text-link" href="/produtos/implantacao-de-ia">Ver implantação de IA</Link></p>
         </div>
       </section>
 

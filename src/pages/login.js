@@ -27,7 +27,7 @@ export default function LoginPage() {
           <ol className="cards">
             {points.map((item) => (
               <li key={item.title}>
-                <span>{item.title}</span>
+                <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </li>
             ))}

@@ -20,15 +20,15 @@ export default function TrafegoPago() {
           <div className="shell">
             <ol className="cards">
               <li>
-                <span>Meta</span>
+                <h3>Meta</h3>
                 <p>Quem já conhece a marca e quem ainda não comprou.</p>
               </li>
               <li>
-                <span>Google</span>
+                <h3>Google</h3>
                 <p>Quem está procurando agora.</p>
               </li>
               <li>
-                <span>LinkedIn</span>
+                <h3>LinkedIn</h3>
                 <p>Quem decide na empresa, quando a venda é entre empresas.</p>
               </li>
             </ol>
@@ -45,7 +45,7 @@ export default function TrafegoPago() {
                 <h2>Sneaker Society.</h2>
                 <p>De R$ 19 mil para mais de R$ 60 mil por mês, com o mesmo anúncio. Leonardo Utida.</p>
                 <p className="note">Relato do cliente. O período entra depois de conferir a conta.</p>
-                <p><Link href="/cases/sneaker-society">Ler o case</Link></p>
+                <p className="more"><Link className="text-link" href="/cases/sneaker-society">Ler o case</Link></p>
               </article>
             </div>
           </div>

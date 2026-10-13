@@ -11,7 +11,7 @@ export default function Sobre() {
         <section className="hero">
           <div className="shell">
             <p className="eyebrow">Quem somos</p>
-            <h1>Implantamos IA em empresas.</h1>
+            <h1>Implantamos IA<br />em empresas.</h1>
             <p className="lede">GTX Gestão e Implementações Digitais, desde 2017, atendimento remoto no Brasil.</p>
           </div>
         </section>
@@ -29,14 +29,14 @@ export default function Sobre() {
               <p className="eyebrow">Fundador</p>
               <h2>Guilherme Teixeira.</h2>
               <p className="role">Fundador da Agência GTX. 9 anos em growth marketing.</p>
-              <p>Sem transparência e sem visão do conjunto, o dado não sustenta a decisão. A implantação de IA entra no fluxo que a empresa já tem.</p>
+              <p className="bio">Sem transparência e sem visão do conjunto, o dado não sustenta a decisão. A implantação de IA entra no fluxo que a empresa já tem.</p>
               <p className="hero-actions"><Link className="btn" href="/contato">Pedir diagnóstico</Link></p>
             </div>
           </div>
         </section>
 
-        <section>
-          <div className="shell split">
+        <section className="section flush-top">
+          <div className="shell statements">
             <article>
               <h2>Três passos, e um deles é dizer não.</h2>
               <p>Diagnóstico, plano curto, e a primeira entrega no fluxo que já existe.</p>
