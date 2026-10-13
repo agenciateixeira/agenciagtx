@@ -8,13 +8,13 @@ import Solutions from '../components/site/Solutions';
 import { faqSchema } from '../lib/seo';
 
 const clients = [
-  { src: '/images/clients/logofl.png', alt: 'Logo da Frasco Life' },
-  { src: '/images/clients/LOGODZS.png', alt: 'Logo do Depósito Zona Sul' },
-  { src: '/images/clients/logosneakers.png', alt: 'Logo da Sneaker Society' },
-  { src: '/images/clients/logojsete.png', alt: 'Logo da Jsete' },
-  { src: '/images/clients/logoroute.png', alt: 'Logo da Route Cred' },
-  { src: '/images/clients/logoflypro.png', alt: 'Logo da FlyPro' },
-  { src: '/images/clients/podologia.png', alt: 'Logo da Podologia' },
+  { src: '/images/clients/logofl.png', alt: 'Logo da Frasco Life', mark: 1.51 },
+  { src: '/images/clients/LOGODZS.png', alt: 'Logo do Depósito Zona Sul', mark: 1.22 },
+  { src: '/images/clients/logosneakers.png', alt: 'Logo da Sneaker Society', mark: 1.13 },
+  { src: '/images/clients/logojsete.png', alt: 'Logo da Jsete', mark: 1.3, ink: true },
+  { src: '/images/clients/logoroute.png', alt: 'Logo da Route Cred', mark: 1.5 },
+  { src: '/images/clients/logoflypro.png', alt: 'Logo da FlyPro', mark: 2.15 },
+  { src: '/images/clients/podologia.png', alt: 'Logo da Podologia', mark: 1 },
 ];
 
 const problems = [
@@ -207,10 +207,10 @@ export default function Home() {
         <div className="marquee">
           <ul className="marquee-track">
             {clients.map((client) => (
-              <li key={client.src}><img src={client.src} alt={client.alt} /></li>
+              <li key={client.src}><img src={client.src} alt={client.alt} className={client.ink ? 'is-ink' : undefined} style={{ '--mark': client.mark }} /></li>
             ))}
             {clients.map((client) => (
-              <li key={`${client.src}-copia`} aria-hidden="true"><img src={client.src} alt={client.alt} /></li>
+              <li key={`${client.src}-copia`} aria-hidden="true"><img src={client.src} alt="" className={client.ink ? 'is-ink' : undefined} style={{ '--mark': client.mark }} /></li>
             ))}
           </ul>
         </div>
