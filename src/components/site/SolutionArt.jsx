@@ -54,48 +54,31 @@ export function InboxArt() {
 
 export function AdsArt() {
   return (
-    <div className="sol-dash" aria-hidden="true">
-      <div className="sol-chat-bar">
+    <div className="sol-ads" aria-hidden="true">
+      <div className="sol-ads-bar">
         <span>Painel de campanhas</span>
         <em>Sua conta</em>
       </div>
-      <div className="sol-metrics">
-        <div><small>ROAS</small><span className="sol-bar" /></div>
-        <div><small>CPA</small><span className="sol-bar short" /></div>
-      </div>
-      <div className="sol-skel" aria-hidden="true">
-        <i /><i /><i /><i /><i />
-      </div>
-      <div className="sol-channels">
-        <span>Meta</span>
-        <span>Google</span>
-        <span>LinkedIn</span>
-      </div>
+      <p className="sol-ads-title">Leitura semanal</p>
+      <ul>
+        <li>Meta</li>
+        <li>Google</li>
+        <li>LinkedIn</li>
+      </ul>
+      <p className="sol-ads-foot">O que pausar, o que escalar e o que não repetir.</p>
     </div>
   );
 }
 
 export function MatrixArt() {
   return (
-    <div className="sol-matrix" aria-hidden="true">
-      <span className="sol-axis y">Impacto</span>
-      <div className="sol-quad">
-        <span>Agora</span>
-        <i className="sol-dot d1" />
-      </div>
-      <div className="sol-quad">
-        <span>Depois</span>
-        <i className="sol-dot d2" />
-      </div>
-      <div className="sol-quad">
-        <span>Observar</span>
-        <i className="sol-dot d3" />
-      </div>
-      <div className="sol-quad">
-        <span>Não entra</span>
-        <i className="sol-dot d4" />
-      </div>
-      <span className="sol-axis x">Esforço</span>
+    <div className="sol-impact" aria-hidden="true">
+      <p className="sol-impact-kicker">Impacto</p>
+      <ol>
+        <li className="is-now">O que fazer agora</li>
+        <li>O que fica para depois</li>
+        <li className="is-out">O que não entra</li>
+      </ol>
     </div>
   );
 }
