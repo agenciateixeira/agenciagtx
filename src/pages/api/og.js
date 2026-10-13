@@ -10,7 +10,7 @@ export default function handler() {
           display: 'flex',
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+          background: '#f6f0e9',
           alignItems: 'center',
           justifyContent: 'center',
           fontFamily: 'system-ui, sans-serif',
@@ -25,7 +25,7 @@ export default function handler() {
             width: 400,
             height: 400,
             borderRadius: '50%',
-            background: 'rgba(154, 205, 50, 0.08)',
+            background: 'rgba(31, 70, 71, 0.08)',
           }}
         />
         <div
@@ -36,7 +36,7 @@ export default function handler() {
             width: 300,
             height: 300,
             borderRadius: '50%',
-            background: 'rgba(154, 205, 50, 0.05)',
+            background: 'rgba(31, 70, 71, 0.05)',
           }}
         />
 
@@ -53,11 +53,8 @@ export default function handler() {
         >
           {/* Logo text */}
           <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: 24 }}>
-            <span style={{ fontSize: 72, fontWeight: 800, color: '#9ACD32', letterSpacing: -2 }}>
+            <span style={{ fontSize: 72, fontWeight: 800, color: '#1f4647', letterSpacing: -2 }}>
               GTX
-            </span>
-            <span style={{ fontSize: 72, fontWeight: 800, color: '#ffffff', letterSpacing: -2 }}>
-              .
             </span>
           </div>
 
@@ -65,14 +62,14 @@ export default function handler() {
           <p
             style={{
               fontSize: 28,
-              color: '#9ACD32',
+              color: '#545e46',
               fontWeight: 600,
               marginBottom: 16,
               letterSpacing: 2,
               textTransform: 'uppercase',
             }}
           >
-            Marketing e Vendas
+            Implantação de IA
           </p>
 
           {/* Main headline */}
@@ -80,18 +77,18 @@ export default function handler() {
             style={{
               fontSize: 48,
               fontWeight: 700,
-              color: '#ffffff',
+              color: '#2b180a',
               lineHeight: 1.2,
               marginBottom: 24,
               maxWidth: 800,
             }}
           >
-            Transforme Visitas em Vendas
+            IA na operação da sua empresa
           </h1>
 
           {/* Description */}
           <p style={{ fontSize: 22, color: '#999999', maxWidth: 700 }}>
-            Especialistas em tráfego pago e transformação digital para seu negócio
+            No trabalho que hoje alguém copia, cobra ou lembra
           </p>
 
           {/* CTA badge */}
@@ -101,8 +98,8 @@ export default function handler() {
               alignItems: 'center',
               gap: 8,
               marginTop: 32,
-              background: '#9ACD32',
-              color: '#1a1a1a',
+              background: '#1f4647',
+              color: '#f6f0e9',
               padding: '12px 28px',
               borderRadius: 100,
               fontWeight: 700,

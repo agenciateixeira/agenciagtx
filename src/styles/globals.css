@@ -12,17 +12,11 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (min-width: 768px) {
-  * { cursor: none !important; }
-}
-
 body {
-  font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Fustat', 'Avenir Next', 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #fafafa;
+  background: #f6f0e9;
 }
 
 /* Scrollbar customizado */
@@ -35,12 +29,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #22c55e;
+  background: #1f4647;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #16a34a;
+  background: #173536;
 }
 
 /* Animações personalizadas */

@@ -7,31 +7,15 @@ export default function Document() {
         {/* Favicon */}
         <link rel="icon" href="/images/favicon.png" />
 
-        {/* Google Fonts - Lexend com preload */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" as="style" />
-        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
 
-        {/* Meta Tags SEO */}
-        <meta name="description" content="GTX Marketing e Vendas - Especialistas em tráfego pago e transformação digital para seu negócio. Consultoria gratuita disponível." />
-        <meta name="keywords" content="tráfego pago, marketing digital, e-commerce, restaurantes, meta ads, google ads, consultoria digital" />
-        <meta name="author" content="GTX Marketing e Vendas" />
-        
-        {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://agenciagtx.com.br/" />
-        <meta property="og:title" content="GTX Marketing e Vendas - Transforme Visitas em Vendas" />
-        <meta property="og:description" content="Especialistas em tráfego pago focado em resultados reais. Consultoria gratuita." />
         <meta property="og:image" content="https://agenciagtx.com.br/api/og" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-
-        {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://agenciagtx.com.br/" />
-        <meta property="twitter:title" content="GTX Marketing e Vendas" />
-        <meta property="twitter:description" content="Especialistas em tráfego pago focado em resultados reais" />
         
         {/* JSON-LD Structured Data */}
         <script
@@ -40,17 +24,17 @@ export default function Document() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "MarketingAgency",
-              "name": "GTX Marketing e Vendas",
+              "name": "GTX",
               "url": "https://agenciagtx.com.br",
-              "logo": "https://agenciagtx.com.br/images/favicon.png",
-              "description": "Especialistas em tráfego pago, e-commerce e transformação digital para seu negócio.",
+              "logo": "https://agenciagtx.com.br/images/logo-gtx.png",
+              "description": "A GTX implementa inteligência artificial na operação de empresas brasileiras.",
               "address": {
                 "@type": "PostalAddress",
                 "addressCountry": "BR"
               },
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+55-19-99012-2773",
+                "telephone": "+5519990122773",
                 "contactType": "customer service",
                 "availableLanguage": "Portuguese"
               },
