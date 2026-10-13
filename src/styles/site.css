@@ -163,6 +163,15 @@
 .stack { display: grid; gap: 0; }
 .stack article { padding: 1.2rem 0; border-top: 1px solid var(--line); }
 .stack article:last-child { border-bottom: 1px solid var(--line); }
+.person { display: grid; gap: 1.15rem 1.75rem; align-items: start; }
+.person img {
+  width: min(100%, 240px);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 12%;
+  display: block;
+}
+.person p + p { margin-top: 0.8rem; }
 
 .proof { padding: clamp(2.6rem, 6vw, 4rem) 0; }
 .marks {
@@ -260,6 +269,7 @@ footer.foot-wrap { padding: 1.6rem 0 2rem; color: var(--muted); font-size: 0.9re
   .three li { padding: 1.5rem 1.4rem 0.2rem 0; border-bottom: 0; }
   .three li + li { padding-left: 1.4rem; }
   .contact-grid { grid-template-columns: 0.85fr 1.15fr; gap: 2.5rem; align-items: start; }
+  .person { grid-template-columns: 220px 1fr; }
   .pair { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 879px) {
