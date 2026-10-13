@@ -261,10 +261,10 @@ O lima atual não entra na interface. Se o símbolo do circuito for mantido, ele
 
 **Imagem**
 
-- Hero: não usa foto de estoque nem vídeo. O artefato é o cartão “Diagnóstico · exemplo”, com quatro linhas e uma delas marcada “depois”. Isso comunica critério, que é o que a página atual tenta comunicar com animação.
-- Cases: número grande só quando houver fonte. Sem foto, o bloco é tipográfico.
-- Sobre: lugar de um retrato do Guilherme, luz natural, corte vertical, como os retratos da Epic. No mockup há um monograma GT e a frase “retrato entra antes de publicar”. Não usar banco de imagem.
-- Logos de cliente: até haver SVG limpo, a fileira é o nome em serif, não o PNG torto. Marquee lento (42s), pausa no hover, parado se o sistema pedir menos movimento.
+- Não há foto de equipe nem de trabalho no repositório (`hero-bg.jpg` tem 0 bytes). O mockup usa só o que existe: o logo e as marcas de cliente.
+- Logo: `docs/logo-gtx.png`, recolorido a partir de `public/images/logo.png`. O alfa de cada pixel foi mantido. Pixels verdes do circuito (saturação alta, verde dominante) passaram para `#1F4647`. Pixels neutros do wordmark passaram para `#2B180A`. Não foi filtro CSS: o lima e o preto precisavam ir para duas tintas da paleta, e um filtro único acinzentaria os dois.
+- Clientes: os PNG transparentes que a home atual já mostra (`logofl`, `LOGODZS`, `logosneakers`, `logojsete`, `logoroute`, `logoflypro`), direto de `public/images/clients/`. Podologia está em `docs/clients/podologia.png`: o mesmo `LOGO PODOLOGIA (1).png`, com o branco do fundo virado em transparência para sentar no papel. Os arquivos de 300×150 px, quase só fundo branco, não entram.
+- Retrato do Guilherme continua necessário antes de publicar a página Sobre. Não há arquivo dele no repo, então o mockup não inventa um.
 
 **Movimento**
 
@@ -272,7 +272,7 @@ Fade nenhum de entrada obrigatório. Scroll suave só se o usuário não tiver `
 
 **Logo, nesta direção**
 
-No mockup a marca é um G itálico dentro de um círculo `#1f4647` e a palavra GTX em Lora. É um wordmark de rascunho, desenhado para esta página, não um logo final.
+O mockup usa o símbolo e o wordmark que já existem, só com a cor trocada (`docs/logo-gtx.png`). Não é um logo novo.
 
 Quando for redraw:
 
@@ -295,9 +295,9 @@ Serve se a GTX quiser parecer estúdio. Pesa contra: fica fria para empresa bras
 
 ### O mockup
 
-Arquivo: `docs/mockup-home.html`. Estático, pt-BR, sem ligação com o Next. O formulário não envia — a linha embaixo do botão diz isso. Dá para abrir no navegador e percorrer âncoras, menu mobile e o estado de “pedido anotado”.
+Arquivo: `docs/mockup-home.html`. Estático, pt-BR, sem ligação com o Next. O formulário não envia.
 
-Seções, nesta ordem: hero e diagnóstico de exemplo, nomes de clientes, os dois serviços, método, case, encaixe (entra / não entra), sobre, perguntas, contato, rodapé com CNPJ.
+A home aprovada na direção, e em seguida enxugada: uma frase, três blocos (o quê, como, por quê), a fileira de logos reais, uma linha de prova da Sneaker Society e o diagnóstico. Sem menu longo, sem FAQ, sem monograma, sem painel de exemplo.
 
 ---
 
@@ -322,20 +322,16 @@ Fora do menu, no rodapé se ainda fizer sentido: `/carreiras`. `/exclusive` sai 
 
 ### Home
 
-1. Header com wordmark e um CTA.
-2. Hero com a frase de posição e dois botões (diagnóstico, ver serviços).
-3. Painel “o que entra agora / o que fica para depois”.
-4. Nomes de clientes, sem número inflado.
-5. As duas ofertas, com link para a página e para o contato já com o interesse marcado.
-6. Método em três passos.
-7. Um case com cifra e dois com nome.
-8. Entra / não entra.
-9. Sobre, com retrato quando houver arquivo.
-10. Quatro perguntas.
-11. Formulário.
-12. Rodapé legal.
+Como o mockup, curta de propósito. O detalhe mora nas páginas internas, não na primeira tela.
 
-CTAs da home, todos para `/contato` (no mockup, `#contato`): “Pedir diagnóstico”, “Conversar sobre IA”, “Conversar sobre mídia”, “Falar com o Guilherme”. WhatsApp fica como caminho alternativo, com texto pré-preenchido, não como único botão da página.
+1. Header com o logo recolorido e um CTA.
+2. Uma frase: o que a GTX faz.
+3. Três blocos: o quê, como, por quê.
+4. Logos reais dos clientes e uma linha de prova.
+5. Formulário de diagnóstico.
+6. Rodapé com CNPJ.
+
+CTA da home: “Pedir diagnóstico”. WhatsApp fica ao lado do formulário, não como único caminho.
 
 ### `/servicos/ia`
 
@@ -475,7 +471,7 @@ Cada fase só começa com o que a anterior deixou decidido. Nenhuma publica sozi
 ## 9. Decisões que travam a implementação
 
 1. A direção A (papel, Lora, Fustat, verde `#1f4647`) está aprovada, ou segue a direção B?
-2. O wordmark do mockup serve até o símbolo novo, ou o G de circuito precisa aparecer já na fase 1, em uma cor só?
+2. O logo recolorido (`docs/logo-gtx.png`) serve na fase 1? O circuito saiu do lima `#9ACD32` para `#1F4647`; o wordmark, do preto para `#2B180A`. O desenho é o arquivo original.
 3. Confirmar, com data e print, o relato Sneaker Society (R$ 19 mil → R$ 60 mil/mês, mesmo custo de anúncio). Sem isso, a home publica o case sem a cifra.
 4. Um parágrafo e uma foto do Guilherme, para a seção sobre. O mockup não inventa biografia.
 5. Horário real de resposta e se o WhatsApp comercial continua sendo +55 19 99012-2773.
