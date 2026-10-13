@@ -37,6 +37,8 @@ A página revela as seções no scroll. O resultado fica preso enquanto a histó
 
 Quem pede menos movimento vê o conteúdo parado, sem revelação, sem bloco preso e sem scroll suave.
 
+A faixa de clientes usa os logos reais, em creme e com opacidade baixa, sem cartão. A cor original aparece quando o ponteiro passa. A mesma marca não se repete no quadro. Quem pede menos movimento vê essas marcas em grade parada.
+
 ## Copy e dados
 
 Menos texto na tela. O que fica é dado já publicado.
