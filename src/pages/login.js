@@ -10,10 +10,11 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Área de Login | GTX Marketing e Vendas</title>
+        <title>Área do cliente | GTX</title>
+        <meta name="robots" content="noindex, nofollow" />
         <meta
           name="description"
-          content="Acesse o painel exclusivo da GTX Marketing e Vendas com segurança e suporte personalizado."
+          content="Acesse o painel da GTX."
         />
       </Head>
 
@@ -23,21 +24,20 @@ export default function LoginPage() {
             <div>
               <div className="flex items-center gap-4 mb-10">
                 <div className="relative w-20 h-20 rounded-3xl bg-white shadow-lg flex items-center justify-center">
-                  <Image src="/images/logo.png" alt="GTX" width={72} height={24} priority />
+                  <Image src="/images/logo-gtx.png" alt="GTX" width={120} height={33} priority />
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-green-600">GTX</p>
-                  <p className="text-2xl font-semibold text-gray-900">Marketing e Vendas</p>
+                  <p className="text-2xl font-semibold text-gray-900">Portal do cliente</p>
                 </div>
               </div>
 
-              <span className="text-green-600 font-semibold text-sm uppercase tracking-widest">Área Restrita</span>
+              <span className="text-green-600 font-semibold text-sm uppercase tracking-widest">Área restrita</span>
               <h1 className="text-4xl lg:text-5xl font-bold leading-tight mt-4 mb-6">
-                Bem-vindo ao Portal do Cliente GTX
+                Bem vindo ao portal do cliente GTX
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-xl">
-                Aqui você acompanha métricas, relatórios e o andamento das suas campanhas em um ambiente seguro,
-                com a mesma identidade visual da nossa landing page. Tudo criado para oferecer clareza, velocidade e confiança.
+                Aqui você acompanha relatórios e o andamento do trabalho, em um ambiente seguro.
               </p>
 
               <div className="space-y-6">
@@ -48,7 +48,7 @@ export default function LoginPage() {
                 }, {
                   icon: Lock,
                   title: 'Autenticação simples',
-                  description: 'Use seu e-mail corporativo e senha cadastrada para entrar sem complicações.'
+                  description: 'Use seu email corporativo e a senha cadastrada para entrar.'
                 }, {
                   icon: Headphones,
                   title: 'Suporte dedicado',

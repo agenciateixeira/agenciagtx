@@ -2,6 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /login
-Disallow: /exclusive
+Disallow: /obrigado
 
 Sitemap: https://agenciagtx.com.br/sitemap.xml
