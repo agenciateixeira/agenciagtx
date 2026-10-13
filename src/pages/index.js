@@ -156,7 +156,7 @@ const faq = [
   },
   {
     q: 'Quanto custa o plano?',
-    a: 'A partir de R$ 2.000 mensais. Entram o diagnóstico, o plano, a primeira automação, a expansão quando a primeira estiver em uso, e o acompanhamento do que ficou no ar.',
+    a: 'O investimento é definido depois do diagnóstico, conforme o escopo. Entram o diagnóstico, o plano, a primeira automação, a expansão quando a primeira estiver em uso, e o acompanhamento do que ficou no ar.',
   },
   {
     q: 'Para quem é a GTX?',
@@ -186,7 +186,7 @@ export default function Home() {
   return (
     <Layout
       title="IA na operação da sua empresa | GTX"
-      description="IA no trabalho repetido da empresa. Diagnóstico de 30 minutos, sem contrato. Plano a partir de R$ 2.000 mensais, para quem fatura de R$ 100 mil a R$ 1 milhão por mês."
+      description="IA no trabalho repetido da empresa. Diagnóstico de 30 minutos, sem contrato. O investimento é definido depois do diagnóstico, conforme o escopo."
       crumbs={[{ href: '/', label: 'Início' }]}
       showCrumbs={false}
       jsonLd={[faqSchema(faq)]}
@@ -284,13 +284,13 @@ export default function Home() {
         <div className="shell">
           <div className="section-intro">
             <p className="eyebrow">Plano</p>
-            <h2>A partir de R$ 2.000 mensais.</h2>
-            <p className="lede">O que está incluso na implantação de IA. O diagnóstico continua sem contrato.</p>
+            <h2>O investimento sai depois do diagnóstico.</h2>
+            <p className="lede">Ele acompanha o escopo de cada empresa. O diagnóstico continua sem contrato.</p>
           </div>
           <Steps items={included} label="O que está incluso" />
           <div className="stack">
             <article>
-              <h2>O que não entra nesse valor.</h2>
+              <h2>O que não entra.</h2>
               <p>Aplicativo do zero sem processo, modelo treinado do nada, promessa de cortar equipe e retorno prometido antes de ver a operação.</p>
             </article>
           </div>
@@ -337,7 +337,7 @@ export default function Home() {
             <h2>Peça o diagnóstico da operação.</h2>
             <p className="lede">30 minutos, sem contrato. Se não couber, a conversa acaba ali. Ou fale direto no <a href={whatsapp}>WhatsApp</a>.</p>
             <ul className="cta-points">
-              <li>Plano a partir de R$ 2.000 mensais.</li>
+              <li>O investimento é definido depois do diagnóstico, conforme o escopo.</li>
               <li>Para empresas que faturam de R$ 100 mil a R$ 1 milhão por mês.</li>
               <li>Resposta em horário comercial, no WhatsApp que você deixar.</li>
             </ul>

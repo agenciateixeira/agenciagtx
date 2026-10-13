@@ -76,14 +76,7 @@ export const siteGraph = {
       url: `${SITE}/produtos/implantacao-de-ia`,
       provider: { '@id': businessId },
       areaServed: 'Brasil',
-      description: 'Automação no fluxo que a empresa já tem. Pedido, cobrança e resumo do dia, no canal atual.',
-      offers: {
-        '@type': 'Offer',
-        price: '2000',
-        priceCurrency: 'BRL',
-        description: 'A partir de R$ 2.000 mensais. O diagnóstico dura 30 minutos e não exige contrato.',
-        url: `${SITE}/produtos/implantacao-de-ia`,
-      },
+      description: 'Automação no fluxo que a empresa já tem. Pedido, cobrança e resumo do dia, no canal atual. O investimento é definido depois do diagnóstico, conforme o escopo.',
     },
     {
       '@type': 'Service',

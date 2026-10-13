@@ -33,7 +33,7 @@ const deliverables = [
     n: '04',
     label: 'Acompanhamento',
     line: 'Todo mês.',
-    text: 'Ajuste do que ficou no ar, dentro do plano a partir de R$ 2.000 mensais.',
+    text: 'Ajuste do que ficou no ar, enquanto o plano estiver ativo.',
   },
 ];
 
@@ -133,7 +133,7 @@ const faq = [
   },
   {
     q: 'Quanto custa?',
-    a: 'A partir de R$ 2.000 mensais. Entram o diagnóstico, o plano, a primeira automação, a expansão quando a primeira estiver em uso, e o acompanhamento mensal.',
+    a: 'O investimento é definido depois do diagnóstico, conforme o escopo. Entram o diagnóstico, o plano, a primeira automação, a expansão quando a primeira estiver em uso, e o acompanhamento mensal.',
   },
   {
     q: 'Vocês trocam o sistema da empresa?',
@@ -157,7 +157,7 @@ export default function ImplantacaoIa() {
   return (
     <Layout
       title="IA no fluxo que a empresa já tem | GTX"
-      description="Automação onde hoje alguém copia, cobra ou lembra. Diagnóstico de 30 minutos. Plano a partir de R$ 2.000 mensais. Se não couber, a conversa acaba ali."
+      description="Automação onde hoje alguém copia, cobra ou lembra. Diagnóstico de 30 minutos. O investimento é definido depois do diagnóstico, conforme o escopo. Se não couber, a conversa acaba ali."
       crumbs={crumbs}
       jsonLd={[faqSchema(faq)]}
     >
@@ -166,7 +166,7 @@ export default function ImplantacaoIa() {
           <div className="shell">
             <p className="eyebrow">Produtos</p>
             <h1>IA no fluxo que a empresa já tem.</h1>
-            <p className="lede">Automação onde hoje alguém copia, cobra ou lembra. Plano a partir de R$ 2.000 mensais.</p>
+            <p className="lede">Automação onde hoje alguém copia, cobra ou lembra. O investimento é definido depois do diagnóstico, conforme o escopo.</p>
           </div>
         </section>
 
@@ -243,8 +243,8 @@ export default function ImplantacaoIa() {
           <div className="shell stack">
             <article>
               <p className="eyebrow">Valor</p>
-              <h2>A partir de R$ 2.000 mensais.</h2>
-              <p>Entram o diagnóstico, o plano curto, a primeira automação, a expansão quando a primeira estiver em uso, e o acompanhamento do que ficou no ar. O diagnóstico não vira contrato. Se não couber, a conversa acaba ali.</p>
+              <h2>Definido depois do diagnóstico.</h2>
+              <p>O investimento acompanha o escopo. Entram o diagnóstico, o plano curto, a primeira automação, a expansão quando a primeira estiver em uso, e o acompanhamento do que ficou no ar. O diagnóstico não vira contrato. Se não couber, a conversa acaba ali.</p>
             </article>
           </div>
         </section>
@@ -257,7 +257,7 @@ export default function ImplantacaoIa() {
           <div>
             <p className="eyebrow">Diagnóstico</p>
             <h2>Ver se a IA cabe na sua operação.</h2>
-            <p className="lede">30 minutos, sem contrato. Plano a partir de R$ 2.000 mensais. Se não couber, a conversa acaba aqui.</p>
+            <p className="lede">30 minutos, sem contrato. O investimento é definido depois do diagnóstico, conforme o escopo. Se não couber, a conversa acaba aqui.</p>
             <ul className="cta-points">
               <li>Para empresas de R$ 100 mil a R$ 1 milhão por mês.</li>
               <li>WhatsApp, CRM, ERP ou planilha.</li>
