@@ -32,8 +32,8 @@ export default function Cases() {
           <p className="lede">Um número só quando a conta foi conferida.</p>
         </div>
       </section>
-      <section className="page">
-        <div className="shell stack">
+      <section className="section">
+        <div className="shell case-list">
           {cases.map((item) => (
             <article key={item.title}>
               <h2><Link href={item.href}>{item.title}</Link></h2>

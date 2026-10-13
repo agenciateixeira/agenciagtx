@@ -18,7 +18,7 @@ export default function TrafegoPago() {
         </section>
         <section>
           <div className="shell">
-            <ol className="three">
+            <ol className="cards">
               <li>
                 <span>Meta</span>
                 <p>Quem já conhece a marca e quem ainda não comprou.</p>

@@ -21,15 +21,13 @@ export default function Home() {
       <section className="hero">
         <div className="shell">
           <p className="eyebrow">Agência GTX</p>
-          <div className="hero-row">
-            <h1>IA na operação da sua empresa.</h1>
-            <a className="btn" href="#contato">Pedir diagnóstico</a>
-          </div>
+          <h1>IA na operação da sua empresa.</h1>
           <p className="lede">No trabalho que hoje alguém copia, cobra ou lembra.</p>
+          <p className="hero-actions"><a className="btn" href="#contato">Pedir diagnóstico</a></p>
         </div>
       </section>
 
-      <section aria-label="O que fazemos, como e por quê">
+      <section className="section" aria-label="O que fazemos, como e por quê">
         <div className="shell">
           <ol className="three">
             <li>
@@ -48,11 +46,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flow-section" aria-label="IA no fluxo que a empresa já tem">
+      <section className="section" aria-label="IA no fluxo que a empresa já tem">
         <div className="shell">
-          <p className="eyebrow">O fluxo</p>
-          <h2>IA no fluxo que a empresa já tem.</h2>
-          <p className="lede">Pedido, cobrança e resumo do dia, no canal que o time já usa.</p>
+          <div className="section-intro">
+            <p className="eyebrow">O fluxo</p>
+            <h2>IA no fluxo que a empresa já tem.</h2>
+            <p className="lede">Pedido, cobrança e resumo do dia, no canal que o time já usa.</p>
+          </div>
           <FlowMap />
         </div>
       </section>
