@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { trackGaEvent } from '../../lib/ga4';
 
 const defaultOptions = [
   { value: 'Implantação de IA', label: 'Implantação de IA' },
@@ -74,9 +75,7 @@ export default function LeadForm({
       if (typeof window !== 'undefined' && window.fbq) {
         window.fbq('track', 'Lead', { content_name: page });
       }
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'generate_lead', { event_label: page });
-      }
+      trackGaEvent('generate_lead', { event_label: page });
       router.push('/obrigado');
     } catch (err) {
       setError('Não foi possível enviar. Tente de novo ou chame no WhatsApp.');
