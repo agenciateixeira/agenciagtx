@@ -3,6 +3,14 @@ import Link from 'next/link';
 import { solutions } from '../../lib/solutions';
 import { SolutionPreview } from './SolutionArt';
 
+function Chevron() {
+  return (
+    <svg className="chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -22,10 +30,10 @@ export default function Header() {
   };
 
   return (
-    <header className={`nav${scrolled ? ' scrolled' : ''}`}>
+    <header className={`nav${scrolled ? ' scrolled' : ''}${open ? ' is-open' : ''}`}>
       <div className="nav-inner">
         <Link href="/" className="brand" aria-label="GTX, início" onClick={close}>
-          <img src="/images/logo-gtx.png" alt="GTX" width="472" height="130" />
+          <span className="brand-mark" />
         </Link>
         <button
           className="nav-toggle"
@@ -45,9 +53,15 @@ export default function Header() {
               onClick={() => setProductsOpen((value) => !value)}
             >
               Soluções
+              <Chevron />
             </button>
             <div className="mega-panel" id="menu-solucoes">
               <div className="mega-list">
+                <span
+                  className="services-rail"
+                  aria-hidden="true"
+                  style={{ transform: `translateY(${active * 100}%)` }}
+                />
                 {solutions.map((item, index) => (
                   <Link
                     key={item.href}
@@ -57,7 +71,7 @@ export default function Header() {
                     onFocus={() => setActive(index)}
                     onClick={close}
                   >
-                    {item.title}
+                    <span>{item.title}</span>
                     <small>{item.menu}</small>
                   </Link>
                 ))}
@@ -67,10 +81,13 @@ export default function Header() {
               </div>
             </div>
           </div>
-          <Link href="/cases" onClick={close}>Cases</Link>
-          <Link href="/sobre" onClick={close}>Sobre</Link>
-          <Link href="/contato" onClick={close}>Contato</Link>
-          <Link className="btn nav-cta" href="/contato" onClick={close}>Pedir diagnóstico</Link>
+          <Link className="nav-link" href="/cases" onClick={close}>Cases</Link>
+          <Link className="nav-link" href="/sobre" onClick={close}>Sobre</Link>
+          <Link className="nav-link" href="/contato" onClick={close}>Contato</Link>
+          <div className="nav-actions">
+            <Link className="btn ghost nav-enter" href="/login" onClick={close}>Entrar</Link>
+            <Link className="btn nav-cta" href="/contato" onClick={close}>Pedir diagnóstico</Link>
+          </div>
         </nav>
       </div>
     </header>

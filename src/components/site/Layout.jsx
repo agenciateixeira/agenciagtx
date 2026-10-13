@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from './Header';
 import Footer from './Footer';
@@ -16,6 +17,32 @@ export default function Layout({
 }) {
   const router = useRouter();
   const canonical = canonicalUrl(router.asPath.split('?')[0]);
+
+  useEffect(() => {
+    const root = document.getElementById('conteudo');
+    if (!root) return undefined;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nodes = [...root.querySelectorAll('.section, .proof, .contact')];
+    if (reduce) {
+      nodes.forEach((node) => node.classList.add('is-in'));
+      return undefined;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    nodes.forEach((node) => {
+      const rect = node.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92) node.classList.add('is-in');
+      node.classList.add('reveal');
+      io.observe(node);
+    });
+    return () => io.disconnect();
+  }, [router.asPath]);
   const schema = [
     ...jsonLd,
     ...(crumbs.length ? [breadcrumbSchema(crumbs)] : []),

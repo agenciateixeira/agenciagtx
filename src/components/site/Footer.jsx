@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="shell">
         <div className="foot">
           <div className="foot-brand">
-            <img src="/images/logo-gtx.png" alt="GTX" width="472" height="130" />
+            <span className="brand-mark" role="img" aria-label="GTX" />
             <p>contato@agenciagtx.com.br<br />+55 19 99012 2773</p>
           </div>
           <nav aria-label="Rodapé">

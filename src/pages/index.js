@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Layout from '../components/site/Layout';
 import LeadForm from '../components/site/LeadForm';
-import FlowMap from '../components/site/FlowMap';
+import { OutcomePin } from '../components/site/FlowMap';
 import Faq from '../components/site/Faq';
-import Steps from '../components/site/Steps';
+import Picker from '../components/site/Picker';
 import Solutions from '../components/site/Solutions';
 import { faqSchema } from '../lib/seo';
 
@@ -216,31 +216,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" aria-label="O que fazemos, como e por quê">
-        <div className="shell">
-          <ol className="editorial plain">
-            <li>
-              <div>
-                <p className="label">O quê</p>
-                <p className="line">IAs dentro da empresa, nos processos que já existem. Pedido, cobrança, resumo do dia.</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p className="label">Como</p>
-                <p className="line">Diagnóstico de 30 minutos, um plano curto e a primeira automação no canal atual.</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p className="label">Por quê</p>
-                <p className="line">O time para de copiar e lembrar. Quem decide continua decidindo.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
       <Solutions />
 
       <section className="section" id="problemas" aria-label="Problemas que resolvemos">
@@ -248,20 +223,18 @@ export default function Home() {
           <div className="section-intro">
             <p className="eyebrow">Problemas</p>
             <h2>Onde a operação pesa hoje.</h2>
-            <p className="lede">Quatro áreas. O exemplo é o trabalho que alguém ainda copia, cobra ou lembra.</p>
           </div>
-          <Steps items={problems} label="Problemas por área" />
+          <Picker items={problems} label="Problemas" />
         </div>
       </section>
 
-      <section className="section" aria-label="Resultado nos processos que a empresa já tem">
+      <section className="section story-section" aria-label="Resultado nos processos que a empresa já tem">
         <div className="shell">
           <div className="section-intro">
             <p className="eyebrow">Resultado</p>
             <h2>O processo que a empresa já tem, sem o trabalho repetido.</h2>
-            <p className="lede">A GTX implementa IAs dentro da empresa. O pedido entra, a cobrança sai e o resumo chega para quem decide.</p>
           </div>
-          <FlowMap />
+          <OutcomePin />
           <p className="more"><Link className="text-link" href="/produtos/implantacao-de-ia">Ver implantação de IA</Link></p>
         </div>
       </section>
@@ -271,9 +244,8 @@ export default function Home() {
           <div className="section-intro">
             <p className="eyebrow">Como funciona</p>
             <h2>Do diagnóstico ao acompanhamento.</h2>
-            <p className="lede">Cada etapa tem uma entrega. O único prazo fixo, antes de ver a operação, é o diagnóstico.</p>
           </div>
-          <Steps items={steps} label="Etapas" numbered={false} />
+          <Picker items={steps} label="Etapas" />
         </div>
       </section>
 
@@ -282,15 +254,9 @@ export default function Home() {
           <div className="section-intro">
             <p className="eyebrow">Plano</p>
             <h2>O investimento sai depois do diagnóstico.</h2>
-            <p className="lede">Ele acompanha o escopo de cada empresa. O diagnóstico continua sem contrato.</p>
           </div>
-          <Steps items={included} label="O que está incluso" numbered={false} />
-          <div className="stack">
-            <article>
-              <h2>O que não entra.</h2>
-              <p>Aplicativo do zero sem processo, modelo treinado do nada, promessa de cortar equipe e retorno prometido antes de ver a operação.</p>
-            </article>
-          </div>
+          <Picker items={included} label="Plano" />
+          <p className="note">Não entra aplicativo do zero, modelo treinado do nada, promessa de cortar equipe nem retorno prometido antes de ver a operação.</p>
         </div>
       </section>
 
@@ -299,9 +265,8 @@ export default function Home() {
           <div className="section-intro">
             <p className="eyebrow">Ferramentas</p>
             <h2>IAs nos processos que a empresa já tem.</h2>
-            <p className="lede">WhatsApp, CRM, ERP e planilhas. A GTX implementa as IAs nesses processos. Não trocamos o sistema por um aplicativo novo.</p>
           </div>
-          <Steps items={tools} label="Integrações" numbered={false} />
+          <Picker items={tools} label="Ferramentas" />
         </div>
       </section>
 
