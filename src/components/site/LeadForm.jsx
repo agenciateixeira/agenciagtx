@@ -4,8 +4,9 @@ import { trackGaEvent } from '../../lib/ga4';
 
 const defaultOptions = [
   { value: 'Implantação de IA', label: 'Implantação de IA' },
+  { value: 'Gestão de redes sociais', label: 'Gestão de redes sociais' },
   { value: 'Gestão de tráfego pago', label: 'Gestão de tráfego pago' },
-  { value: 'Os dois', label: 'Os dois' },
+  { value: 'Mais de um', label: 'Mais de um' },
 ];
 
 function readAttribution() {
@@ -126,7 +127,7 @@ export default function LeadForm({
           <input name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
-      <button className="btn light" type="submit" disabled={sending}>
+      <button className="btn" type="submit" disabled={sending}>
         {sending ? 'Enviando' : submitLabel}
       </button>
       {error ? <p className="error" role="alert">{error}</p> : null}

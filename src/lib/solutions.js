@@ -4,8 +4,16 @@ export const solutions = [
     href: '/produtos/implantacao-de-ia',
     title: 'Implantação de IA',
     menu: 'Nos processos que a empresa já tem.',
-    text: 'IAs nos processos que a empresa já tem. O pedido entra, a cobrança sai e o resumo chega.',
+    text: 'IAs nos processos que a empresa já tem. Não é uma ferramenta para a empresa montar automação sozinha.',
     link: 'Ver implantação de IA',
+  },
+  {
+    id: 'redes',
+    href: '/produtos/gestao-de-redes-sociais',
+    title: 'Gestão de redes sociais',
+    menu: 'A presença que a empresa já tem.',
+    text: 'A gestão das redes que a empresa já usa. Sem pacote genérico e sem número de alcance publicado.',
+    link: 'Ver gestão de redes',
   },
   {
     id: 'trafego',

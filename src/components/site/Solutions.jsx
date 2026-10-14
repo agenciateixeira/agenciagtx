@@ -2,9 +2,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { solutions } from '../../lib/solutions';
 import ImplantFlow from './ImplantFlow';
-import { AdsArt, MatrixArt } from './SolutionArt';
+import { AdsArt, MatrixArt, SocialArt } from './SolutionArt';
 
 const arts = {
+  redes: SocialArt,
   trafego: AdsArt,
   diagnostico: MatrixArt,
 };
@@ -139,6 +140,7 @@ export default function Solutions() {
           <div className="section-intro">
             <p className="eyebrow">Soluções</p>
             <h2 id="solucoes-titulo">Nossas soluções.</h2>
+            <p className="lede">IAs dentro da empresa, gestão das redes sociais e tráfego pago.</p>
           </div>
 
           <div className="sol-board">

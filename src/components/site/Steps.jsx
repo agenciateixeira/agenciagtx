@@ -1,4 +1,4 @@
-export default function Steps({ items, label, numbered = true }) {
+export default function Steps({ items, label, numbered = false }) {
   return (
     <ol className={numbered ? 'editorial' : 'editorial plain'} aria-label={label}>
       {items.map((item) => (

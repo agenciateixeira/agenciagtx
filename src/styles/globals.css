@@ -16,8 +16,9 @@ body {
   font-family: 'Fustat', 'Avenir Next', 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #2d2621;
-  color: #ece5d8;
+  background: #ffffff;
+  color: #3f332c;
+  color-scheme: light;
 }
 
 /* Scrollbar customizado */
@@ -26,16 +27,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #2d2621;
+  background: #ffffff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4a4039;
+  background: #8a6244;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4a574;
+  background: #6a4b34;
 }
 
 /* Animações personalizadas */

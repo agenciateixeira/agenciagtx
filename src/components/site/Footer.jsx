@@ -11,6 +11,7 @@ export default function Footer() {
           </div>
           <nav aria-label="Rodapé">
             <Link href="/produtos/implantacao-de-ia">Implantação de IA</Link>
+            <Link href="/produtos/gestao-de-redes-sociais">Gestão de redes sociais</Link>
             <Link href="/produtos/gestao-de-trafego-pago">Gestão de tráfego pago</Link>
             <Link href="/cases">Cases</Link>
             <Link href="/sobre">Sobre</Link>

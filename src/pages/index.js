@@ -140,7 +140,11 @@ const tools = [
 const faq = [
   {
     q: 'O que a GTX implementa?',
-    a: 'IAs dentro da empresa, nos processos que já existem. Pedido, cobrança e resumo do dia, no canal que o time já usa.',
+    a: 'IAs dentro da empresa, nos processos que já existem. Pedido, cobrança e resumo do dia, no canal que o time já usa. Não é uma ferramenta para montar automação sozinha.',
+  },
+  {
+    q: 'A GTX também cuida de redes e de anúncio?',
+    a: 'Sim. Além da implantação de IA, a GTX faz a gestão das redes sociais da empresa e a gestão de tráfego pago no Meta, no Google e no LinkedIn.',
   },
   {
     q: 'Quanto tempo dura o diagnóstico?',
@@ -206,11 +210,14 @@ export default function Home() {
         </div>
         <div className="marquee">
           <svg className="logo-filters" aria-hidden="true" width="0" height="0">
+            <filter id="logo-brown" colorInterpolationFilters="sRGB" x="0" y="0" width="100%" height="100%">
+              <feColorMatrix type="matrix" values="0 0 0 0 0.2275  0 0 0 0 0.1686  0 0 0 0 0.1333  0 0 0 1 0" />
+            </filter>
             <filter id="logo-knockout" colorInterpolationFilters="sRGB" x="0" y="0" width="100%" height="100%">
               <feColorMatrix in="SourceGraphic" type="matrix" result="dark" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.2126 -0.7152 -0.0722 0 1" />
               <feComposite in="dark" in2="SourceGraphic" operator="in" result="masked" />
-              <feFlood floodColor="#ece5d8" result="cream" />
-              <feComposite in="cream" in2="masked" operator="in" />
+              <feFlood floodColor="#3a2b22" result="ink" />
+              <feComposite in="ink" in2="masked" operator="in" />
             </filter>
           </svg>
           <div className="marquee-track">
@@ -267,7 +274,7 @@ export default function Home() {
             <h2>O investimento sai depois do diagnóstico.</h2>
           </div>
           <Picker items={included} label="Plano" />
-          <p className="note">Não entra aplicativo do zero, modelo treinado do nada, promessa de cortar equipe nem retorno prometido antes de ver a operação.</p>
+          <p className="note">Não entra aplicativo do zero, ferramenta para montar automação sozinha, modelo treinado do nada, promessa de cortar equipe nem retorno prometido antes de ver a operação.</p>
         </div>
       </section>
 

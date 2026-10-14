@@ -35,9 +35,8 @@ export default function Cases() {
       </section>
       <section className="section">
         <div className="shell case-list">
-          {cases.map((item, index) => (
+          {cases.map((item) => (
             <article key={item.title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
               <div>
                 <h2><Link href={item.href}>{item.title}</Link></h2>
                 <p>{item.text}</p>

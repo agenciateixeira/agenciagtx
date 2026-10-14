@@ -70,6 +70,24 @@ export function AdsArt() {
   );
 }
 
+export function SocialArt() {
+  return (
+    <div className="sol-ads" aria-hidden="true">
+      <div className="sol-ads-bar">
+        <span>Redes da empresa</span>
+        <em>Presença</em>
+      </div>
+      <p className="sol-ads-title">No ritmo da operação</p>
+      <ul>
+        <li>O que publicar</li>
+        <li>O que responder</li>
+        <li>O que parar</li>
+      </ul>
+      <p className="sol-ads-foot">Sem pacote genérico e sem cifra de alcance.</p>
+    </div>
+  );
+}
+
 export function MatrixArt() {
   return (
     <div className="sol-impact" aria-hidden="true">
@@ -85,6 +103,7 @@ export function MatrixArt() {
 
 const arts = {
   ia: InboxArt,
+  redes: SocialArt,
   trafego: AdsArt,
   diagnostico: MatrixArt,
 };
