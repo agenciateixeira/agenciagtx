@@ -158,7 +158,8 @@ export default function TrafegoPago() {
               </article>
               <article>
                 <h2>O que não está incluso.</h2>
-                <p>Loja virtual, marketplace e pacote de posts sem anúncio.</p>
+                <p>Loja virtual, marketplace e pacote de posts sem anúncio. A gestão das redes sociais é outro trabalho.</p>
+                <p className="more"><Link className="text-link" href="/produtos/gestao-de-redes-sociais">Ver gestão de redes sociais</Link></p>
               </article>
             </div>
           </div>

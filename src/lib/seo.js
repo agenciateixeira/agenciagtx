@@ -44,7 +44,7 @@ export const siteGraph = {
       url: `${SITE}/`,
       name: 'GTX',
       inLanguage: 'pt-BR',
-      description: 'A GTX implementa IAs dentro da empresa, nos processos que já existem.',
+      description: 'A GTX implementa IAs dentro da empresa, nos processos que já existem, e faz a gestão das redes sociais e do tráfego pago.',
       publisher: { '@id': businessId },
     },
     {
@@ -58,7 +58,7 @@ export const siteGraph = {
       telephone: '+5519990122773',
       email: 'contato@agenciagtx.com.br',
       taxID: '41.768.146/0001-69',
-      description: 'Implementação de IAs na operação da empresa e gestão de tráfego pago, com atendimento remoto no Brasil desde 2017.',
+      description: 'Implementação de IAs na operação da empresa, gestão de redes sociais e gestão de tráfego pago, com atendimento remoto no Brasil desde 2017.',
       areaServed: {
         '@type': 'Country',
         name: 'Brasil',
@@ -77,6 +77,16 @@ export const siteGraph = {
       provider: { '@id': businessId },
       areaServed: 'Brasil',
       description: 'IAs nos processos que a empresa já tem. Pedido, cobrança e resumo do dia, no canal atual. O investimento é definido depois do diagnóstico, conforme o escopo.',
+    },
+    {
+      '@type': 'Service',
+      '@id': `${SITE}/produtos/gestao-de-redes-sociais#service`,
+      name: 'Gestão de redes sociais',
+      serviceType: 'Gestão da presença da empresa nas redes que ela já usa',
+      url: `${SITE}/produtos/gestao-de-redes-sociais`,
+      provider: { '@id': businessId },
+      areaServed: 'Brasil',
+      description: 'Gestão das redes que a empresa já usa, no ritmo da operação. Sem número de alcance publicado. O escopo sai da conversa.',
     },
     {
       '@type': 'Service',

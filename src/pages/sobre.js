@@ -110,7 +110,7 @@ export default function Sobre() {
               </article>
               <article>
                 <h2>O que a empresa faz hoje.</h2>
-                <p>Implementa IAs nos processos que a empresa já tem. Pedido, cobrança e resumo do dia. Em outro produto, faz a gestão de tráfego pago no Meta, no Google e no LinkedIn.</p>
+                <p>Implementa IAs nos processos que a empresa já tem. Pedido, cobrança e resumo do dia. Também faz a gestão das redes sociais da empresa e a gestão de tráfego pago no Meta, no Google e no LinkedIn.</p>
               </article>
               <article>
                 <h2>Quem fala com você.</h2>
@@ -124,7 +124,7 @@ export default function Sobre() {
           <div className="shell">
             <div className="section-intro">
               <p className="eyebrow">Método</p>
-              <h2>Três passos, e um deles é dizer não.</h2>
+              <h2>O método inclui dizer não.</h2>
               <p className="lede">O não é uma etapa. Não é um imprevisto no fim da conversa.</p>
             </div>
             <Steps items={method} label="Método" />
@@ -159,6 +159,7 @@ export default function Sobre() {
             <p className="eyebrow">Produtos</p>
             <div className="quiet-links">
               <Link href="/produtos/implantacao-de-ia">Implantação de IA</Link>
+              <Link href="/produtos/gestao-de-redes-sociais">Gestão de redes sociais</Link>
               <Link href="/produtos/gestao-de-trafego-pago">Gestão de tráfego pago</Link>
             </div>
           </div>

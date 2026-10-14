@@ -140,6 +140,10 @@ const faq = [
     a: 'Não. A GTX implementa IAs no WhatsApp, no CRM, no ERP ou na planilha que a operação já usa.',
   },
   {
+    q: 'Vocês entregam uma ferramenta de automação?',
+    a: 'Não. O time não recebe um aplicativo para montar fluxo do zero. A implantação entra no processo que a empresa já tem.',
+  },
+  {
     q: 'Vocês treinam um modelo do zero?',
     a: 'Não. O trabalho é a automação no fluxo atual, não um modelo novo.',
   },
@@ -166,7 +170,7 @@ export default function ImplantacaoIa() {
           <div className="shell">
             <p className="eyebrow">Produtos</p>
             <h1>IAs dentro da empresa.</h1>
-            <p className="lede">Nos processos que já existem, onde hoje alguém copia, cobra ou lembra. O investimento é definido depois do diagnóstico, conforme o escopo.</p>
+            <p className="lede">Nos processos que já existem, onde hoje alguém copia, cobra ou lembra. Não é uma ferramenta para montar automação sozinha. O investimento é definido depois do diagnóstico, conforme o escopo.</p>
           </div>
         </section>
 
@@ -195,7 +199,7 @@ export default function ImplantacaoIa() {
               </article>
               <article>
                 <h2>O que não entra.</h2>
-                <p>Aplicativo do zero, modelo treinado do nada e promessa de cortar equipe. Retorno prometido antes de ver a operação também fica de fora.</p>
+                <p>Aplicativo do zero, ferramenta para montar automação sozinha, modelo treinado do nada e promessa de cortar equipe. Retorno prometido antes de ver a operação também fica de fora.</p>
               </article>
             </div>
           </div>

@@ -3,6 +3,7 @@ const BASE_URL = 'https://www.agenciagtx.com.br';
 const pages = [
   { url: '/', priority: '1.0', changefreq: 'weekly' },
   { url: '/produtos/implantacao-de-ia', priority: '0.9', changefreq: 'monthly' },
+  { url: '/produtos/gestao-de-redes-sociais', priority: '0.8', changefreq: 'monthly' },
   { url: '/produtos/gestao-de-trafego-pago', priority: '0.8', changefreq: 'monthly' },
   { url: '/cases', priority: '0.7', changefreq: 'monthly' },
   { url: '/cases/sneaker-society', priority: '0.6', changefreq: 'monthly' },

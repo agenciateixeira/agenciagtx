@@ -10,7 +10,7 @@ export default function handler() {
           display: 'flex',
           width: '100%',
           height: '100%',
-          background: '#f6f0e9',
+          background: '#ffffff',
           alignItems: 'center',
           justifyContent: 'center',
           fontFamily: 'system-ui, sans-serif',
@@ -25,7 +25,7 @@ export default function handler() {
             width: 400,
             height: 400,
             borderRadius: '50%',
-            background: 'rgba(31, 70, 71, 0.08)',
+            background: 'rgba(138, 98, 68, 0.16)',
           }}
         />
         <div
@@ -36,7 +36,7 @@ export default function handler() {
             width: 300,
             height: 300,
             borderRadius: '50%',
-            background: 'rgba(31, 70, 71, 0.05)',
+            background: 'rgba(212, 165, 116, 0.28)',
           }}
         />
 
@@ -53,7 +53,7 @@ export default function handler() {
         >
           {/* Logo text */}
           <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: 24 }}>
-            <span style={{ fontSize: 72, fontWeight: 800, color: '#1f4647', letterSpacing: -2 }}>
+            <span style={{ fontSize: 72, fontWeight: 800, color: '#3a2b22', letterSpacing: -2 }}>
               GTX
             </span>
           </div>
@@ -62,7 +62,7 @@ export default function handler() {
           <p
             style={{
               fontSize: 28,
-              color: '#545e46',
+              color: '#6a4b34',
               fontWeight: 600,
               marginBottom: 16,
               letterSpacing: 2,
@@ -77,7 +77,7 @@ export default function handler() {
             style={{
               fontSize: 48,
               fontWeight: 700,
-              color: '#2b180a',
+              color: '#241c17',
               lineHeight: 1.2,
               marginBottom: 24,
               maxWidth: 800,
@@ -87,7 +87,7 @@ export default function handler() {
           </h1>
 
           {/* Description */}
-          <p style={{ fontSize: 22, color: '#999999', maxWidth: 700 }}>
+          <p style={{ fontSize: 22, color: '#5e4d42', maxWidth: 700 }}>
             No trabalho que hoje alguém copia, cobra ou lembra
           </p>
 
@@ -98,8 +98,8 @@ export default function handler() {
               alignItems: 'center',
               gap: 8,
               marginTop: 32,
-              background: '#1f4647',
-              color: '#f6f0e9',
+              background: '#3a2b22',
+              color: '#f6f0e8',
               padding: '12px 28px',
               borderRadius: 100,
               fontWeight: 700,
