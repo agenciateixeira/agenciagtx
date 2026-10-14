@@ -690,8 +690,10 @@ footer.foot-wrap {
   border: 1px solid var(--line);
 }
 .sol-hero-stage::after,
-.sol-card:has(.sol-chat) .sol-stage::after { display: none; }
-.sol-card:has(.sol-chat) .sol-stage {
+.sol-card-stage::after,
+.mega-preview.sol-stage::after { display: none; }
+.sol-card-stage,
+.mega-preview.sol-stage {
   background: var(--paper-2);
 }
 .sol-card-stage {
