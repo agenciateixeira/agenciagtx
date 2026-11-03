@@ -2,8 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Header from './Header';
-import Footer from './Footer';
+import { VtHeader, VtFooter } from '../vt/Chrome';
 import { breadcrumbSchema, canonicalUrl } from '../../lib/seo';
 
 export default function Layout({
@@ -14,13 +13,14 @@ export default function Layout({
   crumbs = [],
   showCrumbs = true,
   jsonLd = [],
+  variant = 'site',
 }) {
   const router = useRouter();
   const canonical = canonicalUrl(router.asPath.split('?')[0]);
 
   useEffect(() => {
     const root = document.getElementById('conteudo');
-    if (!root) return undefined;
+    if (!root || variant === 'vt') return undefined;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const nodes = [...root.querySelectorAll('.section, .proof, .contact')];
     if (reduce) {
@@ -42,14 +42,14 @@ export default function Layout({
       io.observe(node);
     });
     return () => io.disconnect();
-  }, [router.asPath]);
+  }, [router.asPath, variant]);
   const schema = [
     ...jsonLd,
     ...(crumbs.length ? [breadcrumbSchema(crumbs)] : []),
   ];
 
   return (
-    <div className="site">
+    <>
       <Head>
         <title>{title}</title>
         {description ? <meta name="description" content={description} /> : null}
@@ -66,28 +66,38 @@ export default function Layout({
           />
         ))}
       </Head>
-      <a className="skip" href="#conteudo">Pular para o conteúdo</a>
-      <Header />
-      <main id="conteudo">
-        {showCrumbs && crumbs.length > 1 ? (
-          <nav className="crumbs" aria-label="Trilha">
-            <div className="shell">
-              <ol>
-                {crumbs.map((crumb, index) => {
-                  const last = index === crumbs.length - 1;
-                  return (
-                    <li key={crumb.href}>
-                      {last ? crumb.label : <Link href={crumb.href}>{crumb.label}</Link>}
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
-          </nav>
-        ) : null}
-        {children}
-      </main>
-      <Footer />
-    </div>
+      <div className="vt">
+        <a className="vt-skip" href="#conteudo">Pular para o conteúdo</a>
+        <VtHeader />
+      </div>
+      {variant === 'vt' ? (
+        <main id="conteudo" className="vt">{children}</main>
+      ) : (
+        <div className="site">
+          <main id="conteudo">
+            {showCrumbs && crumbs.length > 1 ? (
+              <nav className="crumbs" aria-label="Trilha">
+                <div className="shell">
+                  <ol>
+                    {crumbs.map((crumb, index) => {
+                      const last = index === crumbs.length - 1;
+                      return (
+                        <li key={crumb.href}>
+                          {last ? crumb.label : <Link href={crumb.href}>{crumb.label}</Link>}
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </div>
+              </nav>
+            ) : null}
+            {children}
+          </main>
+        </div>
+      )}
+      <div className="vt">
+        <VtFooter />
+      </div>
+    </>
   );
 }

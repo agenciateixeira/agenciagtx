@@ -9,7 +9,7 @@ const defaultOptions = [
   { value: 'Mais de um', label: 'Mais de um' },
 ];
 
-function readAttribution() {
+export function readAttribution() {
   const params = new URLSearchParams(window.location.search);
   const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'];
   let stored = {};
