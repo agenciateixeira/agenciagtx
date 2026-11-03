@@ -1,24 +1,24 @@
 .site {
-  --paper: #ffffff;
-  --paper-2: #ffffff;
-  --ink: #241c17;
-  --ink-soft: #3f332c;
-  --muted: #5e4d42;
-  --line: #e4d3c2;
-  --olive: #6a4b34;
-  --deep: #3a2b22;
-  --deep-2: #5c4334;
+  --paper: #f6f1e7;
+  --paper-2: #f6f1e7;
+  --ink: #2b180a;
+  --ink-soft: #4a3626;
+  --muted: #5b4a3c;
+  --line: rgba(43, 24, 10, 0.16);
+  --olive: #1f4647;
+  --deep: #1f4647;
+  --deep-2: #122c2d;
   --sand: #8a6244;
-  --cream: #f6f0e8;
-  --avocado: #f3eadf;
-  --wash: #f6f0e8;
-  --popover: #f6f0e8;
-  --accent: #efe4d6;
+  --cream: #f6f1e7;
+  --avocado: #ede5d6;
+  --wash: #ede5d6;
+  --popover: #ede5d6;
+  --accent: #ede5d6;
   --max: 1120px;
   --nav: 4rem;
-  --serif: "Lora", "Iowan Old Style", Palatino, Georgia, serif;
-  --sans: "Fustat", "Avenir Next", "Segoe UI", sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --serif: var(--font-lora), "Lora", "Iowan Old Style", Palatino, Georgia, serif;
+  --sans: var(--font-fustat), "Fustat", "Avenir Next", "Segoe UI", sans-serif;
+  --mono: var(--font-plex), "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --pad: clamp(1.25rem, 4vw, 2.25rem);
   color: var(--ink-soft);
   font-family: var(--sans);
@@ -31,7 +31,8 @@
 
 .site * { box-sizing: border-box; }
 .site a { color: inherit; text-decoration: none; }
-.site button, .site input, .site select, .site textarea { font: inherit; color: inherit; }
+.site button, .site input, .site select, .site textarea { font: inherit; }
+.site input, .site select, .site textarea, .site button:not(.btn) { color: inherit; }
 .site :focus-visible { outline: 2px solid var(--deep); outline-offset: 3px; }
 .site ::selection { background: #e7d3b8; color: var(--ink); }
 .site h1, .site h2, .site h3 {

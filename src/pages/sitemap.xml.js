@@ -6,6 +6,7 @@ const pages = [
   { url: '/produtos/gestao-de-redes-sociais', priority: '0.8', changefreq: 'monthly' },
   { url: '/produtos/gestao-de-trafego-pago', priority: '0.8', changefreq: 'monthly' },
   { url: '/cases', priority: '0.7', changefreq: 'monthly' },
+  { url: '/cases/fine-tune-on-minis', priority: '0.7', changefreq: 'monthly' },
   { url: '/cases/sneaker-society', priority: '0.6', changefreq: 'monthly' },
   { url: '/sobre', priority: '0.6', changefreq: 'monthly' },
   { url: '/contato', priority: '0.8', changefreq: 'monthly' },

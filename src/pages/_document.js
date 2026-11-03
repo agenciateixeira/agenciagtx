@@ -10,10 +10,6 @@ export default function Document() {
         {/* Favicon */}
         <link rel="icon" href="/images/favicon.png" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet" />
-
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://www.agenciagtx.com.br/api/og" />
         <meta property="og:image:width" content="1200" />
@@ -36,10 +32,9 @@ export default function Document() {
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
               if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              n.queue=[];}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
+              /* fbevents.js e gtag.js entram depois, por src/lib/loadTrackers.js; as chamadas abaixo ficam na fila */
               fbq('init', '611003988383118');
               fbq('track', 'PageView');
             `,
@@ -55,10 +50,6 @@ export default function Document() {
           />
         </noscript>
         
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="beforeInteractive"
-        />
         <Script id="ga4" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];

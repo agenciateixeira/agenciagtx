@@ -16,8 +16,8 @@ body {
   font-family: 'Fustat', 'Avenir Next', 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #ffffff;
-  color: #3f332c;
+  background: #f6f1e7;
+  color: #2b180a;
   color-scheme: light;
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: #f6f1e7;
 }
 
 ::-webkit-scrollbar-thumb {
