@@ -3,7 +3,7 @@
   --paper:#F6F1E7; --paper2:#EDE5D6; --sand:#DCCDB3;
   --ink:#2B180A; --ink2:#5b4a3c; --petro:#1F4647; --petro-d:#122c2d; --petro-l:#3b7b7c; --brass:#D2A24C;
   --line:rgba(43,24,10,.16);
-  --serif:var(--font-lora),'Lora',Georgia,serif; --sans:var(--font-fustat),'Fustat','Avenir Next',sans-serif; --mono:var(--font-plex),'IBM Plex Mono',monospace;
+  --serif:var(--font-lora),'Lora',Georgia,serif; --sans:var(--font-fustat),'Fustat','Avenir Next',sans-serif; --mono:var(--font-plex),'IBM Plex Mono',monospace; --cond:var(--font-barlow),'Barlow Condensed','Arial Narrow',sans-serif;
   background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip;
 }
 .vt *{box-sizing:border-box}
@@ -406,4 +406,72 @@
 }
 @media (max-width:420px){
   .vt-foot-g{grid-template-columns:1fr}
+}
+
+/* ===== linguagem de portfólio: faixa de marca, grade de trabalhos e títulos condensados ===== */
+.vt-band{background:var(--petro);color:#F6F1E7;position:relative;z-index:5}
+.vt-band .vt-top{height:104px}
+.vt-band .vt-logo{display:flex;align-items:flex-end;gap:18px}
+.vt-band .vt-logo img{height:54px;width:auto}
+.vt-logo-tag{font:700 17px/1 var(--cond);letter-spacing:.16em;text-transform:uppercase;color:#9fd0cc;padding-bottom:6px}
+.vt-band .vt-nav{font:700 17px/1 var(--cond);letter-spacing:.12em;text-transform:uppercase;color:#cfe0dd;gap:34px}
+.vt-band .vt-nav a:hover{color:#fff}
+.vt-band .vt-nav a.vt-on{color:#fff;box-shadow:0 2px 0 #9fd0cc}
+.vt-band .vt-btn{font:700 16px/1 var(--cond);letter-spacing:.1em;text-transform:uppercase}
+.vt-band :focus-visible{outline-color:#9fd0cc}
+
+.vt-grid-sec{background:#0d1f20;scroll-margin-top:0}
+.vt-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.vt-tile{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:#122c2d;isolation:isolate}
+.vt-tile img{object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.vt-tile:hover img,.vt-tile:focus-visible img{transform:scale(1.045)}
+.vt-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,44,45,0) 40%,rgba(18,44,45,.88));opacity:0;transition:opacity .3s;z-index:1}
+.vt-tile:hover::after,.vt-tile:focus-visible::after{opacity:1}
+.vt-tile-cap{position:absolute;left:28px;right:28px;bottom:24px;z-index:2;color:#fff;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s}
+.vt-tile:hover .vt-tile-cap,.vt-tile:focus-visible .vt-tile-cap{opacity:1;transform:none}
+.vt-tile-cap b{display:block;font:800 clamp(28px,2.6vw,40px)/.95 var(--cond);text-transform:uppercase;letter-spacing:.01em}
+.vt-tile-cap small{display:block;margin-top:8px;font:12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#9fd0cc}
+.vt-tile:focus-visible{outline:3px solid #9fd0cc;outline-offset:-3px}
+.vt-tile-lg{background:radial-gradient(600px 420px at 30% 20%,#2e6162,transparent 70%),#122c2d}
+.vt-tile-logo{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:12%}
+.vt-tile-logo img{width:62%;max-width:300px;height:auto;background:#fff;border-radius:14px;padding:16px 22px;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.vt-tile-logo p{font:800 clamp(24px,2.2vw,34px)/1 var(--cond);text-transform:uppercase;color:#F6F1E7;text-align:center;letter-spacing:.01em;max-width:420px}
+.vt-tile-lg:hover .vt-tile-logo p{opacity:.25}
+@media (hover:none){
+  .vt-tile::after{opacity:1}
+  .vt-tile-cap{opacity:1;transform:none}
+}
+
+.vt-stmt{padding:96px 0 70px;border-bottom:1.5px solid var(--line)}
+.vt-stmt-g{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:70px;align-items:end}
+.vt-stmt h1{font:800 clamp(48px,6.2vw,96px)/.9 var(--cond);text-transform:uppercase;letter-spacing:-.005em;color:var(--ink)}
+.vt-stmt h1 em{font-style:normal;color:var(--petro);display:block}
+.vt-stmt p{font-size:19px;color:var(--ink2)}
+.vt-stmt .vt-cta{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+.vt-stmt .vt-svca{margin-top:56px}
+
+/* titulos condensados em caixa alta, no lugar da serifa, nas secoes da vitrine */
+.vt .vt-sec-h h2,.vt .vt-contact h2,.vt .vt-cta-band h2,.vt .vt-c-hero h1,.vt .vt-chal h2,.vt .vt-built h2{font-family:var(--cond);font-weight:800;text-transform:uppercase;letter-spacing:-.005em;line-height:.92}
+.vt .vt-c-hero h1 em,.vt .vt-sec-h h2 em,.vt .vt-contact h2 em,.vt .vt-cta-band h2 em,.vt .vt-chal h2 em,.vt .vt-built h2 em{font-style:normal}
+.vt .vt-ch h3,.vt .vt-case h3,.vt .vt-step h3,.vt .vt-next h3,.vt .vt-mini h4,.vt .vt-blk h3{font-family:var(--cond);font-weight:800;text-transform:uppercase;letter-spacing:0;line-height:.95}
+.vt .vt-case h3 em,.vt .vt-next h3 em{font-style:normal}
+.vt .vt-step .vt-n{font-family:var(--cond);font-weight:800}
+
+@media (max-width:1100px){
+  .vt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vt-band .vt-nav{gap:22px;font-size:15px}
+  .vt-logo-tag{display:none}
+}
+@media (max-width:900px){
+  .vt-stmt-g{grid-template-columns:1fr;gap:26px}
+}
+@media (max-width:760px){
+  .vt-band .vt-top{height:76px}
+  .vt-band .vt-logo img{height:38px}
+  .vt-grid{grid-template-columns:1fr}
+  .vt-tile-cap{left:20px;right:20px;bottom:18px}
+  .vt-stmt{padding:56px 0 44px}
+  .vt-stmt p{font-size:17.5px}
+  .vt-stmt .vt-cta{flex-direction:column}
+  .vt-stmt .vt-svca{margin-top:34px}
 }

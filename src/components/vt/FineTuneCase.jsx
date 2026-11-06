@@ -229,8 +229,8 @@ export default function FineTuneCase() {
               <Image className="vt-lg-fl" src={fl.src} width={fl.width} height={fl.height} alt="Fluido e Pool eiPool" sizes="200px" />
               <div className="vt-eyebrow">Próximo case</div>
               <h3>Fluido e Pool <em>(eiPool)</em></h3>
-              <p>Loja de produto único em creme e laranja, da areia ao mar. Estreia em 04/11/2026.</p>
-              <div><Link className="vt-btn" href="/#trabalhos">Ver trabalhos →</Link></div>
+              <p>Loja de produto único em creme e laranja, da areia ao mar. Loja no ar desde novembro de 2026.</p>
+              <div><Link className="vt-btn" href="/#case-fluido">Ver o case →</Link></div>
             </div>
             <div className="vt-i"><BF name="fl-d-fold" url="eipool" light sizes="(max-width: 760px) 420px, 520px" alt="Página de produto da Fluido e Pool" /></div>
           </div>

@@ -28,6 +28,15 @@ const lora = localFont({
   display: 'swap',
   adjustFontFallback: 'Times New Roman',
 })
+const barlow = localFont({
+  src: [
+    { path: '../fonts/BarlowCondensed-700.woff2', weight: '700', style: 'normal' },
+    { path: '../fonts/BarlowCondensed-800.woff2', weight: '800', style: 'normal' },
+  ],
+  variable: '--font-barlow',
+  display: 'swap',
+  adjustFontFallback: 'Arial',
+})
 const plex = localFont({
   src: [
     { path: '../fonts/PlexMono-400.woff2', weight: '400', style: 'normal' },
@@ -59,7 +68,7 @@ function MyApp({ Component, pageProps }) {
   }, [router.events])
 
   return (
-    <div className={`${fustat.variable} ${lora.variable} ${plex.variable}`}>
+    <div className={`${fustat.variable} ${lora.variable} ${plex.variable} ${barlow.variable}`}>
       <Component {...pageProps} />
     </div>
   )
