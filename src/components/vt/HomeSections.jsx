@@ -16,50 +16,84 @@ function Logo({ name, alt, className, sizes }) {
   return <Image className={className} src={file.src} width={file.width} height={file.height} alt={alt} sizes={sizes} />;
 }
 
-/* ---------- Hero C ---------- */
-export function Hero() {
+/* ---------- Grade de trabalhos (topo da home) ---------- */
+const tiles = [
+  { name: 'ft-shopify-car', client: 'Fine Tune on Minis', kind: 'Loja Shopify', href: '/cases/fine-tune-on-minis', pos: '60% 50%', alt: 'Datsun azul na página de produto da Fine Tune on Minis' },
+  { name: 'fl-d-fold', client: 'Fluido e Pool', kind: 'Loja Shopify', href: '#case-fluido', pos: '30% 50%', alt: 'Página de produto do Fluido da Seda, da Fluido e Pool' },
+  { name: 'four-app-1', client: 'Four Custom Garage', kind: 'Sistema sob medida', href: '#srv-sistemas', pos: '0% 0%', alt: 'Tela de estoque do sistema da Four Custom Garage' },
+  { name: 'logosneakers', client: 'Sneaker Society', kind: 'Mídia paga', href: '/cases/sneaker-society', logo: true, note: 'De R$\u00a019 mil para mais de R$\u00a060 mil por mês', alt: 'Sneaker Society' },
+  { name: 'ft-home-desktop-s10', client: 'Fine Tune on Minis', kind: 'Identidade da loja', href: '/cases/fine-tune-on-minis', pos: '50% 50%', alt: 'Marca Fine Tune on Minis na home da loja' },
+  { name: 'fl-d-trans', client: 'Fluido e Pool', kind: 'Página de produto', href: '#case-fluido', pos: '50% 50%', alt: 'Seção Leve, em segundos, da Fluido e Pool' },
+  { name: 'ft-pdp-desktop-fold', client: 'Fine Tune on Minis', kind: 'Página de produto', href: '/cases/fine-tune-on-minis', pos: '40% 40%', alt: 'Página de produto Datsun 510 Wagon Cromo' },
+  { name: 'fl-d-mar', client: 'Fluido e Pool', kind: 'Garantia e Clube Pro', href: '#case-fluido', pos: '50% 60%', alt: 'Seção Compre com tranquilidade da Fluido e Pool' },
+  { name: 'ft-cart-desktop', client: 'Fine Tune on Minis', kind: 'Carrinho Pit Stop', href: '/cases/fine-tune-on-minis', pos: '50% 20%', alt: 'Carrinho Pit Stop da Fine Tune on Minis' },
+];
+
+function Tile({ tile, index }) {
+  const file = img[tile.name];
+  const inner = (
+    <>
+      {tile.logo ? (
+        <div className="vt-tile-logo">
+          <Image src={file.src} width={file.width} height={file.height} alt={tile.alt} sizes="(max-width: 760px) 60vw, 280px" />
+          {tile.note ? <p>{tile.note}</p> : null}
+        </div>
+      ) : (
+        <Image
+          src={file.src}
+          alt={tile.alt}
+          fill
+          priority={index < 3}
+          sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 34vw"
+          style={{ objectPosition: tile.pos || 'center' }}
+        />
+      )}
+      <span className="vt-tile-cap">
+        <b>{tile.client}</b>
+        <small>{tile.kind}</small>
+      </span>
+    </>
+  );
+  return tile.href.startsWith('/') ? (
+    <Link className={`vt-tile${tile.logo ? ' vt-tile-lg' : ''}`} href={tile.href}>{inner}</Link>
+  ) : (
+    <a className={`vt-tile${tile.logo ? ' vt-tile-lg' : ''}`} href={tile.href}>{inner}</a>
+  );
+}
+
+export function WorkGrid() {
   return (
-    <section className="vt-hc">
-      <div className="vt-wrap">
-        <div className="vt-hc-grid">
-          <div>
-            <div className="vt-eyebrow"><span className="vt-dot" />Shopify · IA · Sistemas · Mídia paga</div>
-            <h1>Lojas Shopify sob medida e IA para a <em>operação inteira.</em></h1>
-            <p className="vt-lead">Do tema ao pagamento, e da campanha ao sistema que roda por trás. A GTX constrói o que a sua empresa vende e opera.</p>
-            <div className="vt-cta">
-              <a className="vt-btn vt-solid" href="#contato">Pedir diagnóstico de 30 min</a>
-              <a className="vt-btn vt-ghost" href="#trabalhos">Ver os trabalhos ↓</a>
-            </div>
-            <div className="vt-aifirst"><b>Abordagem AI first</b>A IA entra no desenho, na construção e na operação de cada projeto, de agentes de atendimento a análise de campanhas.</div>
-          </div>
-          <div className="vt-hc-card">
-            <div className="vt-hc-title">
-              <Logo name="fl-logo-sol" alt="" sizes="60px" />
-              Fluido e Pool · Shopify · estreia 04/11
-            </div>
-            <BF name="fl-d-fold" url="eipool" light className="vt-hc-b1" priority sizes="(max-width: 760px) 86vw, 540px" alt="Página de produto da loja Fluido e Pool, no desktop" />
-            <BF name="fl-d-trans" url="eipool" light className="vt-hc-b2" sizes="(max-width: 760px) 76vw, 500px" alt="Página 'Da areia ao mar' da loja Fluido e Pool" />
-            <PH name="fl-m-mar" className="vt-hc-ph" sizes="(max-width: 760px) 36vw, 190px" alt="Loja Fluido e Pool no celular" />
-            <div className="vt-chip vt-hc-c1">
-              <b>No celular</b>
-              Página de produto pensada para o celular
-              <small>Tema Shopify sob medida</small>
-            </div>
-            <div className="vt-chip vt-hc-c2">
-              <b>&quot;Da areia ao mar&quot;</b>
-              Página de produto em creme e laranja
-              <small>Em Liquid, com seções próprias</small>
-            </div>
+    <section className="vt-grid-sec" id="trabalhos" aria-label="Trabalhos">
+      <div className="vt-grid">
+        {tiles.map((tile, index) => <Tile key={`${tile.name}-${index}`} tile={tile} index={index} />)}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Faixa de marca, logo abaixo da grade ---------- */
+export function Statement() {
+  return (
+    <section className="vt-stmt">
+      <div className="vt-wrap vt-stmt-g">
+        <h1>Lojas Shopify, IA, sistemas e mídia paga. <em>O trabalho fala primeiro.</em></h1>
+        <div className="vt-stmt-side">
+          <p>A GTX constrói o que a sua empresa vende e opera, do tema ao pagamento e da campanha ao sistema que roda por trás. Com IA no desenho, na construção e na operação.</p>
+          <div className="vt-cta">
+            <a className="vt-btn vt-solid" href="#contato">Pedir diagnóstico de 30 min</a>
+            <a className="vt-btn vt-ghost" href="#servicos">Ver serviços ↓</a>
           </div>
         </div>
-        <nav className="vt-svca" aria-label="O que a GTX entrega">
-          <span className="vt-svca-t">O que a GTX entrega</span>
-          {services.map(([name, id], index) => (
-            <a key={id} href={`#${id}`}>
-              <b>{`0${index + 1}`}</b>{name}<i aria-hidden="true">↓</i>
-            </a>
-          ))}
-        </nav>
+      </div>
+      <div className="vt-wrap">
+      <nav className="vt-svca" aria-label="O que a GTX entrega">
+        <span className="vt-svca-t">O que a GTX entrega</span>
+        {services.map(([name, id], index) => (
+          <a key={id} href={`#${id}`}>
+            <b>{`0${index + 1}`}</b>{name}<i aria-hidden="true">↓</i>
+          </a>
+        ))}
+      </nav>
       </div>
     </section>
   );
@@ -68,14 +102,14 @@ export function Hero() {
 /* ---------- Trabalhos ---------- */
 export function Works() {
   return (
-    <section className="vt-sec" id="trabalhos">
+    <section className="vt-sec" id="cases">
       <div className="vt-wrap">
         <div className="vt-sec-h">
-          <h2>Trabalhos</h2>
+          <h2>Cases</h2>
           <p>Duas lojas Shopify com tema sob medida: páginas de produto, carrinho e integrações. O que você vê aqui são as telas reais.</p>
         </div>
 
-        <article className="vt-case vt-ft">
+        <article className="vt-case vt-ft" id="case-fine-tune">
           <div className="vt-txt">
             <Logo name="ft-logo-header" alt="Fine Tune on Minis" className="vt-lg-ft" sizes="200px" />
             <div className="vt-num">Case 01 · Shopify · E-commerce</div>
@@ -101,7 +135,7 @@ export function Works() {
           </div>
         </article>
 
-        <article className="vt-case vt-fl">
+        <article className="vt-case vt-fl" id="case-fluido">
           <div className="vt-vis">
             <div className="vt-vz">
               <BF name="fl-d-fold" url="eipool" light style={vz(44, 56, 610)} sizes="(max-width: 760px) 80vw, 610px" alt="Página de produto da Fluido e Pool" />
@@ -121,8 +155,8 @@ export function Works() {
               <li>Página de produto pensada para a velocidade no celular</li>
             </ul>
             <div className="vt-foot">
-              <span className="vt-status">Estreia em 04/11/2026</span>
-              <span className="vt-tag">Case em preparo</span>
+              <span className="vt-status"><span className="vt-dot" />Loja no ar desde novembro de 2026</span>
+              <span className="vt-tag">Tema Shopify sob medida</span>
             </div>
           </div>
         </article>
