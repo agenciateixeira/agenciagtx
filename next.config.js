@@ -6,6 +6,7 @@ const nextConfig = {
       { source: '/exclusive', destination: '/contato', permanent: true },
       { source: '/politica-privacidade', destination: '/politica-de-privacidade', permanent: true },
       { source: '/termos-de-uso', destination: '/termos', permanent: true },
+      { source: '/cases', destination: '/portfolio', permanent: false },
     ]
   },
   images: {

@@ -2,7 +2,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { VtHeader, VtFooter } from '../vt/Chrome';
+import Header from '../pf/Header';
+import Footer from '../pf/Footer';
 import { breadcrumbSchema, canonicalUrl } from '../../lib/seo';
 
 export default function Layout({
@@ -20,7 +21,7 @@ export default function Layout({
 
   useEffect(() => {
     const root = document.getElementById('conteudo');
-    if (!root || variant === 'vt') return undefined;
+    if (!root || variant === 'pf') return undefined;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const nodes = [...root.querySelectorAll('.section, .proof, .contact')];
     if (reduce) {
@@ -66,14 +67,14 @@ export default function Layout({
           />
         ))}
       </Head>
-      <div className="vt">
-        <a className="vt-skip" href="#conteudo">Pular para o conteúdo</a>
-        <VtHeader />
+      <div className="pf">
+        <a className="pf-skip" href="#conteudo">Pular para o conteúdo</a>
+        <Header />
       </div>
-      {variant === 'vt' ? (
-        <main id="conteudo" className="vt">{children}</main>
+      {variant === 'pf' ? (
+        <main id="conteudo" className="pf pf-main">{children}</main>
       ) : (
-        <div className="site">
+        <div className="site pf-offset">
           <main id="conteudo">
             {showCrumbs && crumbs.length > 1 ? (
               <nav className="crumbs" aria-label="Trilha">
@@ -95,8 +96,8 @@ export default function Layout({
           </main>
         </div>
       )}
-      <div className="vt">
-        <VtFooter />
+      <div className="pf">
+        <Footer />
       </div>
     </>
   );
